@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "statement": "Lavar o cabelo durante a menstruação faz mal e pode cortar o fluxo.",
+    "isTruth": false,
+    "explanation": "Isso é um mito antigo! A menstruação ocorre no útero e lavar a cabeça na água fria ou morna não tem nenhuma relação com o fluxo menstrual. Higienizar os cabelos e tomar banho é saudável e ajuda no bem-estar."
+  },
+  {
+    "id": 2,
+    "statement": "A vacina do HPV previne o câncer de colo de útero.",
+    "isTruth": true,
+    "explanation": "Verdade! Ao proteger contra os principais tipos do vírus HPV de alto risco oncogênico, a vacina evita as lesões que podem evoluir para câncer no futuro."
+  },
+  {
+    "id": 3,
+    "statement": "A camisinha é o único método contraceptivo que também protege contra infecções (ISTs).",
+    "isTruth": true,
+    "explanation": "Verdade! Métodos hormonais, como a pílula e o DIU, apenas evitam gravidez. Só o preservativo impede a transmissão de vírus e bactérias por fluidos e contato genital."
+  },
+  {
+    "id": 4,
+    "statement": "É impossível engravidar na primeira relação sexual.",
+    "isTruth": false,
+    "explanation": "Mito! Se houver ovulação e relação sem proteção, há chances de engravidar logo na primeira vez. O corpo não diferencia a primeira vez de outras relações."
+  },
+  {
+    "id": 5,
+    "statement": "Fazer exercícios físicos durante a menstruação pode ajudar a aliviar a cólica.",
+    "isTruth": true,
+    "explanation": "Verdade! Os exercícios liberam endorfina, que age como um analgésico natural do corpo, além de melhorar a circulação e reduzir o estresse."
+  },
+  {
+    "id": 6,
+    "statement": "A primeira menstruação geralmente acontece entre os 10 e 15 anos.",
+    "isTruth": true,
+    "explanation": "Verdade! O início da menstruação (menarca) é influenciado por fatores genéticos e nutricionais, ocorrendo normalmente nessa faixa etária."
+  },
+  {
+    "id": 7,
+    "statement": "O ciclo menstrual de todas as mulheres dura exatamente 28 dias.",
+    "isTruth": false,
+    "explanation": "Mito! O ciclo considerado regular pode variar de 21 a 35 dias. Além disso, variações e irregularidades são normais, principalmente nos primeiros anos após a menarca."
+  },
+  {
+    "id": 8,
+    "statement": "A pílula anticoncepcional previne contra ISTs (Infecções Sexualmente Transmissíveis).",
+    "isTruth": false,
+    "explanation": "Mito! A pílula atua apenas no bloqueio da ovulação para prevenir a gravidez. Para proteção contra ISTs, é indispensável o uso de preservativo."
+  },
+  {
+    "id": 9,
+    "statement": "Tanto meninos quanto meninas devem tomar a vacina do HPV.",
+    "isTruth": true,
+    "explanation": "Verdade! Meninos também transmitem o vírus e podem desenvolver cânceres (como de pênis e garganta) ou verrugas causadas pelo HPV. A vacinação de ambos cria uma barreira coletiva."
+  },
+  {
+    "id": 10,
+    "statement": "Usar absorvente interno tira a virgindade.",
+    "isTruth": false,
+    "explanation": "Mito! O hímen é uma membrana elástica com abertura natural que permite a saída da menstruação. O absorvente interno se expande na vagina e raramente causa o rompimento do hímen. A perda da virgindade é um conceito social ligado à primeira relação sexual."
+  },
+  {
+    "id": 11,
+    "statement": "Corrimento com cor amarelada/esverdeada e cheiro forte indica que é hora de ir ao médico.",
+    "isTruth": true,
+    "explanation": "Verdade! Enquanto a secreção transparente ou esbranquiçada e sem odor é normal, alterações de cor, coceira e cheiro forte sugerem infecções vaginais que precisam de tratamento."
+  },
+  {
+    "id": 12,
+    "statement": "Andar descalço durante a menstruação aumenta as cólicas.",
+    "isTruth": false,
+    "explanation": "Mito! Embora o frio possa causar um leve desconforto geral por contração muscular, não há nenhuma ligação científica direta entre pisar no chão frio e o aumento das cólicas uterinas."
+  },
+  {
+    "id": 13,
+    "statement": "Comer chocolate na TPM piora as cólicas e as espinhas.",
+    "isTruth": false,
+    "explanation": "Mito/Parcial! O chocolate em si não causa cólica direta, mas o consumo excessivo de açúcares e gorduras pode aumentar processos inflamatórios no corpo e a acne. Chocolates amargos (cacau) podem, na verdade, ajudar na liberação de serotonina e acalmar."
+  },
+  {
+    "id": 14,
+    "statement": "O coletor menstrual é uma alternativa ecológica e segura aos absorventes comuns.",
+    "isTruth": true,
+    "explanation": "Verdade! Feito de silicone medicinal, o coletor é reutilizável, reduz resíduos no meio ambiente e é seguro, pois coleta a menstruação sem ressecar as paredes vaginais."
+  },
+  {
+    "id": 15,
+    "statement": "Mulheres menstruadas não devem cozinhar ou fazer bolos porque a massa sola.",
+    "isTruth": false,
+    "explanation": "Mito! Essa crença antiga é baseada em superstições de que a mulher menstruada estaria 'impura'. A menstruação é um processo biológico interno e não afeta em nada a culinária."
+  },
+  {
+    "id": 16,
+    "statement": "Hormônios são substâncias químicas que regulam o funcionamento do nosso corpo.",
+    "isTruth": true,
+    "explanation": "Verdade! Hormônios como estrogênio, progesterona, testosterona e cortisol agem como mensageiros químicos regulando o humor, crescimento, metabolismo e reprodução."
+  },
+  {
+    "id": 17,
+    "statement": "A TPM não existe e é apenas uma desculpa para mau humor.",
+    "isTruth": false,
+    "explanation": "Mito! A Tensão Pré-Menstrual é uma condição clínica real provocada pelas oscilações hormonais do ciclo que afetam neurotransmissores como a serotonina, gerando sintomas físicos e psicológicos."
+  },
+  {
+    "id": 18,
+    "statement": "A pílula do dia seguinte pode ser usada frequentemente como método contraceptivo principal.",
+    "isTruth": false,
+    "explanation": "Mito! Trata-se de uma contracepção de emergência que possui uma carga hormonal altíssima, desregulando o ciclo e perdendo eficácia se usada repetidamente. Deve ser usada apenas em imprevistos."
+  },
+  {
+    "id": 19,
+    "statement": "Dormir mal afeta a regulação hormonal e pode desregular o ciclo menstrual.",
+    "isTruth": true,
+    "explanation": "Verdade! O sono inadequado altera os níveis de cortisol (hormônio do estresse) e melatonina, impactando diretamente o eixo hipotálamo-hipófise-ovário que controla a menstruação."
+  },
+  {
+    "id": 20,
+    "statement": "Qualquer sangramento vaginal fora do período menstrual é normal e não necessita de atenção.",
+    "isTruth": false,
+    "explanation": "Mito! Sangramentos fora do período (escapes persistentes) podem indicar desequilíbrios hormonais, infecções ou lesões e devem sempre ser investigados por um profissional de saúde."
+  }
+]

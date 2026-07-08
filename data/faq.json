@@ -1,0 +1,32 @@
+[
+  {
+    "category": "Menstruação",
+    "question": "É normal a menstruação atrasar ou ser irregular no início?",
+    "answer": "Sim! Nos primeiros dois anos após a primeira menstruação (menarca), os hormônios que controlam o ciclo ainda estão se ajustando. É perfeitamente comum que o ciclo seja irregular, variando na duração e no fluxo. Se a irregularidade persistir após esse período, é aconselhável consultar um ginecologista."
+  },
+  {
+    "category": "Menstruação",
+    "question": "O que causa as cólicas menstruais e como aliviar?",
+    "answer": "A cólica (dismenorreia) é causada pela contração do útero para expulsar o endométrio. Para aliviar, você pode usar compressas de água morna no abdômen, tomar banhos quentes, praticar atividades físicas leves e beber chás quentes de camomila ou erva-doce. Casos de dores incapacitantes devem ser avaliados por um médico."
+  },
+  {
+    "category": "Puberdade",
+    "question": "Quais são os primeiros sinais de que a puberdade começou?",
+    "answer": "Geralmente, o primeiro sinal físico é o desenvolvimento do broto mamário (uma pequena elevação e sensibilidade nos seios), que surge por volta dos 8 aos 13 anos. Em seguida, surgem os pelos pubianos e axilares, o crescimento rápido em altura (estirão) e o aumento da oleosidade da pele, que pode causar espinhas."
+  },
+  {
+    "category": "Puberdade",
+    "question": "O que é corrimento branco ou transparente que surge na calcinha?",
+    "answer": "É a secreção vaginal fisiológica, um muco natural que ajuda a manter a vagina limpa e úmida. Ele costuma aparecer alguns meses antes da menarca (primeira menstruação) e varia conforme a fase do ciclo. Se for transparente ou esbranquiçado e sem cheiro, é perfeitamente normal. Se tiver cheiro forte, coceira ou coloração esverdeada/amarelada, procure um médico."
+  },
+  {
+    "category": "Prevenção",
+    "question": "Por que adolescentes devem tomar a vacina do HPV?",
+    "answer": "A vacina do HPV protege contra os subtipos do vírus papilomavírus humano que causam verrugas genitais e diversos tipos de cânceres, especialmente o de colo de útero. Ela é altamente eficaz quando administrada antes de qualquer exposição ao vírus (ou seja, antes do início da vida sexual), sendo indicada gratuitamente pelo SUS para jovens de 9 a 14 anos."
+  },
+  {
+    "category": "Métodos Contraceptivos",
+    "question": "Qual é a diferença entre preservativo (camisinha) e anticoncepcional?",
+    "answer": "O preservativo (camisinha) é um método de barreira física que impede o contato de fluidos corporais, prevenindo tanto a gravidez quanto as Infecções Sexualmente Transmissíveis (ISTs). Os anticoncepcionais (hormonais, como a pílula) evitam a ovulação, logo evitam a gravidez, mas NÃO protegem contra ISTs. Por isso, a dupla proteção (usar ambos) é a melhor escolha."
+  }
+]
