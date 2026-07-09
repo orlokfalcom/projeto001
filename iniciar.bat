@@ -44,22 +44,41 @@ echo.
 if exist "out\" (
     echo [INFO] Pasta estatica out/ encontrada!
     
-    rem 2.1 Verificar se o emulador de servidor local pre-compilado [server.exe] existe
+    rem 2.1 Emulador via PowerShell - Padrao do Windows, com suporte a URLs amigaveis
+    where powershell >nul 2>nul
+    if not errorlevel 1 (
+        echo [OK] Iniciando EMULACAO DE SERVIDOR LOCAL via PowerShell...
+        echo [INFO] Este metodo suporta URLs amigaveis do Next.js sem precisar de instalacao!
+        echo [INFO] O navegador abrira automaticamente em instantes...
+        echo.
+        echo Pressione CTRL+C nesta janela para encerrar o servidor de emulacao.
+        echo.
+        
+        rem Inicia o navegador apos 2 segundos
+        start /min cmd.exe /c "timeout /t 2 /nobreak >nul && start http://localhost:3000"
+        
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "$l = New-Object System.Net.HttpListener; $l.Prefixes.Add('http://localhost:3000/'); $l.Start(); Write-Host 'Servidor de Emulacao ativo em http://localhost:3000/'; try { while ($l.IsListening) { $ctx = $l.GetContext(); $res = $null; try { $req = $ctx.Request; $res = $ctx.Response; $p = $req.Url.LocalPath; if ($p -eq '/') { $p = '/index.html' }; $fp = Join-Path 'out' $p; if (!(Test-Path $fp -PathType Leaf) -and (Test-Path ($fp + '.html') -PathType Leaf)) { $fp = $fp + '.html' } elseif (Test-Path $fp -PathType Container) { $fp = Join-Path $fp 'index.html' }; if (Test-Path $fp -PathType Leaf) { $b = [System.IO.File]::ReadAllBytes($fp); $ext = [System.IO.Path]::GetExtension($fp).ToLower(); $ct = 'application/octet-stream'; if ($ext -eq '.html' -or $ext -eq '.htm') { $ct = 'text/html; charset=utf-8' } elseif ($ext -eq '.css') { $ct = 'text/css' } elseif ($ext -eq '.js') { $ct = 'application/javascript' } elseif ($ext -eq '.png') { $ct = 'image/png' } elseif ($ext -eq '.jpg' -or $ext -eq '.jpeg') { $ct = 'image/jpeg' } elseif ($ext -eq '.svg') { $ct = 'image/svg+xml' } elseif ($ext -eq '.json') { $ct = 'application/json' } elseif ($ext -eq '.ico') { $ct = 'image/x-icon' } elseif ($ext -eq '.woff2') { $ct = 'font/woff2' } elseif ($ext -eq '.woff') { $ct = 'font/woff' }; $res.ContentType = $ct; $res.ContentLength64 = $b.Length; $res.OutputStream.Write($b, 0, $b.Length); } else { $res.StatusCode = 404; $res.ContentLength64 = 0; }; $res.Close(); } catch { if ($res) { try { $res.Abort() } catch {} } } } } finally { $l.Stop(); }"
+        goto end
+    )
+    
+    rem 2.2 Verificar se o emulador de servidor local pre-compilado [server.exe] existe
     if exist "server.exe" (
         echo [OK] Emulador de servidor local autônomo [server.exe] encontrado!
         echo [INFO] Iniciando servidor em http://localhost:3000
         echo [INFO] Este emulador funciona de forma independente de qualquer suporte instalado.
+        echo [AVISO] Paginas secundarias acessadas diretamente podem exibir erro 404 neste modo.
         echo.
         server.exe 3000
         goto end
     )
     
-    rem 2.2 Verificar se o Python esta instalado para rodar o servidor estatico
+    rem 2.3 Verificar se o Python esta instalado para rodar o servidor estatico
     where python >nul 2>nul
-    if %ERRORLEVEL% equ 0 (
+    if not errorlevel 1 (
         echo [OK] Python detectado.
         echo [INFO] Iniciando servidor estatico local...
         echo [INFO] O navegador abrira automaticamente em instantes...
+        echo [AVISO] Paginas secundarias acessadas diretamente podem exibir erro 404 neste modo.
         echo.
         echo Pressione CTRL+C para encerrar o servidor.
         echo.
@@ -72,10 +91,11 @@ if exist "out\" (
     )
     
     where python3 >nul 2>nul
-    if %ERRORLEVEL% equ 0 (
+    if not errorlevel 1 (
         echo [OK] Python 3 detectado.
         echo [INFO] Iniciando servidor estatico local...
         echo [INFO] O navegador abrira automaticamente em instantes...
+        echo [AVISO] Paginas secundarias acessadas diretamente podem exibir erro 404 neste modo.
         echo.
         echo Pressione CTRL+C para encerrar o servidor.
         echo.
@@ -84,23 +104,6 @@ if exist "out\" (
         start /min cmd.exe /c "timeout /t 2 /nobreak >nul && start http://localhost:3000"
         
         python3 -m http.server 3000 --directory out
-        goto end
-    )
-    
-    rem 2.3 Emulador via PowerShell - Padrao do Windows, sem necessidade de programas adicionais
-    where powershell >nul 2>nul
-    if %ERRORLEVEL% equ 0 (
-        echo [OK] Iniciando EMULACAO DE SERVIDOR LOCAL via PowerShell...
-        echo [INFO] Este metodo emula um servidor web completo sem precisar instalar nada!
-        echo [INFO] O navegador abrira automaticamente em instantes...
-        echo.
-        echo Pressione CTRL+C nesta janela para encerrar o servidor de emulacao.
-        echo.
-        
-        rem Inicia o navegador apos 2 segundos
-        start /min cmd.exe /c "timeout /t 2 /nobreak >nul && start http://localhost:3000"
-        
-        powershell -NoProfile -ExecutionPolicy Bypass -Command "$l = New-Object System.Net.HttpListener; $l.Prefixes.Add('http://localhost:3000/'); $l.Start(); Write-Host 'Servidor de Emulacao ativo em http://localhost:3000/'; try { while ($l.IsListening) { $ctx = $l.GetContext(); $req = $ctx.Request; $res = $ctx.Response; $p = $req.Url.LocalPath; if ($p -eq '/') { $p = '/index.html' }; $fp = Join-Path 'out' $p; if (Test-Path $fp -PathType Container) { $fp = Join-Path $fp 'index.html' }; if (!(Test-Path $fp -PathType Leaf)) { $alt = $fp + '.html'; if (Test-Path $alt -PathType Leaf) { $fp = $alt } }; if (Test-Path $fp -PathType Leaf) { $b = [System.IO.File]::ReadAllBytes($fp); $ext = [System.IO.Path]::GetExtension($fp).ToLower(); $ct = 'application/octet-stream'; if ($ext -eq '.html' -or $ext -eq '.htm') { $ct = 'text/html; charset=utf-8' } elseif ($ext -eq '.css') { $ct = 'text/css' } elseif ($ext -eq '.js') { $ct = 'application/javascript' } elseif ($ext -eq '.png') { $ct = 'image/png' } elseif ($ext -eq '.jpg' -or $ext -eq '.jpeg') { $ct = 'image/jpeg' } elseif ($ext -eq '.svg') { $ct = 'image/svg+xml' } elseif ($ext -eq '.json') { $ct = 'application/json' } elseif ($ext -eq '.ico') { $ct = 'image/x-icon' }; $res.Headers.Add('Content-Type', $ct); $res.ContentLength64 = $b.Length; $res.OutputStream.Write($b, 0, $b.Length); } else { $res.StatusCode = 404; }; $res.Close(); } } finally { $l.Stop(); }"
         goto end
     )
     
