@@ -191,7 +191,7 @@ export default function GlobalSearch() {
                     <HelpCircle className="w-12 h-12 text-foreground/20 mx-auto mb-3" />
                     <h3 className="text-base font-bold text-foreground mb-1">Nenhum resultado encontrado</h3>
                     <p className="text-sm text-foreground/60 max-w-sm mx-auto">
-                      Tente buscar por termos mais genéricos, como "ciclo", "corpo", "hormônio" ou navegue pelos tópicos no menu.
+                      Tente buscar por termos mais genéricos, como &quot;ciclo&quot;, &quot;corpo&quot;, &quot;hormônio&quot; ou navegue pelos tópicos no menu.
                     </p>
                   </div>
                 )
