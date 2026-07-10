@@ -168,7 +168,7 @@ function initScrollAnimations() {
         });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -204,7 +204,35 @@ const PAGES = [
 function initGlobalSearch() {
     const input    = document.getElementById('global-search-input');
     const dropdown = document.getElementById('search-dropdown');
+    const toggleBtn = document.getElementById('search-toggle-btn');
+    const searchForm = document.getElementById('header-search-form');
     if (!input || !dropdown) return;
+
+    if (toggleBtn && searchForm) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = searchForm.hasAttribute('hidden');
+            if (isHidden) {
+                searchForm.removeAttribute('hidden');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                input.focus();
+            } else {
+                searchForm.setAttribute('hidden', '');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                dropdown.classList.remove('visible');
+            }
+        });
+
+        searchForm.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', () => {
+            searchForm.setAttribute('hidden', '');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            dropdown.classList.remove('visible');
+        });
+    }
 
     let debounceTimer;
 

@@ -64,8 +64,9 @@
 <header id="masthead" class="site-header glassmorphism">
 	<div class="container header-container">
 		<div class="site-branding">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<a href="index.html" class="logo-text">Viva Bem, Menina!</a>
 		</div>
+
 		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
 			<ul class="nav-menu">
 				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
@@ -79,27 +80,50 @@
 				<li><a class="nav-link" href="contato.html">Contato</a></li>
 			</ul>
 		</nav>
+
 		<div class="header-actions">
+			<!-- Barra de Pesquisa Global -->
+			<div class="search-wrapper-header" role="search" aria-label="Pesquisa Global">
+				<button id="search-toggle-btn" class="icon-btn" aria-label="Abrir pesquisa" aria-expanded="false" aria-controls="header-search-form">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+				</button>
+				<div id="header-search-form" class="search-form-expanded" hidden>
+					<input type="search" id="global-search-input" placeholder="Buscar no portal..." aria-label="Pesquisar" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="search-dropdown">
+					<div id="search-dropdown" class="search-dropdown" role="listbox" aria-label="Resultados da pesquisa"></div>
+				</div>
+			</div>
 			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
-			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu Principal" aria-expanded="false" aria-controls="mobile-navigation">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="3" y1="12" x2="21" y2="12"></line>
+					<line x1="3" y1="6" x2="21" y2="6"></line>
+					<line x1="3" y1="18" x2="21" y2="18"></line>
+				</svg>
 			</button>
 		</div>
 	</div>
 </header>
 
 <div id="mobile-navigation" class="mobile-nav glassmorphism">
-	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
-		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
-		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
-		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
-		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	<ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="sobre.html">Sobre o Projeto</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="objetivos.html">Objetivos</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="mitos-e-verdades.html">Mitos e Verdades</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="estatisticas.html">Estatísticas</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="biblioteca.html">Biblioteca</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="faq.html">FAQ</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="linha-do-tempo.html">Linha do Tempo</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="professor.html">Área do Professor</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="aluno.html">Portal do Aluno</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="contato.html">Contato</a></li>
 	</ul>
 </div>
 
 <main id="content">
 
-	<section class="timeline-hero">
+	<section class="timeline-hero reveal">
 		<div class="container">
 			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">🕐 Perspectiva Histórica</div>
 			<h1>Linha do Tempo</h1>
@@ -126,7 +150,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
 						<div class="timeline-year">1543</div>
-						<h2 class="timeline-title">Vesalius descreve anatomia feminina</h2>
+						<h2 class="timeline-title reveal-left">Vesalius descreve anatomia feminina</h2>
 						<p class="timeline-text">Andreas Vesalius publica <em>De Humani Corporis Fabrica</em>, a primeira representação anatômica precisa do corpo feminino, contradizendo séculos de pseudociência galênica.</p>
 					</div>
 				</div>
@@ -136,7 +160,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-medicina">🏥 Medicina</span>
 						<div class="timeline-year">1827</div>
-						<h2 class="timeline-title">Descoberta do óvulo humano</h2>
+						<h2 class="timeline-title reveal-left">Descoberta do óvulo humano</h2>
 						<p class="timeline-text">Karl Ernst von Baer descobre o óvulo humano, revolucionando a compreensão da reprodução e derrubando teorias que minimizavam o papel biológico feminino.</p>
 					</div>
 				</div>
@@ -146,7 +170,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-direitos">⚖️ Direitos</span>
 						<div class="timeline-year">1848</div>
-						<h2 class="timeline-title">Convenção de Seneca Falls</h2>
+						<h2 class="timeline-title reveal-left">Convenção de Seneca Falls</h2>
 						<p class="timeline-text">Primeiro movimento organizado pelos direitos das mulheres nos EUA, reivindicando acesso à educação, à medicina e ao direito de votar.</p>
 					</div>
 				</div>
@@ -156,7 +180,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
 						<div class="timeline-year">1900</div>
-						<h2 class="timeline-title">Descrição do ciclo menstrual</h2>
+						<h2 class="timeline-title reveal-left">Descrição do ciclo menstrual</h2>
 						<p class="timeline-text">Após séculos de tabu, cientistas europeus publicam os primeiros estudos completos descrevendo as fases do ciclo menstrual e a relação com hormônios.</p>
 					</div>
 				</div>
@@ -166,7 +190,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-medicina">🏥 Medicina</span>
 						<div class="timeline-year">1921</div>
-						<h2 class="timeline-title">Isolamento da progesterona</h2>
+						<h2 class="timeline-title reveal-left">Isolamento da progesterona</h2>
 						<p class="timeline-text">Cientistas isolam a progesterona, hormônio fundamental para o ciclo reprodutivo feminino. Isso abriu caminho para tratamentos hormonais e a pílula anticoncepcional décadas depois.</p>
 					</div>
 				</div>
@@ -176,7 +200,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
 						<div class="timeline-year">1932</div>
-						<h2 class="timeline-title">Voto feminino no Brasil</h2>
+						<h2 class="timeline-title reveal-left">Voto feminino no Brasil</h2>
 						<p class="timeline-text">O Código Eleitoral de 1932 garante o direito ao voto para mulheres brasileiras, marco fundamental da conquista de direitos civis e de saúde pública para mulheres.</p>
 					</div>
 				</div>
@@ -186,7 +210,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-medicina">🏥 Medicina</span>
 						<div class="timeline-year">1960</div>
-						<h2 class="timeline-title">FDA aprova a pílula anticoncepcional</h2>
+						<h2 class="timeline-title reveal-left">FDA aprova a pílula anticoncepcional</h2>
 						<p class="timeline-text">Enovid torna-se o primeiro contraceptivo oral aprovado nos EUA — considerado um dos maiores marcos para a autonomia e saúde reprodutiva feminina do século XX.</p>
 					</div>
 				</div>
@@ -196,7 +220,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
 						<div class="timeline-year">1984</div>
-						<h2 class="timeline-title">PAISM — Programa de Atenção Integral à Saúde da Mulher</h2>
+						<h2 class="timeline-title reveal-left">PAISM — Programa de Atenção Integral à Saúde da Mulher</h2>
 						<p class="timeline-text">O Brasil cria o PAISM, política pública pioneira na América Latina que inclui saúde reprodutiva, ginecologia e saúde mental da mulher no sistema público de saúde.</p>
 					</div>
 				</div>
@@ -206,7 +230,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
 						<div class="timeline-year">1992</div>
-						<h2 class="timeline-title">Reconhecimento da endometriose como doença crônica</h2>
+						<h2 class="timeline-title reveal-left">Reconhecimento da endometriose como doença crônica</h2>
 						<p class="timeline-text">A OMS reconhece formalmente a endometriose como doença crônica. Antes disso, dor pélvica feminina era frequentemente descartada como "drama" ou problema emocional.</p>
 					</div>
 				</div>
@@ -216,7 +240,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
 						<div class="timeline-year">2006</div>
-						<h2 class="timeline-title">Lei Maria da Penha</h2>
+						<h2 class="timeline-title reveal-left">Lei Maria da Penha</h2>
 						<p class="timeline-text">A Lei 11.340/2006 cria mecanismos para coibir violência doméstica e familiar contra mulheres — um pilar para a saúde integral feminina ao reconhecer violência como questão de saúde pública.</p>
 					</div>
 				</div>
@@ -226,7 +250,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-tecnologia">💻 Tecnologia</span>
 						<div class="timeline-year">2015</div>
-						<h2 class="timeline-title">Apps de rastreamento menstrual</h2>
+						<h2 class="timeline-title reveal-left">Apps de rastreamento menstrual</h2>
 						<p class="timeline-text">Aplicativos como Clue e Flo popularizam o rastreamento do ciclo menstrual por smartphone, gerando dados que contribuem para pesquisas científicas sobre saúde feminina em larga escala.</p>
 					</div>
 				</div>
@@ -236,7 +260,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
 						<div class="timeline-year">2023</div>
-						<h2 class="timeline-title">Mapeamento completo do genoma feminino</h2>
+						<h2 class="timeline-title reveal-left">Mapeamento completo do genoma feminino</h2>
 						<p class="timeline-text">Pesquisadores publicam o primeiro mapeamento completo do genoma humano feminino, incluindo o cromossomo X completo, abrindo novas fronteiras para diagnósticos de doenças específicas de mulheres.</p>
 					</div>
 				</div>
@@ -246,7 +270,7 @@
 					<div class="timeline-card">
 						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
 						<div class="timeline-year">2026</div>
-						<h2 class="timeline-title">Portal Silêncios da Saúde</h2>
+						<h2 class="timeline-title reveal-left">Portal Silêncios da Saúde</h2>
 						<p class="timeline-text">Nascimento deste portal — uma plataforma educativa gratuita que democratiza o acesso ao conhecimento científico sobre saúde feminina para adolescentes brasileiras. <strong>Você faz parte desta história.</strong></p>
 					</div>
 				</div>
@@ -255,9 +279,9 @@
 		</div>
 	</section>
 
-	<section class="py-10" style="background:var(--gradient-primary);text-align:center;">
+	<section class="py-10 reveal" style="background:var(--gradient-primary);text-align:center;">
 		<div class="container">
-			<h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">O futuro também é feito por você</h2>
+			<h2 class="reveal-left"  style="font-size:2rem;font-weight:800;margin-bottom:16px;">O futuro também é feito por você</h2>
 			<p style="opacity:0.85;max-width:500px;margin:0 auto 32px;">Aprenda, compartilhe e contribua para que mais adolescentes tenham acesso ao conhecimento que muda vidas.</p>
 			<a href="sobre.html" class="btn btn-dark">Conheça o Projeto →</a>
 		</div>
@@ -265,40 +289,112 @@
 
 </main>
 
-<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
-	<div class="container">
-		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
-			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+<footer id="colophon" class="site-footer glassmorphism py-10" style="margin-top: 5rem; border-top: 1px solid var(--border-color);">
+	<div class="container" style="display: flex; flex-direction: column; gap: 32px;">
+		<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px;">
+			<div style="flex: 1; min-width: 250px;">
+				<h2 class="logo-text reveal-left" style="font-size: 1.5rem; margin-bottom: 8px;">Viva Bem, Menina!</h2>
+				<p class="text-muted dark:text-text-light/70" style="font-size: 0.95rem; max-width: 320px;">
+					Uma plataforma educativa focada em quebrar tabus e fornecer conhecimento científico real sobre saúde feminina para adolescentes.
+				</p>
+			</div>
+
+			<div style="min-width: 150px;">
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Links Rápidos</h3>
+				<ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+					<li><a href="sobre.html">Sobre o Projeto</a></li>
+					<li><a href="saude-feminina.html">Saúde Feminina</a></li>
+					<li><a href="mitos-e-verdades.html">Mitos e Verdades</a></li>
+					<li><a href="quiz.html">Quiz Educativo</a></li>
+				</ul>
+			</div>
+
+			<div style="min-width: 150px;">
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Área Especial</h3>
+				<ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+					<li><a href="contato.html">Fale Conosco</a></li>
+					<li><a href="professor.html">Área do Professor</a></li>
+					<li><a href="aluno.html">Portal do Aluno</a></li>
+					<li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+				</ul>
+			</div>
+
+			<div style="min-width: 200px;">
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Siga-nos</h3>
+				<div style="display: flex; gap: 12px;">
+					<a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="Instagram">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+					</a>
+					<a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="TikTok">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+					</a>
+					<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="YouTube">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
+
+		<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted);">
+			<p>&copy; 2026 Viva Bem, Menina! Todos os direitos reservados.</p>
+			<p>Desenvolvido de acordo com as normas científicas e éticas de saúde.</p>
 		</div>
 	</div>
 </footer>
 
 <div id="cookie-banner" class="cookie-banner glassmorphism card">
-	<div style="flex:1;min-width:250px;">
-		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
-		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	<div style="flex: 1; min-width: 250px;">
+		<h4 style="font-size: 1rem; margin-bottom: 4px; font-weight: 700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted);">
+			Utilizamos cookies essenciais e tecnologias semelhantes para garantir o funcionamento correto e de alto desempenho do portal "Viva Bem, Menina!", de acordo com a LGPD.
+		</p>
 	</div>
 	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
 </div>
 
 <div class="luna-widget">
-	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<button id="luna-toggle" class="luna-btn" aria-label="Abrir conversa com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	
 	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
 		<div class="luna-header">
 			<div class="luna-avatar">👩‍⚕️</div>
-			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
-			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+			<div>
+				<h4 style="margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark);">Luna</h4>
+				<span style="font-size: 0.75rem; color: var(--text-dark); opacity: 0.8;">Assistente Virtual de Saúde</span>
+			</div>
+			<button id="luna-close" style="margin-left: auto; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-dark);" aria-label="Fechar chat">&times;</button>
 		</div>
+		
+		<!-- Quick chips de sugestão -->
+		<div id="luna-quick-chips" class="luna-quick-chips">
+			<button class="luna-chip" data-topic="menstruação">🩸 Menstruação</button>
+			<button class="luna-chip" data-topic="cólica">💊 Cólica</button>
+			<button class="luna-chip" data-topic="puberdade">🌱 Puberdade</button>
+			<button class="luna-chip" data-topic="TPM">😤 TPM</button>
+			<button class="luna-chip" data-topic="alimentação">🥗 Alimentação</button>
+			<button class="luna-chip" data-topic="sono">😴 Sono</button>
+		</div>
+		
 		<div id="luna-chat-messages" class="luna-messages">
-			<div class="msg msg-bot">Fascinante, não é? Posso contar mais sobre qualquer evento desta linha do tempo!</div>
+			<div class="msg msg-bot">
+				Olá! Eu sou a Luna, sua assistente virtual de saúde 💜 Aqui podemos conversar de forma segura e anônima sobre puberdade, menstruação, corpo e sentimentos. Use os botões acima ou digite sua pergunta abaixo!
+			</div>
 		</div>
+		
 		<div class="luna-input-area">
-			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
-			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+			<input type="text" id="luna-input" placeholder="Digite sua pergunta aqui..." aria-label="Mensagem para a Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar mensagem">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="22" y1="2" x2="11" y2="13"></line>
+					<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+				</svg>
+			</button>
 		</div>
 	</div>
 </div>
+
 
 <script src="js/theme.js"></script>
 <script src="js/luna.js"></script>

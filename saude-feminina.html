@@ -19,14 +19,14 @@
 <header id="masthead" class="site-header glassmorphism">
 	<div class="container header-container">
 		<div class="site-branding">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<a href="index.html" class="logo-text">Viva Bem, Menina!</a>
 		</div>
 
 		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
 			<ul class="nav-menu">
 				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
 				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
-				<li><a class="nav-link active" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
 				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
 				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
 				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
@@ -37,6 +37,16 @@
 		</nav>
 
 		<div class="header-actions">
+			<!-- Barra de Pesquisa Global -->
+			<div class="search-wrapper-header" role="search" aria-label="Pesquisa Global">
+				<button id="search-toggle-btn" class="icon-btn" aria-label="Abrir pesquisa" aria-expanded="false" aria-controls="header-search-form">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+				</button>
+				<div id="header-search-form" class="search-form-expanded" hidden>
+					<input type="search" id="global-search-input" placeholder="Buscar no portal..." aria-label="Pesquisar" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="search-dropdown">
+					<div id="search-dropdown" class="search-dropdown" role="listbox" aria-label="Resultados da pesquisa"></div>
+				</div>
+			</div>
 			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
 			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu Principal" aria-expanded="false" aria-controls="mobile-navigation">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,7 +70,6 @@
 		<li><a class="nav-link" style="font-size: 1.2rem;" href="biblioteca.html">Biblioteca</a></li>
 		<li><a class="nav-link" style="font-size: 1.2rem;" href="faq.html">FAQ</a></li>
 		<li><a class="nav-link" style="font-size: 1.2rem;" href="linha-do-tempo.html">Linha do Tempo</a></li>
-		<li><a class="nav-link" style="font-size: 1.2rem;" href="pesquisa.html">Metodologia</a></li>
 		<li><a class="nav-link" style="font-size: 1.2rem;" href="professor.html">Área do Professor</a></li>
 		<li><a class="nav-link" style="font-size: 1.2rem;" href="aluno.html">Portal do Aluno</a></li>
 		<li><a class="nav-link" style="font-size: 1.2rem;" href="contato.html">Contato</a></li>
@@ -80,7 +89,7 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 			<!-- Cards de tópicos (Serão preenchidos dinamicamente no carregamento para manter integridade, ou estaticamente para rastreio) -->
 			<!-- Cards criados estaticamente para SEO/Carregamento rápido -->
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-1" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">🩸</div>
 					<h3 class="text-xl font-bold mb-2">Menstruação e Ciclo</h3>
@@ -91,7 +100,7 @@
 				<a href="#menstruacao" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-2" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">🌱</div>
 					<h3 class="text-xl font-bold mb-2">Puberdade e Corpo</h3>
@@ -102,7 +111,7 @@
 				<a href="#puberdade" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-3" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">🧠</div>
 					<h3 class="text-xl font-bold mb-2">Saúde Mental</h3>
@@ -113,7 +122,7 @@
 				<a href="#saude-mental" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-4" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">🍎</div>
 					<h3 class="text-xl font-bold mb-2">Alimentação e Nutrição</h3>
@@ -124,7 +133,7 @@
 				<a href="#alimentacao" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-5" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">🏃‍♀️</div>
 					<h3 class="text-xl font-bold mb-2">Exercícios Físicos</h3>
@@ -135,7 +144,7 @@
 				<a href="#exercicios" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-6" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">😴</div>
 					<h3 class="text-xl font-bold mb-2">Sono e Descanso</h3>
@@ -146,7 +155,7 @@
 				<a href="#sono" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-7" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">💉</div>
 					<h3 class="text-xl font-bold mb-2">Vacinação HPV</h3>
@@ -157,7 +166,7 @@
 				<a href="#vacinacao" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-8" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">🛡️</div>
 					<h3 class="text-xl font-bold mb-2">Prevenção de ISTs</h3>
@@ -168,7 +177,7 @@
 				<a href="#ists" class="btn btn-outline" style="width: 100%; text-align: center; font-size: 0.9rem;">Acessar Conteúdo &rarr;</a>
 			</div>
 
-			<div class="card glassmorphism" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+			<div class="card glassmorphism reveal-scale stagger-1" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
 				<div>
 					<div style="font-size: 2.8rem; margin-bottom: 12px;">💊</div>
 					<h3 class="text-xl font-bold mb-2">Métodos Contraceptivos</h3>
@@ -211,7 +220,7 @@
 			<!-- Coluna Gráfico e Curiosidades (Direita) -->
 			<div class="md:col-span-1" style="display: flex; flex-direction: column; gap: 24px;">
 				<!-- Gráfico -->
-				<div class="card glassmorphism">
+				<div class="card glassmorphism reveal-scale stagger-2">
 					<h3 class="text-lg font-bold mb-4" style="font-size: 1rem; line-height: 1.3;" id="dt-graph-title">Gráfico</h3>
 					<div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color);" id="dt-graph-svg">
 						SVG
@@ -229,8 +238,8 @@
 		</div>
 
 		<!-- FAQ ESPECÍFICA -->
-		<section class="my-10" style="margin-top: 4rem;">
-			<h2 class="text-2xl font-bold mb-6">Dúvidas Frequentes do Tema</h2>
+		<section class="my-10 reveal" style="margin-top: 4rem;">
+			<h2 class="text-2xl font-bold mb-6 reveal-left">Dúvidas Frequentes do Tema</h2>
 			<div style="max-width: 800px;" id="dt-faq">
 				<!-- Accordions -->
 			</div>
@@ -257,7 +266,7 @@
 	<div class="container" style="display: flex; flex-direction: column; gap: 32px;">
 		<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px;">
 			<div style="flex: 1; min-width: 250px;">
-				<h2 class="logo-text" style="font-size: 1.5rem; margin-bottom: 8px;">Silêncios da Saúde</h2>
+				<h2 class="logo-text reveal-left" style="font-size: 1.5rem; margin-bottom: 8px;">Viva Bem, Menina!</h2>
 				<p class="text-muted dark:text-text-light/70" style="font-size: 0.95rem; max-width: 320px;">
 					Uma plataforma educativa focada em quebrar tabus e fornecer conhecimento científico real sobre saúde feminina para adolescentes.
 				</p>
@@ -274,11 +283,12 @@
 			</div>
 
 			<div style="min-width: 150px;">
-				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Privacidade e Termos</h3>
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Área Especial</h3>
 				<ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
 					<li><a href="contato.html">Fale Conosco</a></li>
 					<li><a href="professor.html">Área do Professor</a></li>
 					<li><a href="aluno.html">Portal do Aluno</a></li>
+					<li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
 				</ul>
 			</div>
 
@@ -301,7 +311,7 @@
 		<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
 
 		<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted);">
-			<p>&copy; 2026 Silêncios da Saúde. Todos os direitos reservados.</p>
+			<p>&copy; 2026 Viva Bem, Menina! Todos os direitos reservados.</p>
 			<p>Desenvolvido de acordo com as normas científicas e éticas de saúde.</p>
 		</div>
 	</div>
@@ -312,7 +322,7 @@
 	<div style="flex: 1; min-width: 250px;">
 		<h4 style="font-size: 1rem; margin-bottom: 4px; font-weight: 700;">Valorizamos sua Privacidade 🍪</h4>
 		<p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted);">
-			Utilizamos cookies essenciais e tecnologias semelhantes para garantir o funcionamento correto e de alto desempenho do portal "Silêncios da Saúde", de acordo com a LGPD.
+			Utilizamos cookies essenciais e tecnologias semelhantes para garantir o funcionamento correto e de alto desempenho do portal "Viva Bem, Menina!", de acordo com a LGPD.
 		</p>
 	</div>
 	<div style="display: flex; gap: 12px; align-items: center;">
@@ -334,9 +344,19 @@
 			<button id="luna-close" style="margin-left: auto; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-dark);" aria-label="Fechar chat">&times;</button>
 		</div>
 		
+		<!-- Quick chips de sugestão -->
+		<div id="luna-quick-chips" class="luna-quick-chips">
+			<button class="luna-chip" data-topic="menstruação">🩸 Menstruação</button>
+			<button class="luna-chip" data-topic="cólica">💊 Cólica</button>
+			<button class="luna-chip" data-topic="puberdade">🌱 Puberdade</button>
+			<button class="luna-chip" data-topic="TPM">😤 TPM</button>
+			<button class="luna-chip" data-topic="alimentação">🥗 Alimentação</button>
+			<button class="luna-chip" data-topic="sono">😴 Sono</button>
+		</div>
+		
 		<div id="luna-chat-messages" class="luna-messages">
 			<div class="msg msg-bot">
-				Olá! Eu sou a Luna, sua assistente virtual de saúde. Aqui podemos conversar de forma segura e anônima sobre puberdade, menstruação, corpo e sentimentos. Como posso te ajudar hoje?
+				Olá! Eu sou a Luna, sua assistente virtual de saúde 💜 Aqui podemos conversar de forma segura e anônima sobre puberdade, menstruação, corpo e sentimentos. Use os botões acima ou digite sua pergunta abaixo!
 			</div>
 		</div>
 		
@@ -351,6 +371,7 @@
 		</div>
 	</div>
 </div>
+
 
 <script src="js/theme.js"></script>
 <script src="js/luna.js"></script>

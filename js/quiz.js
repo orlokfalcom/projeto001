@@ -1,5 +1,5 @@
 /**
- * Lógica do Quiz Educativo com Geração de Certificado no Canvas - Silêncios da Saúde
+ * Lógica do Quiz Educativo com Geração de Certificado no Canvas — Viva Bem, Menina!
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -241,6 +241,11 @@ function initQuizGame() {
         }
         levelBadgeEl.textContent = `Nível: ${level}`;
 
+        // Salvar resultados no localStorage para o Portal da Estudante
+        localStorage.setItem('vbm-quiz-score', score);
+        localStorage.setItem('vbm-quiz-level', level);
+        localStorage.setItem('vbm-student-name', studentName);
+
         // Confetes se atingir boa nota
         if (score >= 7) {
             triggerConfetti();
@@ -318,7 +323,7 @@ function initQuizGame() {
         ctx.fillStyle = '#5E5256';
         
         const text1 = "por demonstrar excelente aproveitamento e dedicação ao completar";
-        const text2 = `o Quiz Científico de Saúde Feminina do portal "Silêncios da Saúde",`;
+        const text2 = `o Quiz Científico de Saúde Feminina do portal "Viva Bem, Menina!",`;
         const text3 = `alcançando a pontuação final de ${score} acertos de um total de 10 perguntas.`;
         
         ctx.fillText(text1, 400, 320);
@@ -339,7 +344,7 @@ function initQuizGame() {
         // Assinatura digital simbólica
         ctx.font = 'italic 16px "DM Sans", sans-serif';
         ctx.fillStyle = '#2D2327';
-        ctx.fillText('Equipe Silêncios da Saúde', 400, 485);
+        ctx.fillText('Equipe Viva Bem, Menina!', 400, 485);
         ctx.font = '11px DM Sans, sans-serif';
         ctx.fillStyle = '#5E5256';
         ctx.fillText('Validação Digital via Portal Educativo', 400, 505);

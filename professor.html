@@ -49,43 +49,66 @@
 <header id="masthead" class="site-header glassmorphism">
 	<div class="container header-container">
 		<div class="site-branding">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<a href="index.html" class="logo-text">Viva Bem, Menina!</a>
 		</div>
+
 		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
 			<ul class="nav-menu">
 				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
 				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
 				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
 				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
 				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
 				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
 				<li><a class="nav-link" href="faq.html">FAQ</a></li>
-				<li><a class="nav-link active" href="professor.html">Professor</a></li>
 				<li><a class="nav-link" href="contato.html">Contato</a></li>
 			</ul>
 		</nav>
+
 		<div class="header-actions">
+			<!-- Barra de Pesquisa Global -->
+			<div class="search-wrapper-header" role="search" aria-label="Pesquisa Global">
+				<button id="search-toggle-btn" class="icon-btn" aria-label="Abrir pesquisa" aria-expanded="false" aria-controls="header-search-form">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+				</button>
+				<div id="header-search-form" class="search-form-expanded" hidden>
+					<input type="search" id="global-search-input" placeholder="Buscar no portal..." aria-label="Pesquisar" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="search-dropdown">
+					<div id="search-dropdown" class="search-dropdown" role="listbox" aria-label="Resultados da pesquisa"></div>
+				</div>
+			</div>
 			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
-			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu Principal" aria-expanded="false" aria-controls="mobile-navigation">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="3" y1="12" x2="21" y2="12"></line>
+					<line x1="3" y1="6" x2="21" y2="6"></line>
+					<line x1="3" y1="18" x2="21" y2="18"></line>
+				</svg>
 			</button>
 		</div>
 	</div>
 </header>
 
 <div id="mobile-navigation" class="mobile-nav glassmorphism">
-	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
-		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
-		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
-		<li><a class="nav-link active" href="professor.html">Área do Professor</a></li>
-		<li><a class="nav-link" href="aluno.html">Portal do Aluno</a></li>
-		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	<ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="sobre.html">Sobre o Projeto</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="objetivos.html">Objetivos</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="mitos-e-verdades.html">Mitos e Verdades</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="estatisticas.html">Estatísticas</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="biblioteca.html">Biblioteca</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="faq.html">FAQ</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="linha-do-tempo.html">Linha do Tempo</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="professor.html">Área do Professor</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="aluno.html">Portal do Aluno</a></li>
+		<li><a class="nav-link" style="font-size: 1.2rem;" href="contato.html">Contato</a></li>
 	</ul>
 </div>
 
 <main id="content">
 
-	<section class="prof-hero">
+	<section class="prof-hero reveal">
 		<div class="container">
 			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;background:rgba(255,255,255,0.2);color:white;border:1px solid rgba(255,255,255,0.3);">🎓 Para Educadores</div>
 			<h1>Área do Professor</h1>
@@ -94,9 +117,9 @@
 	</section>
 
 	<!-- RECURSOS -->
-	<section class="py-10">
+	<section class="py-10 reveal">
 		<div class="container">
-			<h2 style="font-size:1.5rem;font-weight:800;margin-bottom:8px;">Materiais Didáticos</h2>
+			<h2 class="reveal-left"  style="font-size:1.5rem;font-weight:800;margin-bottom:8px;">Materiais Didáticos</h2>
 			<p style="color:var(--text-muted);margin-bottom:32px;">Todos os materiais são gratuitos, com licença Creative Commons e alinhados à BNCC.</p>
 
 			<div class="resource-grid">
@@ -104,7 +127,7 @@
 					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(205,180,219,0.3),rgba(255,175,204,0.2));">📋</div>
 					<div class="resource-body">
 						<div class="resource-type">Plano de Aula</div>
-						<h2 class="resource-title">Introdução ao Ciclo Menstrual — 6º ao 8º ano</h2>
+						<h2 class="resource-title reveal-left">Introdução ao Ciclo Menstrual — 6º ao 8º ano</h2>
 						<p class="resource-desc">Sequência didática com 3 aulas cobrindo puberdade, ciclo menstrual e higiene menstrual. Inclui atividades interativas e avaliação formativa.</p>
 						<div class="resource-meta">
 							<span>⏱ 3 aulas de 50 min</span>
@@ -119,7 +142,7 @@
 					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(205,180,219,0.2));">🎨</div>
 					<div class="resource-body">
 						<div class="resource-type">Atividade Interativa</div>
-						<h2 class="resource-title">Mitos e Verdades — Dinâmica em Grupos</h2>
+						<h2 class="resource-title reveal-left">Mitos e Verdades — Dinâmica em Grupos</h2>
 						<p class="resource-desc">Cartas imprimíveis com 40 afirmações para debate em sala. Estudantes classificam mitos vs. verdades e pesquisam fontes confiáveis.</p>
 						<div class="resource-meta">
 							<span>⏱ 1 aula de 50 min</span>
@@ -134,7 +157,7 @@
 					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(200,230,201,0.3),rgba(189,224,254,0.2));">📊</div>
 					<div class="resource-body">
 						<div class="resource-type">Infográfico</div>
-						<h2 class="resource-title">O Ciclo Menstrual em 4 Fases</h2>
+						<h2 class="resource-title reveal-left">O Ciclo Menstrual em 4 Fases</h2>
 						<p class="resource-desc">Infográfico visual e científico sobre as quatro fases do ciclo menstrual — ideal para exibir em sala de aula ou projeção.</p>
 						<div class="resource-meta">
 							<span>🖼 Alta resolução</span>
@@ -149,7 +172,7 @@
 					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(255,236,179,0.3),rgba(255,175,204,0.2));">🎬</div>
 					<div class="resource-body">
 						<div class="resource-type">Vídeo Educativo</div>
-						<h2 class="resource-title">Saúde Mental e Puberdade Feminina</h2>
+						<h2 class="resource-title reveal-left">Saúde Mental e Puberdade Feminina</h2>
 						<p class="resource-desc">Documentário curto (18 min) produzido com psicólogas escolares sobre como apoiar adolescentes durante as mudanças da puberdade.</p>
 						<div class="resource-meta">
 							<span>⏱ 18 minutos</span>
@@ -164,7 +187,7 @@
 					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(255,175,204,0.2),rgba(205,180,219,0.3));">📝</div>
 					<div class="resource-body">
 						<div class="resource-type">Avaliação</div>
-						<h2 class="resource-title">Quiz Avaliativo — Saúde Feminina</h2>
+						<h2 class="resource-title reveal-left">Quiz Avaliativo — Saúde Feminina</h2>
 						<p class="resource-desc">Banco com 60 questões de múltipla escolha e dissertativas sobre saúde feminina, prontas para uso em provas e atividades avaliativas.</p>
 						<div class="resource-meta">
 							<span>❓ 60 questões</span>
@@ -179,7 +202,7 @@
 					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(200,230,201,0.2));">🎙️</div>
 					<div class="resource-body">
 						<div class="resource-type">Webinário</div>
-						<h2 class="resource-title">Como Abordar Saúde Feminina sem Constrangimentos</h2>
+						<h2 class="resource-title reveal-left">Como Abordar Saúde Feminina sem Constrangimentos</h2>
 						<p class="resource-desc">Formação de 2h com especialistas em educação e ginecologia. Estratégias práticas para lidar com perguntas difíceis em sala.</p>
 						<div class="resource-meta">
 							<span>⏱ 2 horas</span>
@@ -194,11 +217,11 @@
 	</section>
 
 	<!-- GUIA PASSO A PASSO -->
-	<section class="py-10" style="background:rgba(102,126,234,0.04);">
+	<section class="py-10 reveal" style="background:rgba(102,126,234,0.04);">
 		<div class="container">
 			<div style="max-width:700px;">
 				<div class="guide-section">
-					<h2 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:4px;">Como Usar o Portal em Sala de Aula</h2>
+					<h2 class="reveal-left"  style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:4px;">Como Usar o Portal em Sala de Aula</h2>
 					<p style="color:var(--text-muted);font-size:0.9rem;">Passo a passo para integrar o Silêncios da Saúde à sua prática pedagógica.</p>
 					<div class="guide-steps">
 						<div class="guide-step">
@@ -243,9 +266,9 @@
 	</section>
 
 	<!-- FAQ PROFESSOR -->
-	<section class="py-10">
+	<section class="py-10 reveal">
 		<div class="container" style="max-width:760px;">
-			<h2 style="font-size:1.4rem;font-weight:800;margin-bottom:24px;">Dúvidas Frequentes de Professores</h2>
+			<h2 class="reveal-left"  style="font-size:1.4rem;font-weight:800;margin-bottom:24px;">Dúvidas Frequentes de Professores</h2>
 			<div class="faq-prof">
 				<div class="faq-prof-item">
 					<button class="faq-prof-q">Posso usar estes materiais em qualquer disciplina? <span>+</span></button>
@@ -267,9 +290,9 @@
 		</div>
 	</section>
 
-	<section class="py-10" style="background:linear-gradient(135deg,#667eea,#764ba2);text-align:center;color:white;">
+	<section class="py-10 reveal" style="background:linear-gradient(135deg,#667eea,#764ba2);text-align:center;color:white;">
 		<div class="container">
-			<h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">Quer uma parceria com sua escola?</h2>
+			<h2 class="reveal-left"  style="font-size:2rem;font-weight:800;margin-bottom:16px;">Quer uma parceria com sua escola?</h2>
 			<p style="opacity:0.85;max-width:500px;margin:0 auto 32px;">Oferecemos formações in loco, materiais customizados e suporte para implementação do programa em sua instituição.</p>
 			<a href="contato.html" class="btn" style="background:white;color:#667eea;font-weight:800;">Falar sobre Parceria →</a>
 		</div>
@@ -277,40 +300,112 @@
 
 </main>
 
-<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
-	<div class="container">
-		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
-			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+<footer id="colophon" class="site-footer glassmorphism py-10" style="margin-top: 5rem; border-top: 1px solid var(--border-color);">
+	<div class="container" style="display: flex; flex-direction: column; gap: 32px;">
+		<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px;">
+			<div style="flex: 1; min-width: 250px;">
+				<h2 class="logo-text reveal-left" style="font-size: 1.5rem; margin-bottom: 8px;">Viva Bem, Menina!</h2>
+				<p class="text-muted dark:text-text-light/70" style="font-size: 0.95rem; max-width: 320px;">
+					Uma plataforma educativa focada em quebrar tabus e fornecer conhecimento científico real sobre saúde feminina para adolescentes.
+				</p>
+			</div>
+
+			<div style="min-width: 150px;">
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Links Rápidos</h3>
+				<ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+					<li><a href="sobre.html">Sobre o Projeto</a></li>
+					<li><a href="saude-feminina.html">Saúde Feminina</a></li>
+					<li><a href="mitos-e-verdades.html">Mitos e Verdades</a></li>
+					<li><a href="quiz.html">Quiz Educativo</a></li>
+				</ul>
+			</div>
+
+			<div style="min-width: 150px;">
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Área Especial</h3>
+				<ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+					<li><a href="contato.html">Fale Conosco</a></li>
+					<li><a href="professor.html">Área do Professor</a></li>
+					<li><a href="aluno.html">Portal do Aluno</a></li>
+					<li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+				</ul>
+			</div>
+
+			<div style="min-width: 200px;">
+				<h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Siga-nos</h3>
+				<div style="display: flex; gap: 12px;">
+					<a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="Instagram">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+					</a>
+					<a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="TikTok">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+					</a>
+					<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="YouTube">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
+
+		<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted);">
+			<p>&copy; 2026 Viva Bem, Menina! Todos os direitos reservados.</p>
+			<p>Desenvolvido de acordo com as normas científicas e éticas de saúde.</p>
 		</div>
 	</div>
 </footer>
 
 <div id="cookie-banner" class="cookie-banner glassmorphism card">
-	<div style="flex:1;min-width:250px;">
-		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
-		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	<div style="flex: 1; min-width: 250px;">
+		<h4 style="font-size: 1rem; margin-bottom: 4px; font-weight: 700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted);">
+			Utilizamos cookies essenciais e tecnologias semelhantes para garantir o funcionamento correto e de alto desempenho do portal "Viva Bem, Menina!", de acordo com a LGPD.
+		</p>
 	</div>
 	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
 </div>
 
 <div class="luna-widget">
-	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<button id="luna-toggle" class="luna-btn" aria-label="Abrir conversa com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	
 	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
 		<div class="luna-header">
 			<div class="luna-avatar">👩‍⚕️</div>
-			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
-			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+			<div>
+				<h4 style="margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark);">Luna</h4>
+				<span style="font-size: 0.75rem; color: var(--text-dark); opacity: 0.8;">Assistente Virtual de Saúde</span>
+			</div>
+			<button id="luna-close" style="margin-left: auto; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-dark);" aria-label="Fechar chat">&times;</button>
 		</div>
+		
+		<!-- Quick chips de sugestão -->
+		<div id="luna-quick-chips" class="luna-quick-chips">
+			<button class="luna-chip" data-topic="menstruação">🩸 Menstruação</button>
+			<button class="luna-chip" data-topic="cólica">💊 Cólica</button>
+			<button class="luna-chip" data-topic="puberdade">🌱 Puberdade</button>
+			<button class="luna-chip" data-topic="TPM">😤 TPM</button>
+			<button class="luna-chip" data-topic="alimentação">🥗 Alimentação</button>
+			<button class="luna-chip" data-topic="sono">😴 Sono</button>
+		</div>
+		
 		<div id="luna-chat-messages" class="luna-messages">
-			<div class="msg msg-bot">Olá, Professor(a)! Posso ajudar a identificar qual recurso é mais adequado para sua turma!</div>
+			<div class="msg msg-bot">
+				Olá! Eu sou a Luna, sua assistente virtual de saúde 💜 Aqui podemos conversar de forma segura e anônima sobre puberdade, menstruação, corpo e sentimentos. Use os botões acima ou digite sua pergunta abaixo!
+			</div>
 		</div>
+		
 		<div class="luna-input-area">
-			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
-			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+			<input type="text" id="luna-input" placeholder="Digite sua pergunta aqui..." aria-label="Mensagem para a Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar mensagem">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="22" y1="2" x2="11" y2="13"></line>
+					<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+				</svg>
+			</button>
 		</div>
 	</div>
 </div>
+
 
 <script src="js/theme.js"></script>
 <script src="js/luna.js"></script>
