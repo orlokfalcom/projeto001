@@ -1,350 +1,584 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="light">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Biblioteca - Silêncios da Saúde</title>
-	<meta name="description" content="Acervo de materiais científicos, artigos, livros e recursos didáticos sobre saúde feminina para adolescentes, educadores e pesquisadores.">
+	<meta name="description"
+		content="Acervo de materiais científicos, artigos, livros e recursos didáticos sobre saúde feminina para adolescentes, educadores e pesquisadores.">
 	<link rel="manifest" href="manifest.json">
 	<meta name="theme-color" content="#CDB4DB">
 	<link rel="stylesheet" href="css/theme.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap"
+		rel="stylesheet">
 	<style>
-		.lib-hero { padding:120px 0 60px; background:var(--gradient-primary); text-align:center; }
-		.lib-hero h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:16px; }
+		.lib-hero {
+			padding: 120px 0 60px;
+			background: var(--gradient-primary);
+			text-align: center;
+		}
 
-		.lib-filters { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; align-items:center; }
-		.lib-search { flex:1; min-width:240px; max-width:360px; position:relative; }
-		.lib-search input { width:100%; padding:11px 18px 11px 44px; border-radius:50px; border:2px solid var(--border-color); background:var(--card-bg); color:var(--text-dark); font-size:0.95rem; font-family:var(--font-body); outline:none; transition:border-color 0.2s; }
-		.lib-search input:focus { border-color:var(--color-primary); }
-		.lib-search .icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); }
-		.filter-select { padding:10px 16px; border-radius:50px; border:2px solid var(--border-color); background:var(--card-bg); color:var(--text-dark); font-size:0.9rem; font-family:var(--font-body); cursor:pointer; outline:none; }
-		.filter-select:focus { border-color:var(--color-primary); }
+		.lib-hero h1 {
+			font-size: clamp(2rem, 5vw, 3.2rem);
+			font-weight: 900;
+			margin-bottom: 16px;
+		}
 
-		.lib-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:24px; }
-		.lib-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-lg); overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; }
-		.lib-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.12); }
-		.lib-card-cover { height:140px; display:flex; align-items:center; justify-content:center; font-size:3.5rem; }
-		.lib-card-body { padding:20px; flex:1; display:flex; flex-direction:column; gap:8px; }
-		.lib-card-type { font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; padding:3px 12px; border-radius:50px; display:inline-flex; align-items:center; gap:5px; width:fit-content; }
-		.type-artigo   { background:rgba(205,180,219,0.2); color:#7b5ea7; }
-		.type-livro    { background:rgba(255,175,204,0.2); color:#c25b8a; }
-		.type-video    { background:rgba(189,224,254,0.2); color:#2980b9; }
-		.type-guia     { background:rgba(200,230,201,0.2); color:#27ae60; }
-		.type-podcast  { background:rgba(255,236,179,0.2); color:#e67e22; }
-		.lib-card-title { font-size:1rem; font-weight:700; color:var(--text-dark); line-height:1.4; }
-		.lib-card-author { font-size:0.82rem; color:var(--text-muted); }
-		.lib-card-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.5; flex:1; }
-		.lib-card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:12px; border-top:1px solid var(--border-color); }
-		.lib-card-year { font-size:0.78rem; color:var(--text-muted); }
-		.lib-card-link { font-size:0.82rem; font-weight:700; color:var(--color-primary); text-decoration:none; display:flex; align-items:center; gap:4px; }
-		.lib-card-link:hover { text-decoration:underline; }
+		.lib-filters {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			margin-bottom: 32px;
+			align-items: center;
+		}
 
-		.lib-featured { background:linear-gradient(135deg, rgba(205,180,219,0.15), rgba(255,175,204,0.1)); border:2px solid var(--color-primary); }
-		.featured-badge { font-size:0.72rem; font-weight:800; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+		.lib-search {
+			flex: 1;
+			min-width: 240px;
+			max-width: 360px;
+			position: relative;
+		}
 
-		.results-count { font-size:0.9rem; color:var(--text-muted); margin-bottom:20px; }
+		.lib-search input {
+			width: 100%;
+			padding: 11px 18px 11px 44px;
+			border-radius: 50px;
+			border: 2px solid var(--border-color);
+			background: var(--card-bg);
+			color: var(--text-dark);
+			font-size: 0.95rem;
+			font-family: var(--font-body);
+			outline: none;
+			transition: border-color 0.2s;
+		}
+
+		.lib-search input:focus {
+			border-color: var(--color-primary);
+		}
+
+		.lib-search .icon {
+			position: absolute;
+			left: 16px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: var(--text-muted);
+		}
+
+		.filter-select {
+			padding: 10px 16px;
+			border-radius: 50px;
+			border: 2px solid var(--border-color);
+			background: var(--card-bg);
+			color: var(--text-dark);
+			font-size: 0.9rem;
+			font-family: var(--font-body);
+			cursor: pointer;
+			outline: none;
+		}
+
+		.filter-select:focus {
+			border-color: var(--color-primary);
+		}
+
+		.lib-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 24px;
+		}
+
+		.lib-card {
+			background: var(--card-bg);
+			border: 1px solid var(--border-color);
+			border-radius: var(--radius-lg);
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.lib-card:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+		}
+
+		.lib-card-cover {
+			height: 140px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 3.5rem;
+		}
+
+		.lib-card-body {
+			padding: 20px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.lib-card-type {
+			font-size: 0.72rem;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			padding: 3px 12px;
+			border-radius: 50px;
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			width: fit-content;
+		}
+
+		.type-artigo {
+			background: rgba(205, 180, 219, 0.2);
+			color: #7b5ea7;
+		}
+
+		.type-livro {
+			background: rgba(255, 175, 204, 0.2);
+			color: #c25b8a;
+		}
+
+		.type-video {
+			background: rgba(189, 224, 254, 0.2);
+			color: #2980b9;
+		}
+
+		.type-guia {
+			background: rgba(200, 230, 201, 0.2);
+			color: #27ae60;
+		}
+
+		.type-podcast {
+			background: rgba(255, 236, 179, 0.2);
+			color: #e67e22;
+		}
+
+		.lib-card-title {
+			font-size: 1rem;
+			font-weight: 700;
+			color: var(--text-dark);
+			line-height: 1.4;
+		}
+
+		.lib-card-author {
+			font-size: 0.82rem;
+			color: var(--text-muted);
+		}
+
+		.lib-card-desc {
+			font-size: 0.85rem;
+			color: var(--text-muted);
+			line-height: 1.5;
+			flex: 1;
+		}
+
+		.lib-card-footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: auto;
+			padding-top: 12px;
+			border-top: 1px solid var(--border-color);
+		}
+
+		.lib-card-year {
+			font-size: 0.78rem;
+			color: var(--text-muted);
+		}
+
+		.lib-card-link {
+			font-size: 0.82rem;
+			font-weight: 700;
+			color: var(--color-primary);
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+
+		.lib-card-link:hover {
+			text-decoration: underline;
+		}
+
+		.lib-featured {
+			background: linear-gradient(135deg, rgba(205, 180, 219, 0.15), rgba(255, 175, 204, 0.1));
+			border: 2px solid var(--color-primary);
+		}
+
+		.featured-badge {
+			font-size: 0.72rem;
+			font-weight: 800;
+			color: var(--color-primary);
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			margin-bottom: 4px;
+		}
+
+		.results-count {
+			font-size: 0.9rem;
+			color: var(--text-muted);
+			margin-bottom: 20px;
+		}
 	</style>
 </head>
+
 <body>
 
-<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+	<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
 
-<header id="masthead" class="site-header glassmorphism">
-	<div class="container header-container">
-		<div class="site-branding">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+	<header id="masthead" class="site-header glassmorphism">
+		<div class="container header-container">
+			<div class="site-branding">
+				<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			</div>
+			<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+				<ul class="nav-menu">
+					<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+					<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+					<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+					<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+					<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+					<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+					<li><a class="nav-link active" href="biblioteca.html">Biblioteca</a></li>
+					<li><a class="nav-link" href="faq.html">FAQ</a></li>
+					<li><a class="nav-link" href="contato.html">Contato</a></li>
+				</ul>
+			</nav>
+			<div class="header-actions">
+				<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro"
+					aria-live="polite"></button>
+				<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+						stroke-linecap="round" stroke-linejoin="round">
+						<line x1="3" y1="12" x2="21" y2="12"></line>
+						<line x1="3" y1="6" x2="21" y2="6"></line>
+						<line x1="3" y1="18" x2="21" y2="18"></line>
+					</svg>
+				</button>
+			</div>
 		</div>
-		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
-			<ul class="nav-menu">
-				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
-				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
-				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
-				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
-				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
-				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
-				<li><a class="nav-link active" href="biblioteca.html">Biblioteca</a></li>
-				<li><a class="nav-link" href="faq.html">FAQ</a></li>
-				<li><a class="nav-link" href="contato.html">Contato</a></li>
-			</ul>
-		</nav>
-		<div class="header-actions">
-			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
-			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-			</button>
-		</div>
+	</header>
+
+	<div id="mobile-navigation" class="mobile-nav glassmorphism">
+		<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+			<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+			<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+			<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+			<li><a class="nav-link active" href="biblioteca.html">Biblioteca</a></li>
+			<li><a class="nav-link" href="faq.html">FAQ</a></li>
+			<li><a class="nav-link" href="contato.html">Contato</a></li>
+		</ul>
 	</div>
-</header>
 
-<div id="mobile-navigation" class="mobile-nav glassmorphism">
-	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
-		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
-		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
-		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
-		<li><a class="nav-link active" href="biblioteca.html">Biblioteca</a></li>
-		<li><a class="nav-link" href="faq.html">FAQ</a></li>
-		<li><a class="nav-link" href="contato.html">Contato</a></li>
-	</ul>
-</div>
+	<main id="content">
 
-<main id="content">
+		<section class="lib-hero">
+			<div class="container">
+				<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">📚 Acervo Científico</div>
+				<h1>Biblioteca</h1>
+				<p style="font-size:1.1rem;opacity:0.85;max-width:580px;margin:0 auto;">Artigos, livros, vídeos e guias
+					selecionados por especialistas em saúde feminina e educação para adolescentes.</p>
+			</div>
+		</section>
 
-	<section class="lib-hero">
+		<section class="py-10">
+			<div class="container">
+
+				<!-- FILTERS -->
+				<div class="lib-filters">
+					<div class="lib-search">
+						<span class="icon">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="11" cy="11" r="8"></circle>
+								<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+							</svg>
+						</span>
+						<input type="text" id="lib-search-input" placeholder="Buscar na biblioteca..."
+							aria-label="Buscar materiais">
+					</div>
+					<select class="filter-select" id="lib-type-filter" aria-label="Filtrar por tipo">
+						<option value="todos">Todos os tipos</option>
+						<option value="artigo">Artigos</option>
+						<option value="livro">Livros</option>
+						<option value="video">Vídeos</option>
+						<option value="guia">Guias</option>
+						<option value="podcast">Podcasts</option>
+					</select>
+					<select class="filter-select" id="lib-audience-filter" aria-label="Filtrar por público">
+						<option value="todos">Todos os públicos</option>
+						<option value="adolescente">Para Adolescentes</option>
+						<option value="educador">Para Educadores</option>
+						<option value="pesquisador">Para Pesquisadores</option>
+					</select>
+				</div>
+
+				<p class="results-count" id="lib-results-count">Mostrando todos os materiais</p>
+
+				<!-- GRID -->
+				<div class="lib-grid" id="lib-grid">
+
+					<div class="lib-card lib-featured" data-type="guia" data-audience="adolescente">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(205,180,219,0.3),rgba(255,175,204,0.2));">📖
+						</div>
+						<div class="lib-card-body">
+							<p class="featured-badge">⭐ Destaque</p>
+							<span class="lib-card-type type-guia">📋 Guia</span>
+							<h2 class="lib-card-title">Guia do Ciclo Menstrual para Adolescentes</h2>
+							<p class="lib-card-author">Ministério da Saúde & Fiocruz</p>
+							<p class="lib-card-desc">Guia completo e acessível sobre o ciclo menstrual, puberdade e
+								saúde hormonal para meninas de 10-17 anos.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2024</span>
+								<a href="#" class="lib-card-link" aria-label="Acessar Guia do Ciclo Menstrual">Acessar
+									→</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="artigo" data-audience="pesquisador">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(205,180,219,0.2));">🔬
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-artigo">📄 Artigo</span>
+							<h2 class="lib-card-title">Endometriose na Adolescência: Diagnóstico Precoce</h2>
+							<p class="lib-card-author">Dr. Ana Lima et al. — Revista Brasileira de Ginecologia</p>
+							<p class="lib-card-desc">Revisão sistemática sobre o reconhecimento de sintomas de
+								endometriose em adolescentes e protocolos de diagnóstico.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2023</span>
+								<a href="#" class="lib-card-link" aria-label="Ler artigo">Ler artigo →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="livro" data-audience="adolescente">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(255,175,204,0.3),rgba(205,180,219,0.2));">📘
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-livro">📗 Livro</span>
+							<h2 class="lib-card-title">O Corpo é Seu: Guia de Autocuidado Feminino</h2>
+							<p class="lib-card-author">Dra. Fernanda Costa</p>
+							<p class="lib-card-desc">Obra acessível que aborda puberdade, saúde mental e corpo feminino
+								com linguagem pensada para jovens.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2023</span>
+								<a href="#" class="lib-card-link" aria-label="Ver livro">Ver livro →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="video" data-audience="adolescente">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(200,230,201,0.3),rgba(189,224,254,0.2));">🎥
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-video">▶️ Vídeo</span>
+							<h2 class="lib-card-title">Entendendo a Puberdade Feminina</h2>
+							<p class="lib-card-author">Canal Saúde Jovem / YouTube</p>
+							<p class="lib-card-desc">Série de vídeos animados sobre transformações físicas e emocionais
+								da puberdade. Indicado para 12-15 anos.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2024</span>
+								<a href="#" class="lib-card-link" aria-label="Assistir vídeo">Assistir →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="guia" data-audience="educador">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(255,236,179,0.3),rgba(255,175,204,0.2));">🏫
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-guia">📋 Guia</span>
+							<h2 class="lib-card-title">Manual do Educador: Saúde Feminina na Escola</h2>
+							<p class="lib-card-author">UNESCO Brasil & MEC</p>
+							<p class="lib-card-desc">Guia prático com planos de aula, atividades e estratégias para
+								abordar saúde feminina em sala de aula de forma inclusiva.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2023</span>
+								<a href="#" class="lib-card-link" aria-label="Baixar manual">Baixar →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="podcast" data-audience="adolescente">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(205,180,219,0.2),rgba(189,224,254,0.3));">🎧
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-podcast">🎙️ Podcast</span>
+							<h2 class="lib-card-title">Corpo em Foco</h2>
+							<p class="lib-card-author">Spotify / Disponível em todas as plataformas</p>
+							<p class="lib-card-desc">Podcast semanal com especialistas respondendo dúvidas reais de
+								adolescentes sobre corpo, hormônios e saúde mental.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2024</span>
+								<a href="#" class="lib-card-link" aria-label="Ouvir podcast">Ouvir →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="artigo" data-audience="educador pesquisador">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(255,175,204,0.2),rgba(255,236,179,0.3));">📊
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-artigo">📄 Artigo</span>
+							<h2 class="lib-card-title">Educação Menstrual nas Escolas Públicas Brasileiras</h2>
+							<p class="lib-card-author">Silva, M.R. et al. — Cadernos de Saúde Pública</p>
+							<p class="lib-card-desc">Estudo quantitativo com 3.400 estudantes avaliando o impacto de
+								programas de educação menstrual no absenteísmo escolar.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2024</span>
+								<a href="#" class="lib-card-link" aria-label="Ler artigo completo">Ler artigo →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="video" data-audience="educador">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(200,230,201,0.2));">🎓
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-video">▶️ Vídeo</span>
+							<h2 class="lib-card-title">Como Falar sobre Menstruação em Sala de Aula</h2>
+							<p class="lib-card-author">Fiocruz — Canal Saúde</p>
+							<p class="lib-card-desc">Webinário gravado com professores e especialistas compartilhando
+								estratégias pedagógicas e como lidar com constrangimentos.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2023</span>
+								<a href="#" class="lib-card-link" aria-label="Assistir webinário">Assistir →</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="lib-card" data-type="livro" data-audience="pesquisador">
+						<div class="lib-card-cover"
+							style="background:linear-gradient(135deg,rgba(205,180,219,0.3),rgba(200,230,201,0.2));">🧬
+						</div>
+						<div class="lib-card-body">
+							<span class="lib-card-type type-livro">📗 Livro</span>
+							<h2 class="lib-card-title">Ginecologia da Infância e Adolescência</h2>
+							<p class="lib-card-author">Dra. Roseli Santos (Org.) — Editora Atheneu</p>
+							<p class="lib-card-desc">Referência acadêmica sobre ginecologia pediátrica e adolescente,
+								cobrindo diagnósticos, tratamentos e abordagem multidisciplinar.</p>
+							<div class="lib-card-footer">
+								<span class="lib-card-year">2022</span>
+								<a href="#" class="lib-card-link" aria-label="Ver livro">Ver livro →</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<p id="lib-no-results"
+					style="text-align:center;color:var(--text-muted);font-size:1.05rem;margin-top:48px;display:none;">
+					Nenhum material encontrado. Tente outros filtros.
+				</p>
+
+				<!-- SUGGEST -->
+				<div
+					style="margin-top:60px;background:var(--card-bg);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:36px;text-align:center;">
+					<h2 style="font-size:1.3rem;font-weight:800;margin-bottom:8px;">Conhece um bom material?</h2>
+					<p style="color:var(--text-muted);margin-bottom:20px;">Sugira artigos, livros ou recursos para
+						enriquecer nossa biblioteca colaborativa.</p>
+					<a href="contato.html" class="btn btn-primary">Sugerir Material →</a>
+				</div>
+
+			</div>
+		</section>
+
+	</main>
+
+	<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
 		<div class="container">
-			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">📚 Acervo Científico</div>
-			<h1>Biblioteca</h1>
-			<p style="font-size:1.1rem;opacity:0.85;max-width:580px;margin:0 auto;">Artigos, livros, vídeos e guias selecionados por especialistas em saúde feminina e educação para adolescentes.</p>
+			<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+				<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+				<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+			</div>
 		</div>
-	</section>
+	</footer>
 
-	<section class="py-10">
-		<div class="container">
-
-			<!-- FILTERS -->
-			<div class="lib-filters">
-				<div class="lib-search">
-					<span class="icon">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-					</span>
-					<input type="text" id="lib-search-input" placeholder="Buscar na biblioteca..." aria-label="Buscar materiais">
-				</div>
-				<select class="filter-select" id="lib-type-filter" aria-label="Filtrar por tipo">
-					<option value="todos">Todos os tipos</option>
-					<option value="artigo">Artigos</option>
-					<option value="livro">Livros</option>
-					<option value="video">Vídeos</option>
-					<option value="guia">Guias</option>
-					<option value="podcast">Podcasts</option>
-				</select>
-				<select class="filter-select" id="lib-audience-filter" aria-label="Filtrar por público">
-					<option value="todos">Todos os públicos</option>
-					<option value="adolescente">Para Adolescentes</option>
-					<option value="educador">Para Educadores</option>
-					<option value="pesquisador">Para Pesquisadores</option>
-				</select>
-			</div>
-
-			<p class="results-count" id="lib-results-count">Mostrando todos os materiais</p>
-
-			<!-- GRID -->
-			<div class="lib-grid" id="lib-grid">
-
-				<div class="lib-card lib-featured" data-type="guia" data-audience="adolescente">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(205,180,219,0.3),rgba(255,175,204,0.2));">📖</div>
-					<div class="lib-card-body">
-						<p class="featured-badge">⭐ Destaque</p>
-						<span class="lib-card-type type-guia">📋 Guia</span>
-						<h2 class="lib-card-title">Guia do Ciclo Menstrual para Adolescentes</h2>
-						<p class="lib-card-author">Ministério da Saúde & Fiocruz</p>
-						<p class="lib-card-desc">Guia completo e acessível sobre o ciclo menstrual, puberdade e saúde hormonal para meninas de 10-17 anos.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2024</span>
-							<a href="#" class="lib-card-link" aria-label="Acessar Guia do Ciclo Menstrual">Acessar →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="artigo" data-audience="pesquisador">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(205,180,219,0.2));">🔬</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-artigo">📄 Artigo</span>
-						<h2 class="lib-card-title">Endometriose na Adolescência: Diagnóstico Precoce</h2>
-						<p class="lib-card-author">Dr. Ana Lima et al. — Revista Brasileira de Ginecologia</p>
-						<p class="lib-card-desc">Revisão sistemática sobre o reconhecimento de sintomas de endometriose em adolescentes e protocolos de diagnóstico.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2023</span>
-							<a href="#" class="lib-card-link" aria-label="Ler artigo">Ler artigo →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="livro" data-audience="adolescente">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(255,175,204,0.3),rgba(205,180,219,0.2));">📘</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-livro">📗 Livro</span>
-						<h2 class="lib-card-title">O Corpo é Seu: Guia de Autocuidado Feminino</h2>
-						<p class="lib-card-author">Dra. Fernanda Costa</p>
-						<p class="lib-card-desc">Obra acessível que aborda puberdade, saúde mental e corpo feminino com linguagem pensada para jovens.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2023</span>
-							<a href="#" class="lib-card-link" aria-label="Ver livro">Ver livro →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="video" data-audience="adolescente">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(200,230,201,0.3),rgba(189,224,254,0.2));">🎥</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-video">▶️ Vídeo</span>
-						<h2 class="lib-card-title">Entendendo a Puberdade Feminina</h2>
-						<p class="lib-card-author">Canal Saúde Jovem / YouTube</p>
-						<p class="lib-card-desc">Série de vídeos animados sobre transformações físicas e emocionais da puberdade. Indicado para 12-15 anos.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2024</span>
-							<a href="#" class="lib-card-link" aria-label="Assistir vídeo">Assistir →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="guia" data-audience="educador">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(255,236,179,0.3),rgba(255,175,204,0.2));">🏫</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-guia">📋 Guia</span>
-						<h2 class="lib-card-title">Manual do Educador: Saúde Feminina na Escola</h2>
-						<p class="lib-card-author">UNESCO Brasil & MEC</p>
-						<p class="lib-card-desc">Guia prático com planos de aula, atividades e estratégias para abordar saúde feminina em sala de aula de forma inclusiva.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2023</span>
-							<a href="#" class="lib-card-link" aria-label="Baixar manual">Baixar →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="podcast" data-audience="adolescente">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(205,180,219,0.2),rgba(189,224,254,0.3));">🎧</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-podcast">🎙️ Podcast</span>
-						<h2 class="lib-card-title">Corpo em Foco</h2>
-						<p class="lib-card-author">Spotify / Disponível em todas as plataformas</p>
-						<p class="lib-card-desc">Podcast semanal com especialistas respondendo dúvidas reais de adolescentes sobre corpo, hormônios e saúde mental.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2024</span>
-							<a href="#" class="lib-card-link" aria-label="Ouvir podcast">Ouvir →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="artigo" data-audience="educador pesquisador">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(255,175,204,0.2),rgba(255,236,179,0.3));">📊</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-artigo">📄 Artigo</span>
-						<h2 class="lib-card-title">Educação Menstrual nas Escolas Públicas Brasileiras</h2>
-						<p class="lib-card-author">Silva, M.R. et al. — Cadernos de Saúde Pública</p>
-						<p class="lib-card-desc">Estudo quantitativo com 3.400 estudantes avaliando o impacto de programas de educação menstrual no absenteísmo escolar.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2024</span>
-							<a href="#" class="lib-card-link" aria-label="Ler artigo completo">Ler artigo →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="video" data-audience="educador">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(200,230,201,0.2));">🎓</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-video">▶️ Vídeo</span>
-						<h2 class="lib-card-title">Como Falar sobre Menstruação em Sala de Aula</h2>
-						<p class="lib-card-author">Fiocruz — Canal Saúde</p>
-						<p class="lib-card-desc">Webinário gravado com professores e especialistas compartilhando estratégias pedagógicas e como lidar com constrangimentos.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2023</span>
-							<a href="#" class="lib-card-link" aria-label="Assistir webinário">Assistir →</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="lib-card" data-type="livro" data-audience="pesquisador">
-					<div class="lib-card-cover" style="background:linear-gradient(135deg,rgba(205,180,219,0.3),rgba(200,230,201,0.2));">🧬</div>
-					<div class="lib-card-body">
-						<span class="lib-card-type type-livro">📗 Livro</span>
-						<h2 class="lib-card-title">Ginecologia da Infância e Adolescência</h2>
-						<p class="lib-card-author">Dra. Roseli Santos (Org.) — Editora Atheneu</p>
-						<p class="lib-card-desc">Referência acadêmica sobre ginecologia pediátrica e adolescente, cobrindo diagnósticos, tratamentos e abordagem multidisciplinar.</p>
-						<div class="lib-card-footer">
-							<span class="lib-card-year">2022</span>
-							<a href="#" class="lib-card-link" aria-label="Ver livro">Ver livro →</a>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<p id="lib-no-results" style="text-align:center;color:var(--text-muted);font-size:1.05rem;margin-top:48px;display:none;">
-				Nenhum material encontrado. Tente outros filtros.
-			</p>
-
-			<!-- SUGGEST -->
-			<div style="margin-top:60px;background:var(--card-bg);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:36px;text-align:center;">
-				<h2 style="font-size:1.3rem;font-weight:800;margin-bottom:8px;">Conhece um bom material?</h2>
-				<p style="color:var(--text-muted);margin-bottom:20px;">Sugira artigos, livros ou recursos para enriquecer nossa biblioteca colaborativa.</p>
-				<a href="contato.html" class="btn btn-primary">Sugerir Material →</a>
-			</div>
-
+	<div id="cookie-banner" class="cookie-banner glassmorphism card">
+		<div style="flex:1;min-width:250px;">
+			<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+			<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
 		</div>
-	</section>
+		<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+	</div>
 
-</main>
-
-<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
-	<div class="container">
-		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
-			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+	<div class="luna-widget">
+		<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false"
+			aria-controls="luna-chat-box">💬</button>
+		<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+			<div class="luna-header">
+				<div class="luna-avatar">👩‍⚕️</div>
+				<div>
+					<h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4>
+				</div>
+				<button id="luna-close"
+					style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);"
+					aria-label="Fechar">&times;</button>
+			</div>
+			<div id="luna-chat-messages" class="luna-messages">
+				<div class="msg msg-bot">Posso recomendar leituras personalizadas! O que você quer aprender hoje?</div>
+			</div>
+			<div class="luna-input-area">
+				<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna"
+					autocomplete="off">
+				<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="22" y1="2" x2="11" y2="13"></line>
+						<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+					</svg></button>
+			</div>
 		</div>
 	</div>
-</footer>
 
-<div id="cookie-banner" class="cookie-banner glassmorphism card">
-	<div style="flex:1;min-width:250px;">
-		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
-		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
-	</div>
-	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
-</div>
+	<script src="js/theme.js"></script>
+	<script src="js/luna.js"></script>
+	<script>
+		const searchInput = document.getElementById('lib-search-input');
+		const typeFilter = document.getElementById('lib-type-filter');
+		const audFilter = document.getElementById('lib-audience-filter');
+		const cards = document.querySelectorAll('.lib-card');
+		const noResults = document.getElementById('lib-no-results');
+		const countEl = document.getElementById('lib-results-count');
 
-<div class="luna-widget">
-	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
-	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
-		<div class="luna-header">
-			<div class="luna-avatar">👩‍⚕️</div>
-			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
-			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
-		</div>
-		<div id="luna-chat-messages" class="luna-messages">
-			<div class="msg msg-bot">Posso recomendar leituras personalizadas! O que você quer aprender hoje?</div>
-		</div>
-		<div class="luna-input-area">
-			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
-			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
-		</div>
-	</div>
-</div>
-
-<script src="js/theme.js"></script>
-<script src="js/luna.js"></script>
-<script>
-const searchInput = document.getElementById('lib-search-input');
-const typeFilter  = document.getElementById('lib-type-filter');
-const audFilter   = document.getElementById('lib-audience-filter');
-const cards       = document.querySelectorAll('.lib-card');
-const noResults   = document.getElementById('lib-no-results');
-const countEl     = document.getElementById('lib-results-count');
-
-function filterLib() {
-	const q    = searchInput.value.toLowerCase();
-	const type = typeFilter.value;
-	const aud  = audFilter.value;
-	let visible = 0;
-	cards.forEach(card => {
-		const text    = card.textContent.toLowerCase();
-		const cardType = card.dataset.type || '';
-		const cardAud  = card.dataset.audience || '';
-		const matchQ    = !q || text.includes(q);
-		const matchType = type === 'todos' || cardType.includes(type);
-		const matchAud  = aud === 'todos' || cardAud.includes(aud);
-		const show = matchQ && matchType && matchAud;
-		card.style.display = show ? '' : 'none';
-		if (show) visible++;
-	});
-	noResults.style.display = visible === 0 ? 'block' : 'none';
-	countEl.textContent = `${visible} material${visible !== 1 ? 'is' : ''} encontrado${visible !== 1 ? 's' : ''}`;
-}
-searchInput.addEventListener('input', filterLib);
-typeFilter.addEventListener('change', filterLib);
-audFilter.addEventListener('change', filterLib);
-filterLib();
-</script>
+		function filterLib() {
+			const q = searchInput.value.toLowerCase();
+			const type = typeFilter.value;
+			const aud = audFilter.value;
+			let visible = 0;
+			cards.forEach(card => {
+				const text = card.textContent.toLowerCase();
+				const cardType = card.dataset.type || '';
+				const cardAud = card.dataset.audience || '';
+				const matchQ = !q || text.includes(q);
+				const matchType = type === 'todos' || cardType.includes(type);
+				const matchAud = aud === 'todos' || cardAud.includes(aud);
+				const show = matchQ && matchType && matchAud;
+				card.style.display = show ? '' : 'none';
+				if (show) visible++;
+			});
+			noResults.style.display = visible === 0 ? 'block' : 'none';
+			countEl.textContent = `${visible} material${visible !== 1 ? 'is' : ''} encontrado${visible !== 1 ? 's' : ''}`;
+		}
+		searchInput.addEventListener('input', filterLib);
+		typeFilter.addEventListener('change', filterLib);
+		audFilter.addEventListener('change', filterLib);
+		filterLib();
+	</script>
 </body>
+
 </html>
