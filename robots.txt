@@ -1,6 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /professor
-Disallow: /aluno
-
-Sitemap: https://silenciosdasaude.com/sitemap.xml
