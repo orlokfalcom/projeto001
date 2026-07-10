@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Linha do Tempo - Silêncios da Saúde</title>
+	<meta name="description" content="Linha do tempo interativa da história da saúde feminina e dos direitos das mulheres ao longo dos séculos.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.timeline-hero { padding:120px 0 60px; background:var(--gradient-primary); text-align:center; }
+		.timeline-hero h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:16px; }
+
+		.timeline-container { position:relative; max-width:860px; margin:0 auto; padding:60px 20px; }
+		.timeline-axis { position:absolute; left:50%; top:0; bottom:0; width:3px; background:linear-gradient(to bottom, var(--color-primary), var(--color-accent)); transform:translateX(-50%); border-radius:50px; }
+		@media(max-width:640px) { .timeline-axis { left:24px; } }
+
+		.timeline-item { display:flex; justify-content:flex-end; padding-right:calc(50% + 36px); margin-bottom:48px; position:relative; }
+		.timeline-item.right { justify-content:flex-start; padding-right:0; padding-left:calc(50% + 36px); }
+		@media(max-width:640px) {
+			.timeline-item, .timeline-item.right { justify-content:flex-start; padding-right:0; padding-left:56px; }
+		}
+
+		.timeline-dot {
+			position:absolute; left:50%; top:24px; transform:translateX(-50%);
+			width:20px; height:20px; border-radius:50%;
+			background:var(--color-primary); border:3px solid var(--bg-primary);
+			box-shadow:0 0 0 3px var(--color-primary);
+			transition:transform 0.3s;
+		}
+		.timeline-item:hover .timeline-dot { transform:translateX(-50%) scale(1.3); }
+		@media(max-width:640px) { .timeline-dot { left:24px; } }
+
+		.timeline-card {
+			background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-lg);
+			padding:24px 28px; max-width:340px; width:100%;
+			box-shadow:0 4px 20px rgba(0,0,0,0.06);
+			transition:transform 0.3s, box-shadow 0.3s;
+		}
+		.timeline-item:hover .timeline-card { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.12); }
+		.timeline-year { font-size:0.78rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-primary); margin-bottom:8px; }
+		.timeline-title { font-size:1rem; font-weight:800; color:var(--text-dark); margin-bottom:8px; line-height:1.3; }
+		.timeline-text { font-size:0.88rem; color:var(--text-muted); line-height:1.6; }
+		.timeline-tag { display:inline-block; font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:50px; margin-bottom:8px; }
+		.tag-ciencia    { background:rgba(205,180,219,0.2); color:#7b5ea7; }
+		.tag-direitos   { background:rgba(255,175,204,0.2); color:#c25b8a; }
+		.tag-medicina   { background:rgba(189,224,254,0.2); color:#2980b9; }
+		.tag-tecnologia { background:rgba(200,230,201,0.2); color:#27ae60; }
+		.tag-brasil     { background:rgba(255,236,179,0.2); color:#e67e22; }
+
+		.timeline-filter { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:48px; }
+		.tl-filter-btn { padding:7px 16px; border-radius:50px; border:2px solid var(--border-color); background:transparent; color:var(--text-dark); font-size:0.85rem; font-weight:600; cursor:pointer; font-family:var(--font-body); transition:all 0.2s; }
+		.tl-filter-btn:hover, .tl-filter-btn.active { background:var(--color-primary); border-color:var(--color-primary); color:white; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<section class="timeline-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">🕐 Perspectiva Histórica</div>
+			<h1>Linha do Tempo</h1>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:580px;margin:0 auto 32px;">A história da saúde feminina e dos direitos das mulheres — dos séculos de silêncio às conquistas científicas modernas.</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="timeline-filter" style="margin-top:48px;">
+				<button class="tl-filter-btn active" data-filter="todos">Todos</button>
+				<button class="tl-filter-btn" data-filter="ciencia">🔬 Ciência</button>
+				<button class="tl-filter-btn" data-filter="direitos">⚖️ Direitos</button>
+				<button class="tl-filter-btn" data-filter="medicina">🏥 Medicina</button>
+				<button class="tl-filter-btn" data-filter="tecnologia">💻 Tecnologia</button>
+				<button class="tl-filter-btn" data-filter="brasil">🇧🇷 Brasil</button>
+			</div>
+
+			<div class="timeline-container">
+				<div class="timeline-axis" aria-hidden="true"></div>
+
+				<div class="timeline-item" data-category="ciencia medicina">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
+						<div class="timeline-year">1543</div>
+						<h2 class="timeline-title">Vesalius descreve anatomia feminina</h2>
+						<p class="timeline-text">Andreas Vesalius publica <em>De Humani Corporis Fabrica</em>, a primeira representação anatômica precisa do corpo feminino, contradizendo séculos de pseudociência galênica.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item right" data-category="medicina">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-medicina">🏥 Medicina</span>
+						<div class="timeline-year">1827</div>
+						<h2 class="timeline-title">Descoberta do óvulo humano</h2>
+						<p class="timeline-text">Karl Ernst von Baer descobre o óvulo humano, revolucionando a compreensão da reprodução e derrubando teorias que minimizavam o papel biológico feminino.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-category="direitos">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-direitos">⚖️ Direitos</span>
+						<div class="timeline-year">1848</div>
+						<h2 class="timeline-title">Convenção de Seneca Falls</h2>
+						<p class="timeline-text">Primeiro movimento organizado pelos direitos das mulheres nos EUA, reivindicando acesso à educação, à medicina e ao direito de votar.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item right" data-category="ciencia">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
+						<div class="timeline-year">1900</div>
+						<h2 class="timeline-title">Descrição do ciclo menstrual</h2>
+						<p class="timeline-text">Após séculos de tabu, cientistas europeus publicam os primeiros estudos completos descrevendo as fases do ciclo menstrual e a relação com hormônios.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-category="medicina ciencia">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-medicina">🏥 Medicina</span>
+						<div class="timeline-year">1921</div>
+						<h2 class="timeline-title">Isolamento da progesterona</h2>
+						<p class="timeline-text">Cientistas isolam a progesterona, hormônio fundamental para o ciclo reprodutivo feminino. Isso abriu caminho para tratamentos hormonais e a pílula anticoncepcional décadas depois.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item right" data-category="brasil direitos">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
+						<div class="timeline-year">1932</div>
+						<h2 class="timeline-title">Voto feminino no Brasil</h2>
+						<p class="timeline-text">O Código Eleitoral de 1932 garante o direito ao voto para mulheres brasileiras, marco fundamental da conquista de direitos civis e de saúde pública para mulheres.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-category="medicina tecnologia">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-medicina">🏥 Medicina</span>
+						<div class="timeline-year">1960</div>
+						<h2 class="timeline-title">FDA aprova a pílula anticoncepcional</h2>
+						<p class="timeline-text">Enovid torna-se o primeiro contraceptivo oral aprovado nos EUA — considerado um dos maiores marcos para a autonomia e saúde reprodutiva feminina do século XX.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item right" data-category="brasil direitos">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
+						<div class="timeline-year">1984</div>
+						<h2 class="timeline-title">PAISM — Programa de Atenção Integral à Saúde da Mulher</h2>
+						<p class="timeline-text">O Brasil cria o PAISM, política pública pioneira na América Latina que inclui saúde reprodutiva, ginecologia e saúde mental da mulher no sistema público de saúde.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-category="ciencia medicina">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
+						<div class="timeline-year">1992</div>
+						<h2 class="timeline-title">Reconhecimento da endometriose como doença crônica</h2>
+						<p class="timeline-text">A OMS reconhece formalmente a endometriose como doença crônica. Antes disso, dor pélvica feminina era frequentemente descartada como "drama" ou problema emocional.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item right" data-category="brasil direitos">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
+						<div class="timeline-year">2006</div>
+						<h2 class="timeline-title">Lei Maria da Penha</h2>
+						<p class="timeline-text">A Lei 11.340/2006 cria mecanismos para coibir violência doméstica e familiar contra mulheres — um pilar para a saúde integral feminina ao reconhecer violência como questão de saúde pública.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-category="tecnologia ciencia">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-tecnologia">💻 Tecnologia</span>
+						<div class="timeline-year">2015</div>
+						<h2 class="timeline-title">Apps de rastreamento menstrual</h2>
+						<p class="timeline-text">Aplicativos como Clue e Flo popularizam o rastreamento do ciclo menstrual por smartphone, gerando dados que contribuem para pesquisas científicas sobre saúde feminina em larga escala.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item right" data-category="ciencia medicina">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-ciencia">🔬 Ciência</span>
+						<div class="timeline-year">2023</div>
+						<h2 class="timeline-title">Mapeamento completo do genoma feminino</h2>
+						<p class="timeline-text">Pesquisadores publicam o primeiro mapeamento completo do genoma humano feminino, incluindo o cromossomo X completo, abrindo novas fronteiras para diagnósticos de doenças específicas de mulheres.</p>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-category="brasil tecnologia">
+					<div class="timeline-dot" aria-hidden="true"></div>
+					<div class="timeline-card">
+						<span class="timeline-tag tag-brasil">🇧🇷 Brasil</span>
+						<div class="timeline-year">2026</div>
+						<h2 class="timeline-title">Portal Silêncios da Saúde</h2>
+						<p class="timeline-text">Nascimento deste portal — uma plataforma educativa gratuita que democratiza o acesso ao conhecimento científico sobre saúde feminina para adolescentes brasileiras. <strong>Você faz parte desta história.</strong></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="py-10" style="background:var(--gradient-primary);text-align:center;">
+		<div class="container">
+			<h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">O futuro também é feito por você</h2>
+			<p style="opacity:0.85;max-width:500px;margin:0 auto 32px;">Aprenda, compartilhe e contribua para que mais adolescentes tenham acesso ao conhecimento que muda vidas.</p>
+			<a href="sobre.html" class="btn btn-dark">Conheça o Projeto →</a>
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Fascinante, não é? Posso contar mais sobre qualquer evento desta linha do tempo!</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/luna.js"></script>
+<script>
+// Timeline filter
+document.querySelectorAll('.tl-filter-btn').forEach(btn => {
+	btn.addEventListener('click', () => {
+		document.querySelectorAll('.tl-filter-btn').forEach(b => b.classList.remove('active'));
+		btn.classList.add('active');
+		const filter = btn.dataset.filter;
+		document.querySelectorAll('.timeline-item').forEach(item => {
+			const cats = item.dataset.category || '';
+			item.style.display = (filter === 'todos' || cats.includes(filter)) ? '' : 'none';
+		});
+	});
+});
+
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			entry.target.style.opacity = '1';
+			entry.target.style.transform = entry.target.classList.contains('right')
+				? 'translateX(0)'
+				: 'translateX(0)';
+		}
+	});
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.timeline-card').forEach(card => {
+	card.style.opacity = '0';
+	card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+	observer.observe(card);
+});
+</script>
+</body>
+</html>

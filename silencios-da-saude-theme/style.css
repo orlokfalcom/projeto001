@@ -1,0 +1,15 @@
+/*
+Theme Name: Silêncios da Saúde
+Theme URI: https://github.com/silencios-da-saude
+Description: Tema de alta performance e acessibilidade (WCAG AA) para o portal educativo "Silêncios da Saúde", focado em saúde feminina para adolescentes. Desenvolvido com foco em velocidade, sem construtores de página.
+Version: 1.0.0
+Author: Antigravity
+Author URI: https://github.com/silencios-da-saude
+Text Domain: silencios-da-saude
+Tags: custom-menu, featured-images, translation-ready, full-width-template
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 7.4
+*/
+
+/* Reset e Configurações iniciais estão localizadas em assets/css/theme.css para melhor organização */

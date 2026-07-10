@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Área do Professor - Silêncios da Saúde</title>
+	<meta name="description" content="Recursos pedagógicos, planos de aula e materiais didáticos para professores abordarem saúde feminina em sala de aula.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.prof-hero { padding:120px 0 60px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); text-align:center; color:white; }
+		.prof-hero h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:16px; }
+
+		.resource-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+		.resource-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-lg); overflow:hidden; transition:transform 0.3s, box-shadow 0.3s; }
+		.resource-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.12); }
+		.resource-cover { height:120px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+		.resource-body { padding:20px; }
+		.resource-type { font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--color-primary); margin-bottom:6px; }
+		.resource-title { font-size:1rem; font-weight:700; color:var(--text-dark); margin-bottom:6px; line-height:1.3; }
+		.resource-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.5; margin-bottom:16px; }
+		.resource-meta { display:flex; gap:12px; font-size:0.78rem; color:var(--text-muted); margin-bottom:16px; flex-wrap:wrap; }
+		.resource-meta span { display:flex; align-items:center; gap:4px; }
+		.resource-btn { display:block; text-align:center; padding:10px; border-radius:var(--radius-md); background:var(--gradient-primary); color:white; font-weight:700; font-size:0.88rem; text-decoration:none; transition:opacity 0.2s; }
+		.resource-btn:hover { opacity:0.9; }
+
+		.guide-section { background:linear-gradient(135deg,rgba(102,126,234,0.08),rgba(118,75,162,0.05)); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:40px; }
+		.guide-steps { display:flex; flex-direction:column; gap:24px; margin-top:24px; }
+		.guide-step { display:flex; gap:20px; align-items:flex-start; }
+		.step-num { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); color:white; font-weight:900; font-size:1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+		.step-content h4 { font-size:1rem; font-weight:700; color:var(--text-dark); margin-bottom:4px; }
+		.step-content p  { font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin:0; }
+
+		.faq-prof { display:flex; flex-direction:column; gap:12px; }
+		.faq-prof-item { background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-md); }
+		.faq-prof-q { width:100%; padding:16px 20px; background:none; border:none; font-size:0.95rem; font-weight:700; color:var(--text-dark); text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-body); }
+		.faq-prof-a { max-height:0; overflow:hidden; transition:max-height 0.35s ease; padding:0 20px; font-size:0.88rem; color:var(--text-muted); line-height:1.6; }
+		.faq-prof-item.open .faq-prof-a { max-height:200px; padding:0 20px 16px; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link active" href="professor.html">Professor</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link active" href="professor.html">Área do Professor</a></li>
+		<li><a class="nav-link" href="aluno.html">Portal do Aluno</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<section class="prof-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;background:rgba(255,255,255,0.2);color:white;border:1px solid rgba(255,255,255,0.3);">🎓 Para Educadores</div>
+			<h1>Área do Professor</h1>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:580px;margin:0 auto;">Recursos pedagógicos gratuitos para abordar saúde feminina em sala de aula com segurança, ciência e inclusão.</p>
+		</div>
+	</section>
+
+	<!-- RECURSOS -->
+	<section class="py-10">
+		<div class="container">
+			<h2 style="font-size:1.5rem;font-weight:800;margin-bottom:8px;">Materiais Didáticos</h2>
+			<p style="color:var(--text-muted);margin-bottom:32px;">Todos os materiais são gratuitos, com licença Creative Commons e alinhados à BNCC.</p>
+
+			<div class="resource-grid">
+				<div class="resource-card">
+					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(205,180,219,0.3),rgba(255,175,204,0.2));">📋</div>
+					<div class="resource-body">
+						<div class="resource-type">Plano de Aula</div>
+						<h2 class="resource-title">Introdução ao Ciclo Menstrual — 6º ao 8º ano</h2>
+						<p class="resource-desc">Sequência didática com 3 aulas cobrindo puberdade, ciclo menstrual e higiene menstrual. Inclui atividades interativas e avaliação formativa.</p>
+						<div class="resource-meta">
+							<span>⏱ 3 aulas de 50 min</span>
+							<span>👥 11-14 anos</span>
+							<span>🎯 Biologia / CN</span>
+						</div>
+						<a href="#" class="resource-btn" aria-label="Baixar plano de aula">📥 Baixar PDF</a>
+					</div>
+				</div>
+
+				<div class="resource-card">
+					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(205,180,219,0.2));">🎨</div>
+					<div class="resource-body">
+						<div class="resource-type">Atividade Interativa</div>
+						<h2 class="resource-title">Mitos e Verdades — Dinâmica em Grupos</h2>
+						<p class="resource-desc">Cartas imprimíveis com 40 afirmações para debate em sala. Estudantes classificam mitos vs. verdades e pesquisam fontes confiáveis.</p>
+						<div class="resource-meta">
+							<span>⏱ 1 aula de 50 min</span>
+							<span>👥 12-17 anos</span>
+							<span>🎯 Qualquer disciplina</span>
+						</div>
+						<a href="#" class="resource-btn" aria-label="Baixar atividade">📥 Baixar PDF</a>
+					</div>
+				</div>
+
+				<div class="resource-card">
+					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(200,230,201,0.3),rgba(189,224,254,0.2));">📊</div>
+					<div class="resource-body">
+						<div class="resource-type">Infográfico</div>
+						<h2 class="resource-title">O Ciclo Menstrual em 4 Fases</h2>
+						<p class="resource-desc">Infográfico visual e científico sobre as quatro fases do ciclo menstrual — ideal para exibir em sala de aula ou projeção.</p>
+						<div class="resource-meta">
+							<span>🖼 Alta resolução</span>
+							<span>📏 A3 e A4</span>
+							<span>🎯 Ciências / Biologia</span>
+						</div>
+						<a href="#" class="resource-btn" aria-label="Baixar infográfico">📥 Baixar PNG</a>
+					</div>
+				</div>
+
+				<div class="resource-card">
+					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(255,236,179,0.3),rgba(255,175,204,0.2));">🎬</div>
+					<div class="resource-body">
+						<div class="resource-type">Vídeo Educativo</div>
+						<h2 class="resource-title">Saúde Mental e Puberdade Feminina</h2>
+						<p class="resource-desc">Documentário curto (18 min) produzido com psicólogas escolares sobre como apoiar adolescentes durante as mudanças da puberdade.</p>
+						<div class="resource-meta">
+							<span>⏱ 18 minutos</span>
+							<span>👥 14-17 anos</span>
+							<span>🎯 Orientação Educacional</span>
+						</div>
+						<a href="#" class="resource-btn" aria-label="Assistir vídeo">▶️ Assistir</a>
+					</div>
+				</div>
+
+				<div class="resource-card">
+					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(255,175,204,0.2),rgba(205,180,219,0.3));">📝</div>
+					<div class="resource-body">
+						<div class="resource-type">Avaliação</div>
+						<h2 class="resource-title">Quiz Avaliativo — Saúde Feminina</h2>
+						<p class="resource-desc">Banco com 60 questões de múltipla escolha e dissertativas sobre saúde feminina, prontas para uso em provas e atividades avaliativas.</p>
+						<div class="resource-meta">
+							<span>❓ 60 questões</span>
+							<span>👥 6º ao 3º EM</span>
+							<span>🎯 Biologia / Ciências</span>
+						</div>
+						<a href="#" class="resource-btn" aria-label="Baixar banco de questões">📥 Baixar DOCX</a>
+					</div>
+				</div>
+
+				<div class="resource-card">
+					<div class="resource-cover" style="background:linear-gradient(135deg,rgba(189,224,254,0.3),rgba(200,230,201,0.2));">🎙️</div>
+					<div class="resource-body">
+						<div class="resource-type">Webinário</div>
+						<h2 class="resource-title">Como Abordar Saúde Feminina sem Constrangimentos</h2>
+						<p class="resource-desc">Formação de 2h com especialistas em educação e ginecologia. Estratégias práticas para lidar com perguntas difíceis em sala.</p>
+						<div class="resource-meta">
+							<span>⏱ 2 horas</span>
+							<span>🎓 Todos os professores</span>
+							<span>✅ Certificado</span>
+						</div>
+						<a href="#" class="resource-btn" aria-label="Inscrever-se no webinário">🎓 Inscrever-se</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- GUIA PASSO A PASSO -->
+	<section class="py-10" style="background:rgba(102,126,234,0.04);">
+		<div class="container">
+			<div style="max-width:700px;">
+				<div class="guide-section">
+					<h2 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:4px;">Como Usar o Portal em Sala de Aula</h2>
+					<p style="color:var(--text-muted);font-size:0.9rem;">Passo a passo para integrar o Silêncios da Saúde à sua prática pedagógica.</p>
+					<div class="guide-steps">
+						<div class="guide-step">
+							<div class="step-num">1</div>
+							<div class="step-content">
+								<h4>Explore os recursos disponíveis</h4>
+								<p>Navegue pela Biblioteca, Mitos e Verdades e Linha do Tempo para escolher o conteúdo mais adequado à faixa etária e disciplina.</p>
+							</div>
+						</div>
+						<div class="guide-step">
+							<div class="step-num">2</div>
+							<div class="step-content">
+								<h4>Baixe os materiais didáticos</h4>
+								<p>Faça download dos planos de aula, infográficos e atividades — todos gratuitos e prontos para usar sem edição.</p>
+							</div>
+						</div>
+						<div class="guide-step">
+							<div class="step-num">3</div>
+							<div class="step-content">
+								<h4>Use o Quiz em turma</h4>
+								<p>Projete o quiz do portal para a turma e permita que os alunos respondam coletivamente — ótimo para debate.</p>
+							</div>
+						</div>
+						<div class="guide-step">
+							<div class="step-num">4</div>
+							<div class="step-content">
+								<h4>Indique a Luna para dúvidas individuais</h4>
+								<p>Incentive os alunos a usarem a assistente Luna para dúvidas que possam ter vergonha de perguntar em sala.</p>
+							</div>
+						</div>
+						<div class="guide-step">
+							<div class="step-num">5</div>
+							<div class="step-content">
+								<h4>Compartilhe sua experiência</h4>
+								<p>Envie seu relato de experiência pelo formulário de contato para ajudarmos outros professores com sua prática.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ PROFESSOR -->
+	<section class="py-10">
+		<div class="container" style="max-width:760px;">
+			<h2 style="font-size:1.4rem;font-weight:800;margin-bottom:24px;">Dúvidas Frequentes de Professores</h2>
+			<div class="faq-prof">
+				<div class="faq-prof-item">
+					<button class="faq-prof-q">Posso usar estes materiais em qualquer disciplina? <span>+</span></button>
+					<div class="faq-prof-a">Sim! Os recursos foram desenvolvidos de forma interdisciplinar. Ciências e Biologia são as mais óbvias, mas Português (textos científicos), Educação Física (corpo), Arte (autoimagem) e Orientação Educacional também se beneficiam muito.</div>
+				</div>
+				<div class="faq-prof-item">
+					<button class="faq-prof-q">Como lidar com a resistência de pais? <span>+</span></button>
+					<div class="faq-prof-a">Todos os materiais são baseados em evidências científicas e alinhados à BNCC. Recomendamos comunicar previamente os responsáveis sobre os objetivos pedagógicos. Nossa equipe pode fornecer uma carta explicativa para as famílias se necessário.</div>
+				</div>
+				<div class="faq-prof-item">
+					<button class="faq-prof-q">Os materiais atendem turmas mistas (meninos e meninas)? <span>+</span></button>
+					<div class="faq-prof-a">Sim, e recomendamos turmas mistas! Educar meninos sobre saúde feminina reduz o estigma e promove empatia. Os materiais foram desenvolvidos com essa perspectiva inclusiva.</div>
+				</div>
+				<div class="faq-prof-item">
+					<button class="faq-prof-q">Há certificação para professores que participam das formações? <span>+</span></button>
+					<div class="faq-prof-a">Sim, os webinários emitem certificado de participação com carga horária. Estamos em processo de parceria com secretarias de educação para que a carga horária seja reconhecida para progressão de carreira.</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-10" style="background:linear-gradient(135deg,#667eea,#764ba2);text-align:center;color:white;">
+		<div class="container">
+			<h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">Quer uma parceria com sua escola?</h2>
+			<p style="opacity:0.85;max-width:500px;margin:0 auto 32px;">Oferecemos formações in loco, materiais customizados e suporte para implementação do programa em sua instituição.</p>
+			<a href="contato.html" class="btn" style="background:white;color:#667eea;font-weight:800;">Falar sobre Parceria →</a>
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Olá, Professor(a)! Posso ajudar a identificar qual recurso é mais adequado para sua turma!</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/luna.js"></script>
+<script>
+document.querySelectorAll('.faq-prof-item').forEach(item => {
+	item.querySelector('.faq-prof-q').addEventListener('click', () => {
+		const isOpen = item.classList.contains('open');
+		document.querySelectorAll('.faq-prof-item').forEach(i => i.classList.remove('open'));
+		if (!isOpen) item.classList.add('open');
+	});
+});
+</script>
+</body>
+</html>

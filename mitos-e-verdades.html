@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mitos e Verdades - Silêncios da Saúde</title>
+	<meta name="description" content="Descubra quais informações sobre saúde feminina são mitos e quais são verdades comprovadas pela ciência. Aprenda a identificar desinformação.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.myths-hero {
+			padding: 120px 0 60px;
+			background: var(--gradient-primary);
+			text-align: center;
+		}
+		.myths-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; margin-bottom: 16px; }
+		.myths-hero p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: 0 auto 32px; }
+
+		.filter-bar {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin: 40px 0;
+		}
+		.filter-btn {
+			padding: 8px 22px;
+			border-radius: 50px;
+			border: 2px solid var(--border-color);
+			background: transparent;
+			color: var(--text-dark);
+			cursor: pointer;
+			font-size: 0.9rem;
+			font-weight: 600;
+			transition: all 0.25s ease;
+			font-family: var(--font-body);
+		}
+		.filter-btn:hover, .filter-btn.active {
+			background: var(--color-primary);
+			border-color: var(--color-primary);
+			color: white;
+		}
+
+		.myth-card {
+			border-radius: var(--radius-lg);
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			cursor: pointer;
+			background: var(--card-bg);
+			border: 1px solid var(--border-color);
+		}
+		.myth-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+
+		.myth-card-header {
+			padding: 24px 24px 16px;
+			display: flex;
+			align-items: flex-start;
+			gap: 16px;
+		}
+		.myth-badge {
+			padding: 4px 14px;
+			border-radius: 50px;
+			font-size: 0.75rem;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			flex-shrink: 0;
+			margin-top: 4px;
+		}
+		.myth-badge.mito { background: #ffe0e0; color: #c0392b; }
+		.myth-badge.verdade { background: #e0f5e9; color: #27ae60; }
+		.myth-badge.parcial { background: #fff3e0; color: #e67e22; }
+		[data-theme="dark"] .myth-badge.mito { background: rgba(192,57,43,0.25); }
+		[data-theme="dark"] .myth-badge.verdade { background: rgba(39,174,96,0.25); }
+		[data-theme="dark"] .myth-badge.parcial { background: rgba(230,126,34,0.25); }
+
+		.myth-card-question { font-size: 1.05rem; font-weight: 700; line-height: 1.4; color: var(--text-dark); }
+
+		.myth-card-body { padding: 0 24px 24px; }
+		.myth-card-answer { font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); }
+		.myth-card-source { font-size: 0.78rem; color: var(--color-primary); font-weight: 600; margin-top: 12px; display: flex; align-items: center; gap: 6px; }
+
+		.myths-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+			gap: 24px;
+			margin-top: 12px;
+		}
+
+		.myth-card .reveal-answer {
+			display: none;
+		}
+		.myth-card.flipped .reveal-answer {
+			display: block;
+			animation: fadeInDown 0.4s ease;
+		}
+		@keyframes fadeInDown {
+			from { opacity: 0; transform: translateY(-8px); }
+			to   { opacity: 1; transform: translateY(0); }
+		}
+
+		.myth-card-toggle {
+			width: 100%;
+			padding: 10px 24px;
+			background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+			border: none;
+			color: white;
+			font-weight: 700;
+			font-size: 0.9rem;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			font-family: var(--font-body);
+			transition: opacity 0.2s;
+		}
+		.myth-card-toggle:hover { opacity: 0.9; }
+
+		.search-myths {
+			max-width: 480px;
+			margin: 0 auto;
+			position: relative;
+		}
+		.search-myths input {
+			width: 100%;
+			padding: 14px 20px 14px 48px;
+			border-radius: 50px;
+			border: 2px solid var(--border-color);
+			background: var(--card-bg);
+			color: var(--text-dark);
+			font-size: 1rem;
+			font-family: var(--font-body);
+			outline: none;
+			transition: border-color 0.2s;
+		}
+		.search-myths input:focus { border-color: var(--color-primary); }
+		.search-myths .search-icon {
+			position: absolute;
+			left: 18px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: var(--text-muted);
+		}
+
+		.stats-row {
+			display: flex;
+			gap: 16px;
+			justify-content: center;
+			flex-wrap: wrap;
+			margin-bottom: 40px;
+		}
+		.stat-pill {
+			padding: 8px 20px;
+			border-radius: 50px;
+			font-size: 0.9rem;
+			font-weight: 700;
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.stat-pill.red   { background: rgba(192,57,43,0.12); color: #c0392b; }
+		.stat-pill.green { background: rgba(39,174,96,0.12); color: #27ae60; }
+		.stat-pill.orange{ background: rgba(230,126,34,0.12); color: #e67e22; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link active" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre o Projeto</a></li>
+		<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link active" href="mitos-e-verdades.html">Mitos e Verdades</a></li>
+		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" href="estatisticas.html">Estatísticas</a></li>
+		<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+		<li><a class="nav-link" href="faq.html">FAQ</a></li>
+		<li><a class="nav-link" href="linha-do-tempo.html">Linha do Tempo</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<!-- HERO -->
+	<section class="myths-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">🔍 Desinformação vs. Ciência</div>
+			<h1>Mitos e Verdades</h1>
+			<p>A ciência responde às principais dúvidas sobre saúde feminina. Clique em cada card para revelar a resposta baseada em evidências.</p>
+			<div class="search-myths">
+				<span class="search-icon">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+				</span>
+				<input type="text" id="myth-search" placeholder="Pesquisar mito ou verdade..." aria-label="Pesquisar mitos e verdades">
+			</div>
+		</div>
+	</section>
+
+	<!-- STATS ROW -->
+	<section class="py-10">
+		<div class="container">
+			<div class="stats-row" id="myth-stats">
+				<div class="stat-pill red">🚫 <span id="count-mito">0</span> Mitos</div>
+				<div class="stat-pill green">✅ <span id="count-verdade">0</span> Verdades</div>
+				<div class="stat-pill orange">⚠️ <span id="count-parcial">0</span> Parcialmente Verdade</div>
+			</div>
+
+			<!-- FILTER BAR -->
+			<div class="filter-bar">
+				<button class="filter-btn active" data-filter="todos">Todos</button>
+				<button class="filter-btn" data-filter="mito">Apenas Mitos</button>
+				<button class="filter-btn" data-filter="verdade">Apenas Verdades</button>
+				<button class="filter-btn" data-filter="parcial">Parcialmente</button>
+				<button class="filter-btn" data-filter="menstruacao">Menstruação</button>
+				<button class="filter-btn" data-filter="corpo">Corpo</button>
+				<button class="filter-btn" data-filter="saude-mental">Saúde Mental</button>
+				<button class="filter-btn" data-filter="sexualidade">Sexualidade</button>
+			</div>
+
+			<!-- MYTHS GRID -->
+			<div class="myths-grid" id="myths-container">
+				<!-- Preenchido por myths.js -->
+			</div>
+
+			<p id="no-results" style="text-align:center;color:var(--text-muted);font-size:1.05rem;margin-top:48px;display:none;">
+				Nenhum resultado encontrado. Tente outra palavra-chave.
+			</p>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="py-10" style="background:var(--gradient-primary);text-align:center;">
+		<div class="container">
+			<h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">Coloque seu conhecimento à prova!</h2>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:500px;margin:0 auto 32px;">Agora que você sabe separar mitos de verdades, faça o Quiz e descubra seu nível de educação em saúde.</p>
+			<a href="quiz.html" class="btn btn-dark">Fazer o Quiz →</a>
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<nav aria-label="Menu rodapé">
+				<ul style="list-style:none;display:flex;gap:24px;flex-wrap:wrap;font-size:0.9rem;">
+					<li><a href="sobre.html">Sobre</a></li>
+					<li><a href="biblioteca.html">Biblioteca</a></li>
+					<li><a href="contato.html">Contato</a></li>
+				</ul>
+			</nav>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<!-- COOKIE BANNER LGPD -->
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais para o funcionamento do portal (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<!-- LUNA WIDGET -->
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div>
+				<h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4>
+				<span style="font-size:0.75rem;color:var(--text-dark);opacity:0.8;">Assistente de Saúde</span>
+			</div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Olá! Posso explicar qualquer um dos mitos ou verdades em mais detalhes. O que você quer saber?</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+			</button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/myths.js"></script>
+<script src="js/luna.js"></script>
+</body>
+</html>

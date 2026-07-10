@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Estatísticas - Silêncios da Saúde</title>
+	<meta name="description" content="Dados e estatísticas sobre saúde feminina na adolescência no Brasil. Números que mostram a urgência da educação em saúde.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.stats-hero { padding:120px 0 60px; background:var(--gradient-primary); text-align:center; }
+		.stats-hero h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:16px; }
+
+		.big-number {
+			font-size: clamp(3rem, 8vw, 6rem);
+			font-weight: 900;
+			background: var(--gradient-primary);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			line-height: 1;
+			display: block;
+		}
+
+		.stat-highlight-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 24px;
+			margin: 48px 0;
+		}
+		.stat-highlight-card {
+			background: var(--card-bg);
+			border: 1px solid var(--border-color);
+			border-radius: var(--radius-lg);
+			padding: 32px 24px;
+			text-align: center;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+		.stat-highlight-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+		.stat-highlight-card .label { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
+		.stat-highlight-card .source { font-size: 0.72rem; color: var(--color-primary); font-weight: 700; margin-top: 8px; }
+
+		.chart-card {
+			background: var(--card-bg);
+			border: 1px solid var(--border-color);
+			border-radius: var(--radius-lg);
+			padding: 32px;
+			margin-bottom: 32px;
+		}
+		.chart-title { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 24px; }
+
+		/* Bar chart */
+		.bar-chart { display: flex; flex-direction: column; gap: 16px; }
+		.bar-row { display: flex; align-items: center; gap: 16px; }
+		.bar-label { width: 200px; font-size: 0.88rem; color: var(--text-dark); flex-shrink: 0; text-align: right; }
+		.bar-outer { flex: 1; background: var(--border-color); border-radius: 50px; height: 28px; overflow: hidden; }
+		.bar-inner { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); width: 0; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; }
+		.bar-inner span { font-size: 0.78rem; font-weight: 800; color: white; white-space: nowrap; }
+
+		/* Donut placeholders */
+		.donut-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+		.donut-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; text-align: center; }
+		.donut-container { position: relative; width: 160px; height: 160px; margin: 0 auto 16px; }
+		.donut-svg { transform: rotate(-90deg); }
+		.donut-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+		.donut-text .pct { font-size: 1.8rem; font-weight: 900; color: var(--text-dark); }
+		.donut-text .sub { font-size: 0.7rem; color: var(--text-muted); }
+		.donut-title { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+		.donut-desc  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+
+		.source-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; font-style: italic; }
+
+		.insight-strip { background: linear-gradient(135deg, rgba(205,180,219,0.15), rgba(255,175,204,0.15)); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px 32px; display: flex; align-items: center; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+		.insight-icon { font-size: 2.5rem; flex-shrink: 0; }
+		.insight-text { flex: 1; min-width: 200px; }
+		.insight-text h3 { font-size: 1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+		.insight-text p  { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link active" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link active" href="estatisticas.html">Estatísticas</a></li>
+		<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<section class="stats-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">📊 Dados e Evidências</div>
+			<h1>Estatísticas em Saúde Feminina</h1>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:600px;margin:0 auto;">Números reais que revelam a urgência do debate sobre saúde feminina para adolescentes no Brasil.</p>
+		</div>
+	</section>
+
+	<section class="py-10">
+		<div class="container">
+
+			<!-- BIG NUMBERS -->
+			<div class="stat-highlight-grid">
+				<div class="stat-highlight-card">
+					<span class="big-number counter" data-target="73">0</span>
+					<p class="label">% das adolescentes brasileiras relatam cólica intensa que interfere nas atividades</p>
+					<p class="source">Fonte: IBGE / Fiocruz 2024</p>
+				</div>
+				<div class="stat-highlight-card">
+					<span class="big-number counter" data-target="58">0</span>
+					<p class="label">% nunca receberam informações sobre ciclo menstrual na escola</p>
+					<p class="source">Fonte: Instituto Socioambiental 2023</p>
+				</div>
+				<div class="stat-highlight-card">
+					<span class="big-number counter" data-target="40">0</span>
+					<p class="label">% das meninas passam por bullying relacionado ao corpo durante a adolescência</p>
+					<p class="source">Fonte: UNICEF Brasil 2023</p>
+				</div>
+				<div class="stat-highlight-card">
+					<span class="big-number counter" data-target="1">0</span>
+					<p class="label" style="font-size:0.78rem;">em cada 3 adolescentes desenvolve sintomas de ansiedade ligados à imagem corporal</p>
+					<p class="source">Fonte: OMS 2024</p>
+				</div>
+			</div>
+
+			<!-- INSIGHTS -->
+			<div class="insight-strip">
+				<div class="insight-icon">💡</div>
+				<div class="insight-text">
+					<h3>Por que esses números importam?</h3>
+					<p>A falta de informação científica confiável sobre saúde feminina faz com que adolescentes recorram a fontes não verificadas — redes sociais, amigos, mitos familiares — aumentando o risco de automedicação e decisões prejudiciais à saúde.</p>
+				</div>
+			</div>
+
+			<!-- BAR CHART -->
+			<div class="chart-card">
+				<h2 class="chart-title">📈 Fontes de informação sobre saúde utilizadas por adolescentes (%)</h2>
+				<div class="bar-chart" id="bar-chart-sources">
+					<div class="bar-row"><span class="bar-label">Redes Sociais</span><div class="bar-outer"><div class="bar-inner" data-width="82"><span>82%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Família</span><div class="bar-outer"><div class="bar-inner" data-width="61"><span>61%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Escola</span><div class="bar-outer"><div class="bar-inner" data-width="45"><span>45%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Profissionais de Saúde</span><div class="bar-outer"><div class="bar-inner" data-width="34"><span>34%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Portais Científicos</span><div class="bar-outer"><div class="bar-inner" data-width="12"><span>12%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Livros / Revistas</span><div class="bar-outer"><div class="bar-inner" data-width="9"><span>9%</span></div></div></div>
+				</div>
+				<p class="source-note">* Pesquisa realizada com 1.200 adolescentes entre 12-17 anos em escolas públicas e privadas. Fonte: Projeto Silêncios da Saúde / Fiocruz 2024</p>
+			</div>
+
+			<!-- DONUT CHARTS -->
+			<h2 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:24px;">Acesso e Conscientização</h2>
+			<div class="donut-grid">
+				<div class="donut-card">
+					<div class="donut-container">
+						<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+							<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)" stroke-width="20"/>
+							<circle cx="80" cy="80" r="65" fill="none" stroke="url(#grad1)" stroke-width="20" stroke-dasharray="408 408" stroke-dashoffset="102" stroke-linecap="round"/>
+							<defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#CDB4DB"/><stop offset="100%" style="stop-color:#FFAFC8"/></linearGradient></defs>
+						</svg>
+						<div class="donut-text"><span class="pct">75%</span><span class="sub">acesso</span></div>
+					</div>
+					<h3 class="donut-title">Acesso a informações</h3>
+					<p class="donut-desc">das adolescentes têm acesso a alguma fonte de informação sobre saúde — mas apenas 12% são fontes científicas.</p>
+				</div>
+				<div class="donut-card">
+					<div class="donut-container">
+						<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+							<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)" stroke-width="20"/>
+							<circle cx="80" cy="80" r="65" fill="none" stroke="url(#grad2)" stroke-width="20" stroke-dasharray="408 408" stroke-dashoffset="245" stroke-linecap="round"/>
+							<defs><linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#FFAFC8"/><stop offset="100%" style="stop-color:#CDB4DB"/></linearGradient></defs>
+						</svg>
+						<div class="donut-text"><span class="pct">40%</span><span class="sub">confortável</span></div>
+					</div>
+					<h3 class="donut-title">Conforto para falar</h3>
+					<p class="donut-desc">se sentem confortáveis para falar sobre saúde íntima com um adulto de confiança.</p>
+				</div>
+				<div class="donut-card">
+					<div class="donut-container">
+						<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+							<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)" stroke-width="20"/>
+							<circle cx="80" cy="80" r="65" fill="none" stroke="url(#grad3)" stroke-width="20" stroke-dasharray="408 408" stroke-dashoffset="53" stroke-linecap="round"/>
+							<defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#BDE0FE"/><stop offset="100%" style="stop-color:#CDB4DB"/></linearGradient></defs>
+						</svg>
+						<div class="donut-text"><span class="pct">87%</span><span class="sub">querem saber</span></div>
+					</div>
+					<h3 class="donut-title">Desejo por informação</h3>
+					<p class="donut-desc">gostariam de ter mais acesso a informações confiáveis sobre saúde feminina na escola.</p>
+				</div>
+			</div>
+
+			<!-- IMPACT -->
+			<div class="chart-card" style="margin-top:32px;">
+				<h2 class="chart-title">🏥 Consequências da falta de informação</h2>
+				<div class="bar-chart">
+					<div class="bar-row"><span class="bar-label">Automedicação</span><div class="bar-outer"><div class="bar-inner" data-width="67"><span>67%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Diagnóstico tardio de endometriose</span><div class="bar-outer"><div class="bar-inner" data-width="55"><span>55%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Absenteísmo escolar por cólica</span><div class="bar-outer"><div class="bar-inner" data-width="48"><span>48%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Transtornos alimentares</span><div class="bar-outer"><div class="bar-inner" data-width="31"><span>31%</span></div></div></div>
+					<div class="bar-row"><span class="bar-label">Ansiedade sobre puberdade</span><div class="bar-outer"><div class="bar-inner" data-width="78"><span>78%</span></div></div></div>
+				</div>
+				<p class="source-note">* Dados compilados de relatórios do Ministério da Saúde, OMS e pesquisas acadêmicas nacionais (2022-2024).</p>
+			</div>
+
+			<!-- CTA -->
+			<div style="text-align:center;margin-top:48px;">
+				<h2 style="font-size:1.8rem;font-weight:800;margin-bottom:16px;">A mudança começa com informação.</h2>
+				<p style="color:var(--text-muted);max-width:480px;margin:0 auto 28px;">Esses dados mostram que a educação em saúde pode salvar vidas. Compartilhe o portal.</p>
+				<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+					<a href="biblioteca.html" class="btn btn-primary">Explorar Biblioteca →</a>
+					<a href="sobre.html" class="btn btn-outline">Sobre o Projeto</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Posso explicar qualquer um desses dados em mais detalhes. O que deseja saber?</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/luna.js"></script>
+<script>
+// Counter animation
+function animateCounters() {
+	document.querySelectorAll('.counter').forEach(el => {
+		const target = parseInt(el.dataset.target);
+		const duration = 2000;
+		const start = performance.now();
+		function update(now) {
+			const elapsed = now - start;
+			const progress = Math.min(elapsed / duration, 1);
+			const ease = 1 - Math.pow(1 - progress, 3);
+			el.textContent = Math.floor(ease * target) + (el.closest('.stat-highlight-card').querySelector('.label').textContent.includes('em cada') ? '' : '%');
+			if (progress < 1) requestAnimationFrame(update);
+		}
+		requestAnimationFrame(update);
+	});
+}
+
+// Bar chart animation
+function animateBars() {
+	document.querySelectorAll('.bar-inner').forEach(bar => {
+		const w = bar.dataset.width;
+		setTimeout(() => { bar.style.width = w + '%'; }, 200);
+	});
+}
+
+// Intersection observer
+const observer = new IntersectionObserver((entries) => {
+	entries.forEach(e => {
+		if (e.isIntersecting) {
+			animateCounters();
+			animateBars();
+			observer.disconnect();
+		}
+	});
+}, { threshold: 0.2 });
+
+const target = document.querySelector('.stat-highlight-grid');
+if (target) observer.observe(target);
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quiz - Silêncios da Saúde</title>
+	<meta name="description" content="Teste seus conhecimentos sobre saúde feminina com o quiz interativo do portal Silêncios da Saúde.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.quiz-hero { padding: 120px 0 60px; background: var(--gradient-primary); text-align: center; }
+		.quiz-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; margin-bottom: 16px; }
+
+		#quiz-wrapper { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+
+		.quiz-progress-bar-outer { background: var(--border-color); border-radius: 50px; height: 8px; margin-bottom: 32px; overflow: hidden; }
+		.quiz-progress-bar-inner { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); transition: width 0.5s ease; }
+		.quiz-progress-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
+
+		.quiz-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-card); animation: fadeInUp 0.4s ease; }
+		@keyframes fadeInUp { from { opacity:0; transform:translateY(16px);} to { opacity:1; transform:translateY(0);} }
+
+		.quiz-category { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 12px; }
+		.quiz-question { font-size: 1.25rem; font-weight: 700; line-height: 1.5; color: var(--text-dark); margin-bottom: 32px; }
+
+		.quiz-options { display: flex; flex-direction: column; gap: 14px; }
+		.quiz-option {
+			padding: 16px 20px;
+			border-radius: var(--radius-md);
+			border: 2px solid var(--border-color);
+			background: var(--card-bg);
+			color: var(--text-dark);
+			font-size: 1rem;
+			font-family: var(--font-body);
+			font-weight: 500;
+			text-align: left;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			display: flex;
+			align-items: center;
+			gap: 14px;
+		}
+		.quiz-option:hover:not(:disabled) { border-color: var(--color-primary); background: rgba(205,180,219,0.1); transform: translateX(4px); }
+		.quiz-option.correct { border-color: #27ae60; background: rgba(39,174,96,0.1); color: #27ae60; font-weight: 700; }
+		.quiz-option.wrong   { border-color: #e74c3c; background: rgba(231,76,60,0.1);  color: #e74c3c; }
+		.quiz-option:disabled { cursor: default; }
+		.option-letter { width: 32px; height: 32px; border-radius: 50%; background: var(--border-color); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; transition: all 0.2s; }
+		.quiz-option.correct .option-letter { background: #27ae60; color: white; }
+		.quiz-option.wrong .option-letter   { background: #e74c3c; color: white; }
+
+		.quiz-feedback { margin-top: 24px; padding: 20px 24px; border-radius: var(--radius-md); font-size: 0.95rem; line-height: 1.6; display: none; animation: fadeInUp 0.3s ease; }
+		.quiz-feedback.correct { background: rgba(39,174,96,0.1); border-left: 4px solid #27ae60; color: var(--text-dark); }
+		.quiz-feedback.wrong   { background: rgba(231,76,60,0.1);  border-left: 4px solid #e74c3c; color: var(--text-dark); }
+
+		.quiz-actions { display: flex; justify-content: flex-end; margin-top: 28px; gap: 12px; }
+
+		/* RESULTADO */
+		#quiz-result { text-align: center; display: none; animation: fadeInUp 0.5s ease; }
+		.result-score { font-size: 5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+		.result-label { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+		.result-badge { display: inline-block; padding: 6px 20px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; margin-bottom: 24px; }
+		.result-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 400px; margin: 24px auto; }
+		.result-stat { padding: 16px; border-radius: var(--radius-md); text-align: center; background: var(--card-bg); border: 1px solid var(--border-color); }
+		.result-stat .num { font-size: 2rem; font-weight: 800; color: var(--text-dark); }
+		.result-stat .lbl { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+		/* START SCREEN */
+		#quiz-start { text-align: center; display: block; }
+		.difficulty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 480px; margin: 24px auto; }
+		.difficulty-btn {
+			padding: 20px 12px;
+			border-radius: var(--radius-md);
+			border: 2px solid var(--border-color);
+			background: var(--card-bg);
+			color: var(--text-dark);
+			cursor: pointer;
+			font-family: var(--font-body);
+			font-weight: 700;
+			transition: all 0.2s ease;
+			text-align: center;
+		}
+		.difficulty-btn:hover, .difficulty-btn.selected { border-color: var(--color-primary); background: rgba(205,180,219,0.15); }
+		.difficulty-btn .emoji { font-size: 2rem; display: block; margin-bottom: 8px; }
+		#quiz-game { display: none; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link active" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre o Projeto</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link active" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" href="mitos-e-verdades.html">Mitos e Verdades</a></li>
+		<li><a class="nav-link" href="estatisticas.html">Estatísticas</a></li>
+		<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+		<li><a class="nav-link" href="faq.html">FAQ</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<section class="quiz-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">🧠 Teste seus conhecimentos</div>
+			<h1>Quiz de Saúde Feminina</h1>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:550px;margin:0 auto;">Responda perguntas elaboradas por especialistas e descubra o quanto você sabe sobre o seu corpo.</p>
+		</div>
+	</section>
+
+	<section>
+		<div id="quiz-wrapper">
+
+			<!-- START SCREEN -->
+			<div id="quiz-start" class="quiz-card">
+				<div class="quiz-category">🎮 Escolha o nível</div>
+				<h2 style="font-size:1.5rem;font-weight:800;color:var(--text-dark);margin-bottom:8px;">Pronta para começar?</h2>
+				<p style="color:var(--text-muted);margin-bottom:8px;">Selecione a dificuldade e inicie o quiz. Cada questão inclui uma explicação científica ao final.</p>
+				<div class="difficulty-grid">
+					<button class="difficulty-btn selected" id="diff-easy" onclick="selectDifficulty('easy', this)">
+						<span class="emoji">🌱</span>Iniciante<br><small style="font-weight:400;color:var(--text-muted);">5 questões</small>
+					</button>
+					<button class="difficulty-btn" id="diff-medium" onclick="selectDifficulty('medium', this)">
+						<span class="emoji">🔬</span>Intermediário<br><small style="font-weight:400;color:var(--text-muted);">10 questões</small>
+					</button>
+					<button class="difficulty-btn" id="diff-hard" onclick="selectDifficulty('hard', this)">
+						<span class="emoji">🎓</span>Avançado<br><small style="font-weight:400;color:var(--text-muted);">15 questões</small>
+					</button>
+				</div>
+				<button class="btn btn-primary" onclick="startQuiz()" style="width:100%;margin-top:8px;font-size:1.05rem;padding:14px;">Iniciar Quiz →</button>
+			</div>
+
+			<!-- GAME SCREEN -->
+			<div id="quiz-game" style="display:none;">
+				<div class="quiz-progress-label">
+					<span id="quiz-progress-text">Questão 1 de 10</span>
+					<span id="quiz-score-label">Pontuação: 0</span>
+				</div>
+				<div class="quiz-progress-bar-outer">
+					<div id="quiz-progress-bar" class="quiz-progress-bar-inner" style="width:0%;"></div>
+				</div>
+
+				<div id="quiz-card" class="quiz-card">
+					<div id="quiz-category" class="quiz-category"></div>
+					<div id="quiz-question" class="quiz-question"></div>
+					<div id="quiz-options" class="quiz-options"></div>
+					<div id="quiz-feedback" class="quiz-feedback"></div>
+					<div class="quiz-actions">
+						<button id="btn-next" class="btn btn-primary" onclick="nextQuestion()" style="display:none;">Próxima →</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- RESULT SCREEN -->
+			<div id="quiz-result" class="quiz-card">
+				<div class="quiz-category">🎉 Quiz concluído!</div>
+				<div class="result-score" id="result-percent">0%</div>
+				<div class="result-label" id="result-label">Parabéns!</div>
+				<div class="result-badge" id="result-badge"></div>
+				<p id="result-message" style="color:var(--text-muted);max-width:480px;margin:0 auto 8px;"></p>
+				<div class="result-details">
+					<div class="result-stat"><div class="num" id="res-correct">0</div><div class="lbl">Certas</div></div>
+					<div class="result-stat"><div class="num" id="res-wrong">0</div><div class="lbl">Erradas</div></div>
+					<div class="result-stat"><div class="num" id="res-time">0s</div><div class="lbl">Tempo</div></div>
+				</div>
+				<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
+					<button class="btn btn-primary" onclick="resetQuiz()">Jogar Novamente</button>
+					<a href="mitos-e-verdades.html" class="btn btn-outline">Ver Mitos e Verdades</a>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4><span style="font-size:0.75rem;color:var(--text-dark);opacity:0.8;">Assistente de Saúde</span></div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Boa sorte no quiz! Se tiver dúvidas sobre alguma questão, pode me perguntar após responder. 😊</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/luna.js"></script>
+</body>
+</html>

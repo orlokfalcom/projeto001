@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FAQ - Perguntas Frequentes - Silêncios da Saúde</title>
+	<meta name="description" content="Respondemos as dúvidas mais comuns sobre saúde feminina na adolescência com base em evidências científicas.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.faq-hero { padding:120px 0 60px; background:var(--gradient-primary); text-align:center; }
+		.faq-hero h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:16px; }
+
+		.faq-search-wrap { max-width:480px; margin:0 auto; position:relative; }
+		.faq-search-wrap input { width:100%; padding:14px 20px 14px 48px; border-radius:50px; border:2px solid var(--border-color); background:var(--card-bg); color:var(--text-dark); font-size:1rem; font-family:var(--font-body); outline:none; transition:border-color 0.2s; }
+		.faq-search-wrap input:focus { border-color:var(--color-primary); }
+		.faq-search-wrap .s-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--text-muted); }
+
+		.faq-categories { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px; }
+		.faq-cat-btn { padding:7px 18px; border-radius:50px; border:2px solid var(--border-color); background:transparent; color:var(--text-dark); font-size:0.88rem; font-weight:600; cursor:pointer; font-family:var(--font-body); transition:all 0.2s; }
+		.faq-cat-btn:hover, .faq-cat-btn.active { background:var(--color-primary); border-color:var(--color-primary); color:white; }
+
+		.faq-section { margin-bottom:48px; }
+		.faq-section-title { font-size:1.2rem; font-weight:800; color:var(--text-dark); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+
+		.faq-item { border:1px solid var(--border-color); border-radius:var(--radius-md); overflow:hidden; margin-bottom:12px; transition:box-shadow 0.2s; }
+		.faq-item:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+		.faq-question {
+			width:100%; background:var(--card-bg); border:none; padding:20px 24px; font-size:1rem; font-weight:700;
+			color:var(--text-dark); font-family:var(--font-body); text-align:left; cursor:pointer;
+			display:flex; align-items:center; justify-content:space-between; gap:16px; transition:background 0.2s;
+		}
+		.faq-question:hover { background:rgba(205,180,219,0.08); }
+		.faq-question[aria-expanded="true"] { color:var(--color-primary); }
+		.faq-question .faq-icon { flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--border-color); display:flex; align-items:center; justify-content:center; transition:transform 0.3s ease, background 0.2s; }
+		.faq-question[aria-expanded="true"] .faq-icon { background:var(--color-primary); transform:rotate(45deg); }
+		.faq-answer { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1); background:var(--card-bg); }
+		.faq-answer-inner { padding:0 24px 20px; font-size:0.95rem; line-height:1.7; color:var(--text-muted); border-top:1px solid var(--border-color); padding-top:16px; }
+		.faq-answer-inner strong { color:var(--text-dark); }
+		.faq-answer-inner a { color:var(--color-primary); font-weight:700; }
+		.faq-source { font-size:0.78rem; color:var(--color-primary); font-weight:700; margin-top:12px; display:block; }
+
+		.faq-item.open .faq-answer { max-height:400px; }
+
+		.faq-not-found-cta { background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:40px; text-align:center; margin-top:48px; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link" href="objetivos.html">Objetivos</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link active" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link active" href="faq.html">FAQ</a></li>
+		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<section class="faq-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">❓ Perguntas Frequentes</div>
+			<h1>FAQ</h1>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:550px;margin:0 auto 32px;">As dúvidas mais comuns sobre saúde feminina respondidas com base em ciência — sem tabu, sem julgamento.</p>
+			<div class="faq-search-wrap">
+				<span class="s-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+				<input type="text" id="faq-search" placeholder="Buscar uma pergunta..." aria-label="Buscar no FAQ">
+			</div>
+		</div>
+	</section>
+
+	<section class="py-10">
+		<div class="container" style="max-width:800px;">
+
+			<div class="faq-categories">
+				<button class="faq-cat-btn active" data-cat="todos">Todas</button>
+				<button class="faq-cat-btn" data-cat="menstruacao">🩸 Menstruação</button>
+				<button class="faq-cat-btn" data-cat="corpo">🌸 Corpo e Puberdade</button>
+				<button class="faq-cat-btn" data-cat="saude-mental">🧠 Saúde Mental</button>
+				<button class="faq-cat-btn" data-cat="hormonio">💊 Hormônios</button>
+				<button class="faq-cat-btn" data-cat="nutricao">🥗 Nutrição</button>
+			</div>
+
+			<!-- MENSTRUAÇÃO -->
+			<div class="faq-section" data-cat="menstruacao">
+				<h2 class="faq-section-title">🩸 Menstruação</h2>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						É normal menstruar por mais de 7 dias?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>O ciclo menstrual considerado normal dura de <strong>2 a 7 dias</strong>. Menstruar por mais de 7 dias pode ser sinal de <strong>menorragia</strong> (sangramento intenso ou prolongado), que pode ter diversas causas — desde desequilíbrios hormonais até condições como miomas ou pólipos.</p>
+							<p>Se isso ocorre com frequência, <strong>consulte uma ginecologista</strong>. Não ignore — perda excessiva de sangue pode causar anemia ferropriva.</p>
+							<span class="faq-source">📚 Referência: Federação Brasileira de Ginecologia e Obstetrícia (FEBRASGO) 2023</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						Minha menstruação é muito irregular. O que pode ser?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>Nos primeiros 2-3 anos após a primeira menstruação, é comum que o ciclo seja irregular enquanto o sistema hormonal amadurece. Isso é completamente normal.</p>
+							<p>Após esse período, irregularidades persistentes podem indicar: <strong>SOP (Síndrome dos Ovários Policísticos)</strong>, estresse extremo, distúrbios alimentares, exercício físico excessivo ou problemas na tireoide.</p>
+							<p>Uma consulta ginecológica anual é recomendada a partir da primeira menstruação.</p>
+							<span class="faq-source">📚 Referência: OMS — Saúde Reprodutiva da Adolescente (2024)</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						Cólica menstrual muito intensa é normal?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>Cólica leve a moderada é comum — causada por prostaglandinas que contraem o útero. <strong>Mas cólica que te impede de ir à escola, ao trabalho ou de realizar atividades do dia a dia NÃO é normal e não deve ser ignorada.</strong></p>
+							<p>Dor menstrual incapacitante é um dos sintomas mais frequentes de <strong>endometriose</strong>, condição que afeta 1 em cada 10 mulheres. O diagnóstico precoce faz toda a diferença no tratamento.</p>
+							<span class="faq-source">📚 Referência: Endometriosis Foundation of America / SOBRAC 2023</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- CORPO -->
+			<div class="faq-section" data-cat="corpo">
+				<h2 class="faq-section-title">🌸 Corpo e Puberdade</h2>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						Por que meus seios têm tamanhos diferentes?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>Assimetria mamária é <strong>extremamente comum</strong> — a maioria das mulheres tem seios com tamanhos ligeiramente diferentes. Isso ocorre porque cada mama responde de forma diferente aos hormônios durante a puberdade.</p>
+							<p>Diferenças pequenas são completamente normais. Diferenças muito pronunciadas ou súbitas merecem avaliação médica.</p>
+							<span class="faq-source">📚 Referência: American College of Obstetricians and Gynecologists (ACOG)</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						Pelos no corpo são normais durante a adolescência?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>Sim! O crescimento de pelos nas axilas, pernas, braços, abdômen e ao redor da genitália é parte completamente normal da puberdade — causado pelo aumento dos andrógenos (hormônios).</p>
+							<p>A quantidade e a distribuição variam muito entre indivíduos e etnias. <strong>Nenhuma quantidade de pelo corporal é "errada"</strong>. A escolha de remover ou não é pessoal.</p>
+							<p>Crescimento excessivo de pelos no rosto, peito ou costas (hirsutismo) pode indicar SOP e merece avaliação médica.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- SAÚDE MENTAL -->
+			<div class="faq-section" data-cat="saude-mental">
+				<h2 class="faq-section-title">🧠 Saúde Mental</h2>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						Por que me sinto mais ansiosa antes da menstruação?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>O que você está sentindo pode ser <strong>TPM (Tensão Pré-Menstrual)</strong> ou, em casos mais severos, <strong>TDPM (Transtorno Disfórico Pré-Menstrual)</strong>. As flutuações de estrogênio e progesterona na segunda metade do ciclo afetam diretamente os neurotransmissores como serotonina.</p>
+							<p>Sintomas comuns: irritabilidade, ansiedade, tristeza, fadiga, desejo por alimentos específicos. Eles geralmente melhoram após o início da menstruação.</p>
+							<p>Se os sintomas forem muito intensos, converse com uma médica — há tratamentos eficazes.</p>
+							<span class="faq-source">📚 Referência: DSM-5 / ACOG Practice Bulletin 2022</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="faq-item">
+					<button class="faq-question" aria-expanded="false">
+						A pressão para ter um corpo "ideal" afeta a saúde mental?
+						<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+					</button>
+					<div class="faq-answer" role="region">
+						<div class="faq-answer-inner">
+							<p>Sim, e a ciência comprova isso. Adolescentes expostas a padrões irreais de beleza (especialmente via redes sociais) têm <strong>maior risco de desenvolver ansiedade, depressão e transtornos alimentares</strong> como anorexia e bulimia.</p>
+							<p>A autoimagem negativa também está associada ao absenteísmo escolar e à baixa autoestima. Se você se sente assim, <strong>você não está sozinha</strong> — e buscar apoio psicológico é um ato de cuidado.</p>
+							<span class="faq-source">📚 Referência: UNICEF — State of the World's Children 2023</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- NÃO ENCONTROU -->
+			<div class="faq-not-found-cta">
+				<h2 style="font-size:1.3rem;font-weight:800;margin-bottom:8px;">Não encontrou sua resposta? 💬</h2>
+				<p style="color:var(--text-muted);margin-bottom:20px;">Fale com a Luna, nossa assistente virtual de saúde, ou envie sua dúvida pela página de contato.</p>
+				<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+					<a href="contato.html" class="btn btn-primary">Enviar Dúvida</a>
+					<button class="btn btn-outline" onclick="document.getElementById('luna-toggle').click()">Falar com Luna</button>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4><span style="font-size:0.75rem;color:var(--text-dark);opacity:0.8;">Assistente de Saúde</span></div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Olá! Não encontrou sua dúvida no FAQ? Me pergunte aqui — sem julgamento! 💜</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/luna.js"></script>
+<script>
+// Accordion FAQ
+document.querySelectorAll('.faq-question').forEach(btn => {
+	btn.addEventListener('click', () => {
+		const item = btn.closest('.faq-item');
+		const isOpen = item.classList.contains('open');
+		document.querySelectorAll('.faq-item.open').forEach(i => {
+			i.classList.remove('open');
+			i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+		});
+		if (!isOpen) {
+			item.classList.add('open');
+			btn.setAttribute('aria-expanded', 'true');
+		}
+	});
+});
+
+// Category filter
+document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+	btn.addEventListener('click', () => {
+		document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+		btn.classList.add('active');
+		const cat = btn.dataset.cat;
+		document.querySelectorAll('.faq-section').forEach(sec => {
+			sec.style.display = (cat === 'todos' || sec.dataset.cat === cat) ? '' : 'none';
+		});
+	});
+});
+
+// Search
+document.getElementById('faq-search').addEventListener('input', function() {
+	const q = this.value.toLowerCase();
+	document.querySelectorAll('.faq-item').forEach(item => {
+		item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
+	});
+});
+</script>
+</body>
+</html>

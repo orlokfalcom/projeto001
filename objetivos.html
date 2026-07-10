@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Objetivos - Silêncios da Saúde</title>
+	<meta name="description" content="Conheça os objetivos científicos e pedagógicos do portal Silêncios da Saúde e como ele transforma a educação em saúde feminina.">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#CDB4DB">
+	<link rel="stylesheet" href="css/theme.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		.obj-hero { padding:120px 0 60px; background:var(--gradient-primary); text-align:center; }
+		.obj-hero h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:900; margin-bottom:16px; }
+
+		.objectives-list { display:flex; flex-direction:column; gap:32px; max-width:800px; margin:0 auto; }
+		.objective-item { display:flex; gap:28px; align-items:flex-start; padding:32px; background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-lg); transition:transform 0.3s, box-shadow 0.3s; }
+		.objective-item:hover { transform:translateX(8px); box-shadow:0 12px 40px rgba(0,0,0,0.1); }
+		.obj-number { width:56px; height:56px; border-radius:50%; background:var(--gradient-primary); display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:900; color:white; flex-shrink:0; }
+		.obj-content h3 { font-size:1.15rem; font-weight:800; color:var(--text-dark); margin-bottom:8px; }
+		.obj-content p  { font-size:0.95rem; color:var(--text-muted); line-height:1.7; margin:0; }
+		.obj-tag { display:inline-block; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; padding:3px 10px; border-radius:50px; background:rgba(205,180,219,0.2); color:var(--color-primary); margin-bottom:8px; }
+
+		.pillars-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:24px; margin:48px 0; }
+		.pillar-card { text-align:center; padding:32px 20px; background:var(--card-bg); border:1px solid var(--border-color); border-radius:var(--radius-lg); transition:transform 0.3s; }
+		.pillar-card:hover { transform:translateY(-6px); }
+		.pillar-icon { font-size:3rem; margin-bottom:16px; }
+		.pillar-card h3 { font-size:1rem; font-weight:800; color:var(--text-dark); margin-bottom:8px; }
+		.pillar-card p  { font-size:0.85rem; color:var(--text-muted); line-height:1.5; }
+
+		.hipoteses-section { background:linear-gradient(135deg,rgba(205,180,219,0.1),rgba(255,175,204,0.08)); border-radius:var(--radius-lg); padding:48px; }
+		.hipotese-item { display:flex; gap:16px; margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--border-color); }
+		.hipotese-item:last-child { margin-bottom:0; border-bottom:none; padding-bottom:0; }
+		.hip-indicator { width:8px; border-radius:50px; background:var(--gradient-primary); flex-shrink:0; }
+		.hip-text h4 { font-size:1rem; font-weight:700; color:var(--text-dark); margin-bottom:4px; }
+		.hip-text p  { font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin:0; }
+	</style>
+</head>
+<body>
+
+<a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+<header id="masthead" class="site-header glassmorphism">
+	<div class="container header-container">
+		<div class="site-branding">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+		</div>
+		<nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+			<ul class="nav-menu">
+				<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+				<li><a class="nav-link active" href="objetivos.html">Objetivos</a></li>
+				<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+				<li><a class="nav-link" href="mitos-e-verdades.html">Mitos</a></li>
+				<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+				<li><a class="nav-link" href="estatisticas.html">Dados</a></li>
+				<li><a class="nav-link" href="biblioteca.html">Biblioteca</a></li>
+				<li><a class="nav-link" href="faq.html">FAQ</a></li>
+				<li><a class="nav-link" href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+		<div class="header-actions">
+			<button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+			<button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu" aria-expanded="false">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="mobile-navigation" class="mobile-nav glassmorphism">
+	<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+		<li><a class="nav-link" href="sobre.html">Sobre</a></li>
+		<li><a class="nav-link active" href="objetivos.html">Objetivos</a></li>
+		<li><a class="nav-link" href="saude-feminina.html">Saúde Feminina</a></li>
+		<li><a class="nav-link" href="quiz.html">Quiz</a></li>
+		<li><a class="nav-link" href="contato.html">Contato</a></li>
+	</ul>
+</div>
+
+<main id="content">
+
+	<section class="obj-hero">
+		<div class="container">
+			<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">🎯 Nossa Missão</div>
+			<h1>Objetivos do Projeto</h1>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:600px;margin:0 auto;">O que nos move, o que queremos alcançar e como medimos o impacto do portal na vida das adolescentes.</p>
+		</div>
+	</section>
+
+	<!-- PILARES -->
+	<section class="py-10">
+		<div class="container">
+			<h2 style="text-align:center;font-size:1.6rem;font-weight:800;margin-bottom:8px;">Os 4 Pilares do Portal</h2>
+			<p style="text-align:center;color:var(--text-muted);margin-bottom:40px;">Fundamentos que guiam cada decisão de design, conteúdo e tecnologia.</p>
+			<div class="pillars-grid">
+				<div class="pillar-card">
+					<div class="pillar-icon">🔬</div>
+					<h3>Evidência Científica</h3>
+					<p>Todo conteúdo revisado por profissionais de saúde e baseado em literatura científica de alto impacto.</p>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon">♿</div>
+					<h3>Acessibilidade</h3>
+					<p>Conformidade com WCAG 2.1 AA garantindo que todas as adolescentes — incluindo com deficiências — possam acessar.</p>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon">🌐</div>
+					<h3>Alcance Universal</h3>
+					<p>Site leve, com Score Lighthouse 95+, acessível em celulares de baixo custo e conexões lentas.</p>
+				</div>
+				<div class="pillar-card">
+					<div class="pillar-icon">💜</div>
+					<h3>Linguagem Inclusiva</h3>
+					<p>Conteúdo sem julgamento, que respeita diversidade de gênero, raça, classe social e orientação sexual.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- OBJETIVOS -->
+	<section class="py-10" style="background:rgba(205,180,219,0.05);">
+		<div class="container">
+			<h2 style="text-align:center;font-size:1.6rem;font-weight:800;margin-bottom:40px;">Objetivos Específicos</h2>
+			<div class="objectives-list">
+
+				<div class="objective-item">
+					<div class="obj-number">01</div>
+					<div class="obj-content">
+						<span class="obj-tag">Educação</span>
+						<h3>Desmistificar a saúde feminina</h3>
+						<p>Combater a desinformação sobre menstruação, puberdade, saúde hormonal e corpo feminino com conteúdo científico acessível, aumentando em pelo menos 30% o conhecimento correto das adolescentes após usar o portal.</p>
+					</div>
+				</div>
+
+				<div class="objective-item">
+					<div class="obj-number">02</div>
+					<div class="obj-content">
+						<span class="obj-tag">Diagnóstico Precoce</span>
+						<h3>Reduzir o tempo de diagnóstico de doenças ginecológicas</h3>
+						<p>Ao educar adolescentes sobre sintomas como cólica intensa, ciclos irregulares e alterações corporais, estimulamos a busca precoce por atendimento médico — especialmente para endometriose e SOP, que levam em média 7-10 anos para serem diagnosticadas.</p>
+					</div>
+				</div>
+
+				<div class="objective-item">
+					<div class="obj-number">03</div>
+					<div class="obj-content">
+						<span class="obj-tag">Saúde Mental</span>
+						<h3>Fortalecer a autoestima e reduzir ansiedade corporal</h3>
+						<p>Promover uma relação saudável com o próprio corpo, validando as mudanças da puberdade e desconstruindo padrões de beleza irreais que afetam a saúde mental de 40% das adolescentes brasileiras.</p>
+					</div>
+				</div>
+
+				<div class="objective-item">
+					<div class="obj-number">04</div>
+					<div class="obj-content">
+						<span class="obj-tag">Formação de Professores</span>
+						<h3>Capacitar educadores para abordar saúde feminina</h3>
+						<p>Oferecer planos de aula, materiais didáticos e estratégias pedagógicas para que professores se sintam seguros ao tratar saúde feminina em sala de aula, reduzindo o estigma escolar.</p>
+					</div>
+				</div>
+
+				<div class="objective-item">
+					<div class="obj-number">05</div>
+					<div class="obj-content">
+						<span class="obj-tag">Equidade</span>
+						<h3>Ampliar o acesso à informação de qualidade</h3>
+						<p>Garantir que adolescentes de regiões periféricas, zonas rurais e com acesso limitado a serviços de saúde tenham acesso às mesmas informações que alunas de escolas privadas de centros urbanos.</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- HIPÓTESES -->
+	<section class="py-10">
+		<div class="container">
+			<h2 style="font-size:1.5rem;font-weight:800;margin-bottom:8px;">Hipóteses Científicas</h2>
+			<p style="color:var(--text-muted);margin-bottom:32px;">Premissas que fundamentam o design e os conteúdos do portal, a serem validadas por pesquisa longitudinal.</p>
+			<div class="hipoteses-section">
+				<div class="hipotese-item">
+					<div class="hip-indicator"></div>
+					<div class="hip-text">
+						<h4>H1 — Educação reduz automedicação</h4>
+						<p>Adolescentes com maior conhecimento científico sobre saúde feminina têm menor probabilidade de se automedicar para dores menstruais e outras condições ginecológicas.</p>
+					</div>
+				</div>
+				<div class="hipotese-item">
+					<div class="hip-indicator"></div>
+					<div class="hip-text">
+						<h4>H2 — Informação precoce melhora desfechos</h4>
+						<p>O acesso precoce a informações corretas sobre puberdade e ciclo menstrual está associado a menores índices de ansiedade relacionada ao corpo durante a adolescência.</p>
+					</div>
+				</div>
+				<div class="hipotese-item">
+					<div class="hip-indicator"></div>
+					<div class="hip-text">
+						<h4>H3 — Linguagem inclusiva amplia engajamento</h4>
+						<p>Portais educativos que utilizam linguagem não-julgamental e inclusiva têm maior taxa de retorno e compartilhamento por parte de adolescentes de diferentes perfis socioeconômicos.</p>
+					</div>
+				</div>
+				<div class="hipotese-item">
+					<div class="hip-indicator"></div>
+					<div class="hip-text">
+						<h4>H4 — Ferramentas interativas aumentam retenção</h4>
+						<p>Quizzes, cartas e gamificação aumentam em pelo menos 40% a retenção do conhecimento comparado a texto estático, de acordo com princípios de aprendizagem ativa.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="py-10" style="background:var(--gradient-primary);text-align:center;">
+		<div class="container">
+			<h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">Faça parte da mudança</h2>
+			<p style="font-size:1.1rem;opacity:0.85;max-width:500px;margin:0 auto 32px;">Educadores, pesquisadores e adolescentes são bem-vindos a contribuir com o projeto.</p>
+			<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+				<a href="professor.html" class="btn btn-dark">Área do Professor</a>
+				<a href="pesquisa.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:white;">Ver Metodologia</a>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<footer id="colophon" class="site-footer glassmorphism py-10" style="border-top:1px solid var(--border-color);">
+	<div class="container">
+		<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+			<a href="index.html" class="logo-text">Silêncios da Saúde</a>
+			<p style="font-size:0.85rem;color:var(--text-muted);">&copy; 2026 Silêncios da Saúde</p>
+		</div>
+	</div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner glassmorphism card">
+	<div style="flex:1;min-width:250px;">
+		<h4 style="font-size:1rem;margin-bottom:4px;font-weight:700;">Valorizamos sua Privacidade 🍪</h4>
+		<p style="font-size:0.85rem;color:var(--text-muted);">Usamos cookies essenciais (LGPD).</p>
+	</div>
+	<button id="cookie-accept" class="btn btn-primary" style="padding:6px 16px;font-size:0.85rem;">Aceitar</button>
+</div>
+
+<div class="luna-widget">
+	<button id="luna-toggle" class="luna-btn" aria-label="Falar com Luna" aria-expanded="false" aria-controls="luna-chat-box">💬</button>
+	<div id="luna-chat-box" class="luna-chat-window glassmorphism">
+		<div class="luna-header">
+			<div class="luna-avatar">👩‍⚕️</div>
+			<div><h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4></div>
+			<button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar">&times;</button>
+		</div>
+		<div id="luna-chat-messages" class="luna-messages">
+			<div class="msg msg-bot">Olá! Posso te contar mais sobre os objetivos do projeto. O que queres saber?</div>
+		</div>
+		<div class="luna-input-area">
+			<input type="text" id="luna-input" placeholder="Pergunte aqui..." aria-label="Mensagem para Luna" autocomplete="off">
+			<button id="luna-send" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+		</div>
+	</div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/luna.js"></script>
+</body>
+</html>
