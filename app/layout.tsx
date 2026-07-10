@@ -51,6 +51,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Bootstrap CSS (CDN) */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        />
         {/* Anti-flash inline script for dark mode */}
         <script
           dangerouslySetInnerHTML={{
@@ -108,6 +113,8 @@ export default function RootLayout({
           <LunaChat />
           <CookieBanner />
         </AppProvider>
+        {/* Bootstrap JS bundle (CDN) */}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
       </body>
     </html>
   );
