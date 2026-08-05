@@ -141,10 +141,10 @@
         <div class="luna-header">
             <div class="luna-avatar">👩‍⚕️</div>
             <div>
-                <h4 style="margin:0;font-size:0.95rem;font-weight:700;color:var(--text-dark);">Luna</h4>
-                <span style="font-size:0.75rem;color:var(--text-dark);opacity:0.8;">Assistente Virtual de Saúde</span>
+                <h4 style="margin:0;font-size:0.95rem;font-weight:700;color:#150B20;">Luna</h4>
+                <span style="font-size:0.75rem;color:#150B20;opacity:0.85;">Assistente Virtual de Saúde</span>
             </div>
-            <button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-dark);" aria-label="Fechar chat">&times;</button>
+            <button id="luna-close" style="margin-left:auto;background:transparent;border:none;font-size:1.2rem;cursor:pointer;color:#150B20;" aria-label="Fechar chat">&times;</button>
         </div>
         <div id="luna-chat-messages" class="luna-messages">
             <div class="msg msg-bot">Olá! Eu sou a Luna, sua assistente virtual de saúde. Aqui podemos conversar de forma segura sobre puberdade, menstruação, corpo e sentimentos. Como posso te ajudar?</div>
