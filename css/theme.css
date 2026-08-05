@@ -1474,7 +1474,7 @@ details.accordion-item p {
 .badge-new {
     display: inline-block;
     background: linear-gradient(135deg, #f5aab5, var(--purple-light));
-    color: var(--text-dark);
+    color: #150B20 !important;
     font-size: 0.7rem;
     font-weight: 700;
     padding: 2px 8px;
