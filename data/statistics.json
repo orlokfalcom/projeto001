@@ -1,0 +1,71 @@
+{
+  "highlights": [
+    {
+      "id": "stat-1",
+      "value": 73,
+      "unit": "%",
+      "label": "das adolescentes brasileiras relatam cólica intensa que interfere nas atividades",
+      "source": "Fonte: IBGE / Fiocruz 2024",
+      "category": "saude"
+    },
+    {
+      "id": "stat-2",
+      "value": 58,
+      "unit": "%",
+      "label": "nunca receberam informações sobre ciclo menstrual na escola",
+      "source": "Fonte: Instituto Socioambiental 2023",
+      "category": "educacao"
+    },
+    {
+      "id": "stat-3",
+      "value": 40,
+      "unit": "%",
+      "label": "das meninas passam por bullying relacionado ao corpo durante a adolescência",
+      "source": "Fonte: UNICEF Brasil 2023",
+      "category": "bem-estar"
+    },
+    {
+      "id": "stat-4",
+      "value": 33,
+      "unit": "%",
+      "label": "desenvolvem sintomas de ansiedade ligados à imagem corporal (1 em cada 3)",
+      "source": "Fonte: OMS 2024",
+      "category": "bem-estar"
+    }
+  ],
+  "sources_chart": [
+    { "id": "src-1", "label": "Redes Sociais", "percentage": 82, "color": "linear-gradient(90deg, #9B5DE5, #F15BB5)" },
+    { "id": "src-2", "label": "Família", "percentage": 61, "color": "linear-gradient(90deg, #9B5DE5, #CDB4DB)" },
+    { "id": "src-3", "label": "Escola", "percentage": 45, "color": "linear-gradient(90deg, #B8D4E3, #98D8C8)" },
+    { "id": "src-4", "label": "Profissionais de Saúde", "percentage": 34, "color": "linear-gradient(90deg, #98D8C8, #2E8B75)" },
+    { "id": "src-5", "label": "Portais Científicos", "percentage": 12, "color": "linear-gradient(90deg, #F15BB5, #FFB7C5)" },
+    { "id": "src-6", "label": "Livros / Revistas", "percentage": 9, "color": "linear-gradient(90deg, #CDB4DB, #E8C8F0)" }
+  ],
+  "donut_metrics": [
+    {
+      "id": "donut-1",
+      "title": "Acesso a Informações",
+      "percentage": 75,
+      "sublabel": "acesso",
+      "desc": "das adolescentes têm acesso a alguma fonte de informação — mas apenas 12% são científicas.",
+      "strokeColor": "#CDB4DB"
+    },
+    {
+      "id": "donut-2",
+      "title": "Falta de Produtos Íntimos",
+      "percentage": 28,
+      "sublabel": "ausência",
+      "desc": "já faltaram à aula por falta de absorventes ou infraestrutura adequada na escola.",
+      "strokeColor": "#FFAFC8"
+    },
+    {
+      "id": "donut-3",
+      "title": "Diálogo Aberto",
+      "percentage": 42,
+      "sublabel": "diálogo",
+      "desc": "sentem-se confortáveis para conversar abertamente sobre menstruação com a família.",
+      "strokeColor": "#98D8C8"
+    }
+  ],
+  "user_submissions": []
+}

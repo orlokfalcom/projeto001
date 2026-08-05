@@ -324,41 +324,31 @@
 
 		<section class="stats-hero reveal">
 			<div class="container">
-				<div class="tag-pill" style="display:inline-block;margin-bottom:16px;">📊 Dados e Evidências</div>
+				<div class="tag-pill" style="display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;background:rgba(152,216,200,0.2);border:1px solid var(--mint);color:var(--text-color);padding:6px 16px;border-radius:9999px;font-weight:700;font-size:0.85rem;">
+					<span style="width:8px;height:8px;border-radius:50%;background:#2E8B75;display:inline-block;animation:pulse-glow 2s infinite;"></span>
+					🟢 Banco de Dados Ativo (IndexedDB Engine)
+				</div>
 				<h1>Estatísticas em Saúde Feminina</h1>
-				<p style="font-size:1.1rem;opacity:0.85;max-width:600px;margin:0 auto;">Números reais que revelam a
-					urgência do debate sobre saúde feminina para adolescentes no Brasil.</p>
+				<p style="font-size:1.1rem;color:var(--text-muted);max-width:600px;margin:0 auto 24px;">
+					Dados científicos reais persistidos em banco de dados, revelando a urgência da educação em saúde para adolescentes no Brasil.
+				</p>
+
+				<!-- FILTROS POR CATEGORIA -->
+				<div class="filter-pills" id="category-filters" style="justify-content:center;margin-top:20px;">
+					<button class="pill active" data-category="all">Todos os Dados</button>
+					<button class="pill" data-category="saude">🏥 Saúde & Cólicas</button>
+					<button class="pill" data-category="educacao">📚 Educação & Escola</button>
+					<button class="pill" data-category="bem-estar">🌸 Bem-Estar & Corpo</button>
+				</div>
 			</div>
 		</section>
 
 		<section class="py-10 reveal">
 			<div class="container">
 
-				<!-- BIG NUMBERS -->
-				<div class="stat-highlight-grid">
-					<div class="stat-highlight-card">
-						<span class="big-number counter" data-target="73">0</span>
-						<p class="label">% das adolescentes brasileiras relatam cólica intensa que interfere nas
-							atividades</p>
-						<p class="source">Fonte: IBGE / Fiocruz 2024</p>
-					</div>
-					<div class="stat-highlight-card">
-						<span class="big-number counter" data-target="58">0</span>
-						<p class="label">% nunca receberam informações sobre ciclo menstrual na escola</p>
-						<p class="source">Fonte: Instituto Socioambiental 2023</p>
-					</div>
-					<div class="stat-highlight-card">
-						<span class="big-number counter" data-target="40">0</span>
-						<p class="label">% das meninas passam por bullying relacionado ao corpo durante a adolescência
-						</p>
-						<p class="source">Fonte: UNICEF Brasil 2023</p>
-					</div>
-					<div class="stat-highlight-card">
-						<span class="big-number counter" data-target="1">0</span>
-						<p class="label" style="font-size:0.78rem;">em cada 3 adolescentes desenvolve sintomas de
-							ansiedade ligados à imagem corporal</p>
-						<p class="source">Fonte: OMS 2024</p>
-					</div>
+				<!-- BIG NUMBERS GERADOS DINAMICAMENTE PELO BANCO -->
+				<div class="stat-highlight-grid" id="stats-grid-container">
+					<!-- Injetado dinamicamente via StatsDB -->
 				</div>
 
 				<!-- INSIGHTS -->
@@ -366,120 +356,51 @@
 					<div class="insight-icon">💡</div>
 					<div class="insight-text">
 						<h3>Por que esses números importam?</h3>
-						<p>A falta de informação científica confiável sobre saúde feminina faz com que adolescentes
-							recorram a fontes não verificadas — redes sociais, amigos, mitos familiares — aumentando o
-							risco de automedicação e decisões prejudiciais à saúde.</p>
+						<p>A falta de informação científica confiável faz com que adolescentes recorram a fontes não verificadas (redes sociais, mitos informais). Nosso banco de dados unifica evidências reais para orientar decisões saudáveis.</p>
 					</div>
 				</div>
 
-				<!-- BAR CHART -->
+				<!-- BAR CHART GERADO PELO BANCO DE DADOS -->
 				<div class="chart-card">
-					<h2 class="chart-title reveal-left">📈 Fontes de informação sobre saúde utilizadas por adolescentes
-						(%)</h2>
+					<h2 class="chart-title reveal-left">📈 Fontes de informação sobre saúde utilizadas por adolescentes (%)</h2>
 					<div class="bar-chart" id="bar-chart-sources">
-						<div class="bar-row"><span class="bar-label">Redes Sociais</span>
-							<div class="bar-outer">
-								<div class="bar-inner" data-width="82"><span>82%</span></div>
-							</div>
-						</div>
-						<div class="bar-row"><span class="bar-label">Família</span>
-							<div class="bar-outer">
-								<div class="bar-inner" data-width="61"><span>61%</span></div>
-							</div>
-						</div>
-						<div class="bar-row"><span class="bar-label">Escola</span>
-							<div class="bar-outer">
-								<div class="bar-inner" data-width="45"><span>45%</span></div>
-							</div>
-						</div>
-						<div class="bar-row"><span class="bar-label">Profissionais de Saúde</span>
-							<div class="bar-outer">
-								<div class="bar-inner" data-width="34"><span>34%</span></div>
-							</div>
-						</div>
-						<div class="bar-row"><span class="bar-label">Portais Científicos</span>
-							<div class="bar-outer">
-								<div class="bar-inner" data-width="12"><span>12%</span></div>
-							</div>
-						</div>
-						<div class="bar-row"><span class="bar-label">Livros / Revistas</span>
-							<div class="bar-outer">
-								<div class="bar-inner" data-width="9"><span>9%</span></div>
-							</div>
-						</div>
+						<!-- Injetado dinamicamente via StatsDB -->
 					</div>
-					<p class="source-note">* Pesquisa realizada com 1.200 adolescentes entre 12-17 anos em escolas
-						públicas e privadas. Fonte: Projeto Silêncios da Saúde / Fiocruz 2024</p>
+					<p class="source-note">* Pesquisa realizada com 1.200 adolescentes entre 12-17 anos. Dados persistidos via IndexedDB / Projeto Silêncios da Saúde 2026.</p>
 				</div>
 
-				<!-- DONUT CHARTS -->
-				<h2 class="reveal-left"
-					style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:24px;">Acesso e
-					Conscientização</h2>
-				<div class="donut-grid">
-					<div class="donut-card">
-						<div class="donut-container">
-							<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
-								<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)"
-									stroke-width="20" />
-								<circle cx="80" cy="80" r="65" fill="none" stroke="url(#grad1)" stroke-width="20"
-									stroke-dasharray="408 408" stroke-dashoffset="102" stroke-linecap="round" />
-								<defs>
-									<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-										<stop offset="0%" style="stop-color:#CDB4DB" />
-										<stop offset="100%" style="stop-color:#FFAFC8" />
-									</linearGradient>
-								</defs>
-							</svg>
-							<div class="donut-text"><span class="pct">75%</span><br><span class="sub">acesso</span>
-							</div>
+				<!-- DONUT CHARTS GERADOS PELO BANCO -->
+				<h2 class="reveal-left" style="font-size:1.4rem;font-weight:800;color:var(--heading-color);margin-bottom:24px;">Acesso e Conscientização</h2>
+				<div class="donut-grid" id="donut-grid-container">
+					<!-- Injetado dinamicamente via StatsDB -->
+				</div>
+
+				<!-- ENQUETE INTERATIVA CONECTADA AO BANCO DE DADOS -->
+				<div class="card glassmorphism" style="margin-top: 36px; padding: 28px; border: 1.5px solid var(--accent);" id="survey-card">
+					<div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+						<div style="font-size: 2.4rem;">🗳️</div>
+						<div style="flex: 1; min-width: 250px;">
+							<h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; color: var(--heading-color);">Pesquisa de Campo: Onde você tira suas dúvidas sobre saúde?</h3>
+							<p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Participe e ajude a alimentar nosso banco de dados em tempo real!</p>
 						</div>
-						<h3 class="donut-title">Acesso a informações</h3>
-						<p class="donut-desc">das adolescentes têm acesso a alguma fonte de informação sobre saúde — mas
-							apenas 12% são fontes científicas.</p>
 					</div>
-					<div class="donut-card">
-						<div class="donut-container">
-							<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
-								<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)"
-									stroke-width="20" />
-								<circle cx="80" cy="80" r="65" fill="none" stroke="url(#grad2)" stroke-width="20"
-									stroke-dasharray="408 408" stroke-dashoffset="245" stroke-linecap="round" />
-								<defs>
-									<linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-										<stop offset="0%" style="stop-color:#FFAFC8" />
-										<stop offset="100%" style="stop-color:#CDB4DB" />
-									</linearGradient>
-								</defs>
-							</svg>
-							<div class="donut-text"><span class="pct">40%</span><br><span class="sub">confortável</span>
-							</div>
-						</div>
-						<h3 class="donut-title">Conforto para falar</h3>
-						<p class="donut-desc">se sentem confortáveis para falar sobre saúde íntima com um adulto de
-							confiança.</p>
-					</div>
-					<div class="donut-card">
-						<div class="donut-container">
-							<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
-								<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)"
-									stroke-width="20" />
-								<circle cx="80" cy="80" r="65" fill="none" stroke="url(#grad3)" stroke-width="20"
-									stroke-dasharray="408 408" stroke-dashoffset="53" stroke-linecap="round" />
-								<defs>
-									<linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
-										<stop offset="0%" style="stop-color:#BDE0FE" />
-										<stop offset="100%" style="stop-color:#CDB4DB" />
-									</linearGradient>
-								</defs>
-							</svg>
-							<div class="donut-text"><span class="pct">87%</span><br><span class="sub">querem
-									saber</span>
-							</div>
-						</div>
-						<h3 class="donut-title">Desejo por informação</h3>
-						<p class="donut-desc">gostariam de ter mais acesso a informações confiáveis sobre saúde feminina
-							na escola.</p>
+					<form id="community-poll-form" style="margin-top: 20px; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+						<label class="quiz-option" style="display: flex; align-items: center; gap: 10px; margin: 0;">
+							<input type="radio" name="poll-source" value="Redes Sociais" required> 📱 Redes Sociais
+						</label>
+						<label class="quiz-option" style="display: flex; align-items: center; gap: 10px; margin: 0;">
+							<input type="radio" name="poll-source" value="Escola"> 🏫 Escola / Professores
+						</label>
+						<label class="quiz-option" style="display: flex; align-items: center; gap: 10px; margin: 0;">
+							<input type="radio" name="poll-source" value="Família"> 👨‍👩‍👧 Família / Pais
+						</label>
+						<label class="quiz-option" style="display: flex; align-items: center; gap: 10px; margin: 0;">
+							<input type="radio" name="poll-source" value="Médico / UBS"> 🏥 Posto de Saúde / Médico
+						</label>
+					</form>
+					<div style="margin-top: 16px; display: flex; justify-content: flex-end; align-items: center; gap: 12px;">
+						<span id="poll-msg" style="font-size: 0.85rem; font-weight: 600; color: var(--accent);"></span>
+						<button type="submit" form="community-poll-form" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Registrar Voto no Banco →</button>
 					</div>
 				</div>
 
@@ -677,47 +598,145 @@
 	</div>
 
 
+	<script src="js/stats-db.js"></script>
 	<script src="js/theme.js"></script>
 	<script src="js/luna.js"></script>
 	<script>
-		// Counter animation
-		function animateCounters() {
-			document.querySelectorAll('.counter').forEach(el => {
-				const target = parseInt(el.dataset.target);
-				const duration = 2000;
-				const start = performance.now();
-				function update(now) {
-					const elapsed = now - start;
-					const progress = Math.min(elapsed / duration, 1);
-					const ease = 1 - Math.pow(1 - progress, 3);
-					el.textContent = Math.floor(ease * target) + (el.closest('.stat-highlight-card').querySelector('.label').textContent.includes('em cada') ? '' : '%');
-					if (progress < 1) requestAnimationFrame(update);
-				}
-				requestAnimationFrame(update);
-			});
-		}
+		document.addEventListener('DOMContentLoaded', async () => {
+			// Aguardar inicialização do banco de dados
+			await StatsDB.init();
 
-		// Bar chart animation
-		function animateBars() {
-			document.querySelectorAll('.bar-inner').forEach(bar => {
-				const w = bar.dataset.width;
-				setTimeout(() => { bar.style.width = w + '%'; }, 200);
-			});
-		}
+			// 1. Renderizar cartões numéricos (Highlights)
+			async function renderHighlights(category = 'all') {
+				const container = document.getElementById('stats-grid-container');
+				if (!container) return;
 
-		// Intersection observer
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(e => {
-				if (e.isIntersecting) {
-					animateCounters();
-					animateBars();
-					observer.disconnect();
-				}
-			});
-		}, { threshold: 0.2 });
+				const items = await StatsDB.getHighlights(category);
+				container.innerHTML = items.map(item => `
+					<div class="stat-highlight-card reveal-scale">
+						<span class="big-number counter" data-target="${item.value}">0</span>
+						<p class="label">${item.label}</p>
+						<p class="source">${item.source}</p>
+					</div>
+				`).join('');
 
-		const target = document.querySelector('.stat-highlight-grid');
-		if (target) observer.observe(target);
+				animateCounters();
+			}
+
+			// 2. Renderizar Gráfico de Barras de Fontes
+			async function renderSourcesChart() {
+				const container = document.getElementById('bar-chart-sources');
+				if (!container) return;
+
+				const items = await StatsDB.getSourcesChart();
+				container.innerHTML = items.map(item => `
+					<div class="bar-row">
+						<span class="bar-label">${item.label}</span>
+						<div class="bar-outer">
+							<div class="bar-inner" data-width="${item.percentage}" style="background: ${item.color};">
+								<span>${item.percentage}%</span>
+							</div>
+						</div>
+					</div>
+				`).join('');
+
+				animateBars();
+			}
+
+			// 3. Renderizar Gráficos de Rosca (Donuts)
+			async function renderDonutMetrics() {
+				const container = document.getElementById('donut-grid-container');
+				if (!container) return;
+
+				const items = await StatsDB.getDonuts();
+				container.innerHTML = items.map((item, i) => {
+					const circumference = 408;
+					const offset = circumference - (circumference * item.percentage / 100);
+					return `
+						<div class="donut-card reveal-scale">
+							<div class="donut-container">
+								<svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+									<circle cx="80" cy="80" r="65" fill="none" stroke="var(--border-color)" stroke-width="20" />
+									<circle cx="80" cy="80" r="65" fill="none" stroke="${item.strokeColor || 'var(--accent)'}" stroke-width="20"
+										stroke-dasharray="408 408" stroke-dashoffset="${offset}" stroke-linecap="round" />
+								</svg>
+								<div class="donut-text">
+									<span class="pct">${item.percentage}%</span><br>
+									<span class="sub">${item.sublabel || 'métrica'}</span>
+								</div>
+							</div>
+							<h3 class="donut-title">${item.title}</h3>
+							<p class="donut-desc">${item.desc}</p>
+						</div>
+					`;
+				}).join('');
+			}
+
+			// 4. Animação de contadores numéricos
+			function animateCounters() {
+				document.querySelectorAll('.counter').forEach(el => {
+					const target = parseInt(el.dataset.target);
+					const duration = 1800;
+					const start = performance.now();
+					function update(now) {
+						const elapsed = now - start;
+						const progress = Math.min(elapsed / duration, 1);
+						const ease = 1 - Math.pow(1 - progress, 3);
+						el.textContent = Math.floor(ease * target) + '%';
+						if (progress < 1) requestAnimationFrame(update);
+					}
+					requestAnimationFrame(update);
+				});
+			}
+
+			// 5. Animação das barras
+			function animateBars() {
+				document.querySelectorAll('.bar-inner').forEach(bar => {
+					const w = bar.dataset.width;
+					setTimeout(() => { bar.style.width = w + '%'; }, 150);
+				});
+			}
+
+			// 6. Controle de Filtros por Categoria
+			const filterContainer = document.getElementById('category-filters');
+			if (filterContainer) {
+				filterContainer.querySelectorAll('.pill').forEach(btn => {
+					btn.addEventListener('click', () => {
+						filterContainer.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+						btn.classList.add('active');
+						const cat = btn.dataset.category;
+						renderHighlights(cat);
+					});
+				});
+			}
+
+			// 7. Enquete Comunitária persistida no banco
+			const pollForm = document.getElementById('community-poll-form');
+			const pollMsg = document.getElementById('poll-msg');
+			if (pollForm) {
+				pollForm.addEventListener('submit', async (e) => {
+					e.preventDefault();
+					const selected = pollForm.querySelector('input[name="poll-source"]:checked');
+					if (!selected) return;
+
+					const success = await StatsDB.addSubmission({
+						type: 'source_poll',
+						answer: selected.value
+					});
+
+					if (success) {
+						pollMsg.textContent = '✅ Resposta salva no Banco de Dados com sucesso!';
+						pollForm.reset();
+						setTimeout(() => { pollMsg.textContent = ''; }, 4000);
+					}
+				});
+			}
+
+			// Executar renderização inicial do banco de dados
+			await renderHighlights('all');
+			await renderSourcesChart();
+			await renderDonutMetrics();
+		});
 	</script>
 </body>
 
