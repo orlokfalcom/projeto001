@@ -421,7 +421,8 @@
           <p class="map-info-desc">
             Os dados são provenientes do <strong>CNES — Cadastro Nacional de Estabelecimentos de Saúde</strong>.
             Confirme endereços e horários de funcionamento diretamente com o estabelecimento antes de se deslocar.
-            Para importar dados atualizados, use o botão "Importar GeoJSON".
+            Os dados são carregados automaticamente do arquivo <code>dados.geojson</code> na pasta <code>postos/</code>.
+            Para atualizar, substitua o arquivo e recarregue a página.
           </p>
         </div>
       </div>
@@ -592,7 +593,6 @@
         status: document.querySelector('#status'),
         arquivo: document.querySelector('#arquivo'),
         limpar: document.querySelector('#limpar'),
-        importar: document.querySelector('#importar'),
         exibidos: document.querySelector('#card-exibidos'),
         total: document.querySelector('#card-total'),
         ufs: document.querySelector('#card-ufs')
@@ -786,7 +786,8 @@
         render({ fitBounds: true });
       });
 
-      refs.importar.addEventListener('click', () => refs.arquivo.click());
+      // Botão de importar manual (opcional, via input hidden)
+      document.querySelector('#importar')?.addEventListener('click', () => refs.arquivo.click());
 
       refs.arquivo.addEventListener('change', async () => {
         const file = refs.arquivo.files[0];
@@ -803,17 +804,45 @@
         }
       });
 
-      fetch('./dados.geojson')
-        .then((response) => {
-          if (!response.ok) throw new Error('Não foi possível carregar dados.geojson.');
-          return response.json();
-        })
-        .then(load)
+      // Carrega dados.geojson automaticamente ao abrir a página
+      refs.status.textContent = 'Carregando dados.geojson…';
+
+      function loadGeoJSONAuto() {
+        return fetch('./dados.geojson')
+          .then((response) => {
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.json();
+          })
+          .then(load);
+      }
+
+      function loadGeoJSONXHR() {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', './dados.geojson');
+          xhr.responseType = 'json';
+          xhr.onload = () => {
+            if (xhr.status === 0 || xhr.status === 200) {
+              resolve(xhr.response);
+            } else {
+              reject(new Error(`XHR status ${xhr.status}`));
+            }
+          };
+          xhr.onerror = () => reject(new Error('XHR network error'));
+          xhr.send();
+        }).then(load);
+      }
+
+      loadGeoJSONAuto()
+        .catch(() => loadGeoJSONXHR())
         .catch((error) => {
-          refs.status.textContent = 'Abra por um servidor local ou importe o GeoJSON pelo botão. ' + error.message;
+          refs.status.textContent =
+            '⚠️ dados.geojson não pôde ser carregado automaticamente. ' +
+            'Abra a página através de um servidor local (ex: Live Server) ou use o botão "Importar GeoJSON".';
           refs.total.textContent = '0';
           refs.exibidos.textContent = '0';
           refs.ufs.textContent = '0';
+          console.warn('Falha ao carregar dados.geojson:', error);
         });
     })();
   </script>
