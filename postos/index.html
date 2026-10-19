@@ -5,18 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UBRs e Postos de Saúde — Viva Bem, Menina!</title>
-  <meta name="description" content="Encontre Unidades Básicas de Saúde, UPAs, hospitais e postos de atendimento próximos a você. Mapa interativo do portal Viva Bem, Menina!">
+  <meta name="description"
+    content="Encontre Unidades Básicas de Saúde, UPAs, hospitais e postos de atendimento próximos a você. Mapa interativo do portal Viva Bem, Menina!">
   <meta property="og:title" content="UBRs e Postos de Saúde — Viva Bem, Menina!">
   <meta property="og:description" content="Mapa interativo de estabelecimentos de saúde (CNES) para adolescentes.">
   <meta property="og:type" content="website">
   <link rel="manifest" href="../manifest.json">
-  <meta name="theme-color" content="#CDB4DB">
+  <meta name="theme-color" content="#EC4899">
 
   <!-- Design System do Portal -->
   <link rel="stylesheet" href="../css/theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap"
+    rel="stylesheet">
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -28,7 +31,7 @@
     .map-page-banner {
       padding: 3.5rem 0 2rem;
       text-align: center;
-      background: linear-gradient(135deg, rgba(205, 180, 219, 0.15) 0%, rgba(152, 216, 200, 0.12) 100%);
+      background: linear-gradient(135deg, rgba(254, 205, 211, 0.25) 0%, rgba(251, 207, 232, 0.20) 100%);
       border-bottom: 1px solid var(--border-color);
       margin-bottom: 0;
     }
@@ -57,7 +60,7 @@
       padding: 16px 0;
     }
 
-    .map-controls > * {
+    .map-controls>* {
       min-height: 44px;
     }
 
@@ -142,7 +145,7 @@
     .summary-card strong {
       font-size: clamp(1.3rem, 3vw, 2rem);
       font-weight: 900;
-      background: linear-gradient(135deg, var(--purple-light), #ff8fab);
+      background: linear-gradient(135deg, #E11D74, #FF6584);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -270,7 +273,7 @@
         <a href="../index.html" class="logo-text"
           style="display: flex; align-items: center; gap: 10px; font-weight: 900;">
           <img src="../images/logo.png" alt="Logo Viva Bem, Menina!"
-            style="height: 36px; width: 36px; border-radius: 8px; box-shadow: 0 4px 12px rgba(205,180,219,0.3); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+            style="height: 36px; width: 36px; border-radius: 8px; box-shadow: 0 4px 12px rgba(236,72,153,0.3); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
           Viva Bem, Menina!
         </a>
       </div>
@@ -295,24 +298,22 @@
         <div class="search-wrapper-header" role="search" aria-label="Pesquisa Global">
           <button id="search-toggle-btn" class="icon-btn" aria-label="Abrir pesquisa" aria-expanded="false"
             aria-controls="header-search-form">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </button>
           <div id="header-search-form" class="search-form-expanded" hidden>
-            <input type="search" id="global-search-input" placeholder="Buscar no portal..."
-              aria-label="Pesquisar" autocomplete="off" role="combobox" aria-expanded="false"
-              aria-autocomplete="list" aria-controls="search-dropdown">
-            <div id="search-dropdown" class="search-dropdown" role="listbox"
-              aria-label="Resultados da pesquisa"></div>
+            <input type="search" id="global-search-input" placeholder="Buscar no portal..." aria-label="Pesquisar"
+              autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list"
+              aria-controls="search-dropdown">
+            <div id="search-dropdown" class="search-dropdown" role="listbox" aria-label="Resultados da pesquisa"></div>
           </div>
         </div>
-        <button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro"
-          aria-live="polite"></button>
-        <button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu Principal"
-          aria-expanded="false" aria-controls="mobile-navigation">
+        <button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro" aria-live="polite"></button>
+        <button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu Principal" aria-expanded="false"
+          aria-controls="mobile-navigation">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -352,7 +353,7 @@
     <div class="map-page-banner">
       <div class="container">
         <span class="section-tag reveal">🏥 Rede de Saúde Pública</span>
-        <h1 class="reveal">UBRs e Postos de Saúde</h1>
+        <h1 class="reveal">Unidades Básicas de Saúde e UPAs em todo territorio nacional</h1>
         <p class="reveal">Encontre Unidades Básicas de Saúde, UPAs, hospitais e postos de atendimento próximos.
           Dados do CNES — Cadastro Nacional de Estabelecimentos de Saúde.</p>
       </div>
@@ -379,7 +380,6 @@
         </div>
         <div class="button-group">
           <button id="limpar" type="button" class="btn btn-outline">Limpar filtros</button>
-          <button id="importar" type="button" class="btn btn-secondary">⬆ Importar GeoJSON</button>
           <input type="file" id="arquivo" accept=".geojson,.json,application/json" hidden>
         </div>
       </div>
@@ -416,7 +416,8 @@
       <div id="map" class="reveal" aria-label="Mapa com estabelecimentos de saúde"></div>
 
       <!-- Nota informativa -->
-      <div class="card glassmorphism reveal" style="margin-top: 1.5rem; padding: 1.25rem 1.5rem; display: flex; gap: 16px; align-items: flex-start;">
+      <div class="card glassmorphism reveal"
+        style="margin-top: 1.5rem; padding: 1.25rem 1.5rem; display: flex; gap: 16px; align-items: flex-start;">
         <span style="font-size: 1.5rem; flex-shrink: 0;">ℹ️</span>
         <div>
           <h3 style="font-size: 0.97rem; font-weight: 700; margin-bottom: 4px;">Sobre os dados</h3>
@@ -475,24 +476,23 @@
           <div style="display: flex; gap: 12px;">
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
               aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
-              aria-label="TikTok">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
               </svg>
             </a>
             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
               aria-label="YouTube">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <path
                   d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
                 </path>
@@ -563,8 +563,8 @@
       </div>
 
       <div class="luna-input-area">
-        <input type="text" id="luna-input" placeholder="Digite sua pergunta aqui..."
-          aria-label="Mensagem para a Luna" autocomplete="off">
+        <input type="text" id="luna-input" placeholder="Digite sua pergunta aqui..." aria-label="Mensagem para a Luna"
+          autocomplete="off">
         <button id="luna-send" aria-label="Enviar mensagem">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">

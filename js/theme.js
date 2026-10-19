@@ -283,7 +283,7 @@ function initGlobalSearch() {
 
 function highlight(text, query) {
     const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return text.replace(re, '<mark style="background:rgba(205,180,219,0.35);border-radius:3px;padding:0 2px;">$1</mark>');
+    return text.replace(re, '<mark style="background:rgba(244,114,182,0.38);color:inherit;border-radius:3px;padding:0 3px;">$1</mark>');
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -294,14 +294,14 @@ function initHeroParticles() {
     if (!container) return;
 
     const PARTICLES = [
-        { color: '#FADADD', size: 14, top: '12%', left: '8%',  dur: '9s',  delay: '0s' },
-        { color: '#CDB4DB', size: 10, top: '25%', left: '85%', dur: '7s',  delay: '1s' },
-        { color: '#98D8C8', size: 18, top: '65%', left: '5%',  dur: '11s', delay: '2s' },
-        { color: '#B8D4E3', size: 8,  top: '80%', left: '90%', dur: '8s',  delay: '0.5s' },
-        { color: '#FADADD', size: 22, top: '45%', left: '92%', dur: '13s', delay: '3s' },
-        { color: '#CDB4DB', size: 12, top: '10%', left: '55%', dur: '10s', delay: '1.5s' },
-        { color: '#98D8C8', size: 7,  top: '70%', left: '65%', dur: '6s',  delay: '2.5s' },
-        { color: '#e8c8f0', size: 16, top: '35%', left: '3%',  dur: '12s', delay: '0.8s' },
+        { color: '#FBCFE8', size: 14, top: '12%', left: '8%',  dur: '9s',  delay: '0s' },
+        { color: '#F472B6', size: 10, top: '25%', left: '85%', dur: '7s',  delay: '1s' },
+        { color: '#FDA4AF', size: 18, top: '65%', left: '5%',  dur: '11s', delay: '2s' },
+        { color: '#F0ABFC', size: 8,  top: '80%', left: '90%', dur: '8s',  delay: '0.5s' },
+        { color: '#FECDD3', size: 22, top: '45%', left: '92%', dur: '13s', delay: '3s' },
+        { color: '#FF75A0', size: 12, top: '10%', left: '55%', dur: '10s', delay: '1.5s' },
+        { color: '#6EE7B7', size: 7,  top: '70%', left: '65%', dur: '6s',  delay: '2.5s' },
+        { color: '#E879F9', size: 16, top: '35%', left: '3%',  dur: '12s', delay: '0.8s' },
     ];
 
     PARTICLES.forEach(p => {
@@ -319,9 +319,9 @@ function initHeroParticles() {
 
     // Orbs de fundo
     const ORBS = [
-        { color: 'rgba(205,180,219,0.18)', size: 400, top: '-10%', left: '-5%',  dur: '15s' },
-        { color: 'rgba(250,218,221,0.15)', size: 350, top: '40%',  left: '60%',  dur: '20s' },
-        { color: 'rgba(152,216,200,0.12)', size: 300, top: '70%',  left: '-8%',  dur: '18s' },
+        { color: 'rgba(244,114,182,0.20)', size: 400, top: '-10%', left: '-5%',  dur: '15s' },
+        { color: 'rgba(251,207,232,0.22)', size: 350, top: '40%',  left: '60%',  dur: '20s' },
+        { color: 'rgba(240,171,252,0.16)', size: 300, top: '70%',  left: '-8%',  dur: '18s' },
     ];
 
     ORBS.forEach(o => {

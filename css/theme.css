@@ -157,8 +157,13 @@ img {
     outline: 2px solid var(--accent);
 }
 
+::selection {
+    background: #F472B6;
+    color: #FFFFFF;
+}
+
 :focus-visible {
-    outline: 2px solid var(--purple-light);
+    outline: 2px solid var(--pink-medium);
     outline-offset: 3px;
     border-radius: 4px;
 }
@@ -249,7 +254,7 @@ img {
 
 .card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 40px -8px rgba(205, 180, 219, 0.35);
+    box-shadow: 0 16px 40px -8px rgba(236, 72, 153, 0.25);
 }
 
 /* 6. BOTÕES */
@@ -270,29 +275,30 @@ img {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--purple-light) 0%, #e8c8f0 100%);
-    color: #150B20 !important;
+    background: linear-gradient(135deg, #FF6584 0%, #EC4899 50%, #D81B60 100%);
+    color: #FFFFFF !important;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(205, 180, 219, 0.45);
+    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.4);
 }
 
 .btn-primary:hover {
     transform: scale(1.04) translateY(-1px);
-    box-shadow: 0 8px 24px rgba(205, 180, 219, 0.6);
-    color: #150B20 !important;
+    box-shadow: 0 10px 28px rgba(232, 62, 140, 0.55);
+    color: #FFFFFF !important;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--blue-scientific) 0%, var(--mint) 100%);
-    color: #08241D !important;
+    background: linear-gradient(135deg, #FDE2E8 0%, #FBCFE8 50%, #F3E8FF 100%);
+    color: #831843 !important;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(184, 212, 227, 0.4);
+    border: 1.5px solid rgba(244, 114, 182, 0.35);
+    box-shadow: 0 4px 14px rgba(244, 114, 182, 0.22);
 }
 
 .btn-secondary:hover {
     transform: scale(1.04) translateY(-1px);
-    box-shadow: 0 8px 24px rgba(152, 216, 200, 0.5);
-    color: #08241D !important;
+    box-shadow: 0 8px 24px rgba(244, 114, 182, 0.38);
+    color: #500724 !important;
 }
 
 .btn-outline {
@@ -374,7 +380,7 @@ img {
     font-size: 1.3rem;
     font-weight: 800;
     color: var(--heading-color);
-    background: linear-gradient(90deg, #bda0ce 0%, #f5aab5 50%, #98D8C8 100%);
+    background: linear-gradient(90deg, #E11D74 0%, #FF6584 40%, #C084FC 75%, #EC4899 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -510,7 +516,7 @@ img {
 }
 
 .search-result-item:hover {
-    background: rgba(142, 68, 173, 0.12);
+    background: rgba(236, 72, 153, 0.12);
 }
 
 .search-result-item .result-icon {
@@ -532,7 +538,7 @@ img {
 
 .search-result-item .result-tag {
     font-size: 0.7rem;
-    background: rgba(142, 68, 173, 0.15);
+    background: rgba(236, 72, 153, 0.15);
     color: var(--accent);
     padding: 2px 8px;
     border-radius: 9999px;
@@ -558,7 +564,7 @@ img {
 
 .icon-btn:hover {
     background: var(--accent);
-    color: var(--text-dark);
+    color: #FFFFFF;
     border-color: var(--accent);
     transform: scale(1.05);
 }
@@ -647,11 +653,11 @@ img {
 
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgba(205, 180, 219, 0.4);
+        box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.45);
     }
 
     50% {
-        box-shadow: 0 0 0 12px rgba(205, 180, 219, 0);
+        box-shadow: 0 0 0 12px rgba(244, 114, 182, 0);
     }
 }
 
@@ -883,11 +889,11 @@ body {
 
 .hero-title .shimmer-text {
     background: linear-gradient(90deg,
-            var(--purple-light) 0%,
-            #f5aab5 25%,
-            #98D8C8 50%,
-            var(--purple-light) 75%,
-            #f5aab5 100%);
+            #E11D74 0%,
+            #FF75A0 25%,
+            #F472B6 50%,
+            #C084FC 75%,
+            #E11D74 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -979,7 +985,7 @@ body {
     font-size: 2.2rem;
     font-weight: 900;
     letter-spacing: -0.04em;
-    background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
+    background: linear-gradient(135deg, #E11D74 0%, #FF6584 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1071,7 +1077,7 @@ body {
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--purple-light), var(--pink-light));
+    background: linear-gradient(90deg, #FF6584, #EC4899, #D81B60);
     width: 0%;
     transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border-radius: 4px;
@@ -1095,7 +1101,7 @@ body {
 
 .quiz-option:hover {
     border-color: var(--accent);
-    background: rgba(205, 180, 219, 0.1);
+    background: rgba(236, 72, 153, 0.1);
     transform: translateX(4px);
 }
 
@@ -1125,14 +1131,14 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple-light) 0%, #e8afc0 100%);
-    box-shadow: 0 6px 24px rgba(205, 180, 219, 0.5);
+    background: linear-gradient(135deg, #FF6584 0%, #EC4899 50%, #D81B60 100%);
+    box-shadow: 0 8px 28px rgba(236, 72, 153, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border: none;
-    color: var(--text-dark);
+    color: #FFFFFF;
     font-size: 1.6rem;
     transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation: pulse-glow 4s ease-in-out infinite;
@@ -1140,7 +1146,7 @@ body {
 
 .luna-btn:hover {
     transform: scale(1.1) rotate(8deg);
-    box-shadow: 0 10px 32px rgba(205, 180, 219, 0.7);
+    box-shadow: 0 12px 36px rgba(236, 72, 153, 0.75);
 }
 
 .luna-chat-window {
@@ -1163,12 +1169,12 @@ body {
 }
 
 .luna-header {
-    background: linear-gradient(135deg, var(--purple-light) 0%, #f5aab5 100%);
+    background: linear-gradient(135deg, #FF6584 0%, #EC4899 100%);
     padding: 16px 18px;
     display: flex;
     align-items: center;
     gap: 12px;
-    color: #150B20 !important;
+    color: #FFFFFF !important;
 }
 
 .luna-avatar {
@@ -1229,10 +1235,11 @@ body {
 
 .msg-user {
     align-self: flex-end;
-    background: linear-gradient(135deg, var(--purple-light), #e8afc0);
-    color: #150B20 !important;
+    background: linear-gradient(135deg, #FF6584 0%, #EC4899 100%);
+    color: #FFFFFF !important;
     font-weight: 600;
     border-top-right-radius: 4px;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25);
 }
 
 /* Indicador de digitando */
@@ -1288,7 +1295,7 @@ body {
 }
 
 .luna-chip:hover {
-    background: rgba(142, 68, 173, 0.15);
+    background: rgba(236, 72, 153, 0.15);
     border-color: var(--accent);
     color: var(--accent);
 }
@@ -1324,8 +1331,8 @@ body {
 }
 
 .luna-input-area button {
-    background: linear-gradient(135deg, var(--purple-light), #e8afc0);
-    color: #150B20 !important;
+    background: linear-gradient(135deg, #FF6584 0%, #EC4899 100%);
+    color: #FFFFFF !important;
     border: none;
     width: 38px;
     height: 38px;
@@ -1336,6 +1343,7 @@ body {
     justify-content: center;
     transition: transform 0.2s;
     flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
 }
 
 .luna-input-area button:hover {
@@ -1493,8 +1501,8 @@ details.accordion-item p {
 /* 20. SEÇÃO HERO — BADGE "NOVO" */
 .badge-new {
     display: inline-block;
-    background: linear-gradient(135deg, #f5aab5, var(--purple-light));
-    color: #150B20 !important;
+    background: linear-gradient(135deg, #FF6584, #EC4899);
+    color: #FFFFFF !important;
     font-size: 0.7rem;
     font-weight: 700;
     padding: 2px 8px;
@@ -1503,6 +1511,7 @@ details.accordion-item p {
     vertical-align: middle;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.35);
 }
 
 /* 21. SECTION HEADINGS COM DESTAQUE */
@@ -1510,8 +1519,8 @@ details.accordion-item p {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(205, 180, 219, 0.15);
-    border: 1px solid rgba(205, 180, 219, 0.4);
+    background: rgba(244, 114, 182, 0.15);
+    border: 1px solid rgba(244, 114, 182, 0.45);
     color: var(--accent);
     font-size: 0.78rem;
     font-weight: 700;
@@ -1524,8 +1533,8 @@ details.accordion-item p {
 
 /* 22. CARD DE DESTAQUE COLORIDO */
 .card-accent {
-    background: linear-gradient(135deg, rgba(205, 180, 219, 0.15) 0%, rgba(250, 218, 221, 0.15) 100%);
-    border: 1px solid rgba(205, 180, 219, 0.3);
+    background: linear-gradient(135deg, rgba(254, 205, 211, 0.25) 0%, rgba(251, 207, 232, 0.22) 100%);
+    border: 1px solid rgba(244, 114, 182, 0.35);
 }
 
 /* 23. ÍCONE EMOJI CIRCULAR */
@@ -1567,7 +1576,7 @@ details.accordion-item p {
 
 /* 26. PÁGINA INTERNA — BANNER */
 .page-banner {
-    background: linear-gradient(135deg, rgba(205, 180, 219, 0.2), rgba(250, 218, 221, 0.2));
+    background: linear-gradient(135deg, rgba(254, 205, 211, 0.25) 0%, rgba(251, 207, 232, 0.20) 100%);
     border-bottom: 1px solid var(--border-color);
     padding: 4rem 0 3rem;
     margin-bottom: 3rem;
@@ -1600,7 +1609,7 @@ table, .table {
 }
 
 th, .table th {
-    background: rgba(142, 68, 173, 0.12);
+    background: rgba(236, 72, 153, 0.12);
     color: var(--heading-color);
     font-family: var(--font-heading);
     font-weight: 700;
@@ -1626,7 +1635,7 @@ tr:last-child td {
 }
 
 tbody tr:hover td {
-    background: rgba(142, 68, 173, 0.06);
+    background: rgba(236, 72, 153, 0.06);
 }
 
 /* 29. LUNA QUICK CHIPS (chips de sugestão rápida no chat) */
@@ -1653,7 +1662,7 @@ tbody tr:hover td {
 }
 
 .luna-quick-chips .luna-chip:hover {
-    background: rgba(142, 68, 173, 0.15);
+    background: rgba(236, 72, 153, 0.15);
     border-color: var(--accent);
     color: var(--accent);
     transform: translateY(-1px);
@@ -1663,7 +1672,7 @@ tbody tr:hover td {
 .page-banner {
     padding: 5rem 0 3rem;
     text-align: center;
-    background: linear-gradient(135deg, rgba(205, 180, 219, 0.15) 0%, rgba(250, 218, 221, 0.10) 100%);
+    background: linear-gradient(135deg, rgba(254, 205, 211, 0.25) 0%, rgba(251, 207, 232, 0.20) 100%);
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 3rem;
 }
