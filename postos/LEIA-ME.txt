@@ -1,0 +1,7 @@
+MAPA CNES SEM CHAVE DE API
+1. Extraia o ZIP.
+2. Na pasta extraída, execute: python -m http.server 8000
+3. Abra http://localhost:8000 no navegador.
+Alternativa: abra index.html diretamente e use o botão Importar GeoJSON para escolher dados.geojson.
+A conexão com a internet é necessária para carregar Leaflet e os mapas OpenStreetMap.
+Os dados são cadastrais e não confirmam funcionamento atual.
