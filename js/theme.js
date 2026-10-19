@@ -52,6 +52,15 @@ function initDarkMode() {
             themeToggle.setAttribute('aria-label', 'Ativar modo escuro');
             themeToggle.innerHTML = MOON_ICON;
         }
+
+        // Atualização dinâmica da meta theme-color para navegadores móveis compatíveis
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+            metaTheme = document.createElement('meta');
+            metaTheme.setAttribute('name', 'theme-color');
+            document.head.appendChild(metaTheme);
+        }
+        metaTheme.setAttribute('content', theme === 'dark' ? '#170A18' : '#FFF9FB');
     };
 
     // Padrão: Modo Claro (fundo claro)
