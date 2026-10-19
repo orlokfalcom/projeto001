@@ -54,9 +54,15 @@ function initDarkMode() {
         }
     };
 
-    const savedTheme = localStorage.getItem('vbm-theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
+    // Padrão: Modo Claro (fundo claro)
+    // Inicializa explicitamente em 'light' para garantir fundo claro
+    if (!localStorage.getItem('vbm-theme-v2')) {
+        localStorage.setItem('vbm-theme', 'light');
+        localStorage.setItem('vbm-theme-v2', '1');
+    }
+
+    const savedTheme = localStorage.getItem('vbm-theme') || 'light';
+    applyTheme(savedTheme);
 
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.contains('dark');

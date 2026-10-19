@@ -145,8 +145,8 @@ img {
 /* 5. SISTEMA DE DESIGN DE CARD E EFEITO GLASSMORPHISM */
 .glassmorphism {
     background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
     border: 1px solid var(--border-color);
 }
 
