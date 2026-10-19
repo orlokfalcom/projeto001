@@ -5,60 +5,69 @@
 
 /* 1. RESET E VARIÁVEIS DE AMBIENTE */
 :root {
-    --pink-light: #FADADD;
-    --purple-light: #CDB4DB;
-    --mint: #98D8C8;
-    --blue-scientific: #B8D4E3;
+    /* Paleta Feminina — Tons de Rosa, Magenta, Orquídea e Pêssego */
+    --pink-light: #FCE7F3;
+    --pink-soft: #FBCFE8;
+    --pink-medium: #F472B6;
+    --pink-vibrant: #EC4899;
+    --pink-deep: #DB2777;
+    --rose-primary: #E11D74;
+    --purple-light: #F0ABFC;
+    --purple-soft: #C084FC;
+    --mint: #6EE7B7;
+    --blue-scientific: #C4B5FD;
     --white: #FFFFFF;
-    --bg-light: #FAF8FC;
-    --text-dark: #1E1728;
+    --bg-light: #FFF7FA;
+    --text-dark: #260D20;
     --text-light: #FFFFFF;
-    --text-muted: #594E68;
+    --text-muted: #784E6E;
 
     /* Configurações Globais padrão (Tema Claro / Modo Dia) */
     --bg-main: var(--bg-light);
     --bg-card: #FFFFFF;
-    --border-color: rgba(189, 147, 219, 0.35);
-    --text-color: #1E1728;
-    --heading-color: #150E20;
-    --card-shadow: 0 10px 30px -5px rgba(189, 147, 219, 0.18);
-    --accent: #8E44AD;
-    --accent-hover: #732D91;
-    --success: var(--mint);
-    --glass-bg: rgba(255, 255, 255, 0.85);
+    --border-color: rgba(236, 72, 153, 0.22);
+    --text-color: #260D20;
+    --heading-color: #1A0515;
+    --card-shadow: 0 10px 32px -5px rgba(236, 72, 153, 0.12), 0 4px 14px rgba(244, 114, 182, 0.08);
+    --accent: #D81B60;
+    --accent-hover: #AD1457;
+    --accent-glow: rgba(216, 27, 96, 0.35);
+    --success: #10B981;
+    --glass-bg: rgba(255, 255, 255, 0.88);
     --glass-blur: 20px;
-    --bg-gradient: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 40%, #F4EFFB 70%, #F0F7FB 100%);
+    --bg-gradient: linear-gradient(135deg, #FFF0F5 0%, #FFF7FA 35%, #FCE7F3 70%, #F5E8FF 100%);
     --font-heading: 'Inter', sans-serif;
     --font-body: 'DM Sans', sans-serif;
     --radius-card: 20px;
     --radius-btn: 9999px;
 
     /* Aliases de compatibilidade — usados nos estilos inline das páginas internas */
-    --gradient-primary: linear-gradient(135deg, var(--purple-light) 0%, #e8c8f0 100%);
+    --gradient-primary: linear-gradient(135deg, #FF6584 0%, #EC4899 50%, #D81B60 100%);
     --card-bg: #FFFFFF;
-    --color-primary: #8E44AD;
+    --color-primary: #D81B60;
     --radius-lg: 20px;
     --radius-md: 14px;
     --radius-sm: 8px;
 }
 
-/* Tema Escuro (Modo Noite) */
+/* Tema Escuro (Modo Noite — Velvet Plum & Neon Rose) */
 .dark {
-    --bg-main: #0F0B1A;
-    --bg-card: rgba(30, 24, 48, 0.88);
-    --border-color: rgba(205, 180, 219, 0.22);
-    --text-color: #F8F6FC;
-    --text-muted: #C5BCCF;
-    --heading-color: #FFFFFF;
-    --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-    --accent: #D8B4FE;
-    --accent-hover: #F0E6FF;
-    --glass-bg: rgba(26, 20, 42, 0.82);
-    --bg-gradient: linear-gradient(135deg, #0D0B18 0%, #161227 50%, #1E1735 100%);
-    --text-dark: #F8F6FC;
+    --bg-main: #170A18;
+    --bg-card: rgba(38, 16, 40, 0.88);
+    --border-color: rgba(244, 114, 182, 0.26);
+    --text-color: #FDF2F8;
+    --text-muted: #D8B4D4;
+    --heading-color: #FFF0F7;
+    --card-shadow: 0 14px 44px rgba(216, 27, 96, 0.25);
+    --accent: #F472B6;
+    --accent-hover: #FBCFE8;
+    --accent-glow: rgba(244, 114, 182, 0.5);
+    --glass-bg: rgba(32, 12, 34, 0.85);
+    --bg-gradient: linear-gradient(135deg, #130714 0%, #1F0D21 45%, #2B112E 100%);
+    --text-dark: #FDF2F8;
     /* Aliases — sobrescreve para o tema escuro */
-    --card-bg: rgba(30, 24, 48, 0.88);
-    --color-primary: #D8B4FE;
+    --card-bg: rgba(38, 16, 40, 0.88);
+    --color-primary: #F472B6;
 }
 
 /* 2. BASE ESTILOS */
