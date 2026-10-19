@@ -1,0 +1,53 @@
+name: Atualizar dados.geojson (CNES)
+
+on:
+  # Roda todos os dias às 03:00 UTC (meia-noite BRT)
+  schedule:
+    - cron: "0 3 * * *"
+
+  # Permite disparar manualmente pela aba "Actions" no GitHub
+  workflow_dispatch:
+
+jobs:
+  atualizar-geojson:
+    name: Buscar CNES e gerar dados.geojson
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # necessário para fazer commit no repositório
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install requests
+
+      - name: Executar script de atualização
+        run: python scripts/atualizar_geojson.py
+        env:
+          # Variável opcional: limite de registros por UF (padrão: 150)
+          MAX_POR_UF: "150"
+
+      - name: Verificar se houve mudanças
+        id: check_changes
+        run: |
+          git diff --quiet postos/dados.geojson && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit e push do arquivo atualizado
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add postos/dados.geojson
+          git commit -m "chore: atualizar dados CNES $(date -u '+%Y-%m-%d')"
+          git push
+
+      - name: Nenhuma mudança detectada
+        if: steps.check_changes.outputs.changed == 'false'
+        run: echo "dados.geojson ja esta atualizado. Nenhum commit necessario."
