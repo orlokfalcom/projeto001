@@ -1,38 +1,40 @@
 /**
- * Componentes Globais Reutilizáveis - Silêncios da Saúde
+ * Componentes Globais Reutilizáveis - Viva Bem, Menina!
  * Injeta Header, Footer, Luna Widget e Cookie Banner em todas as páginas.
  */
 
-(function() {
+(function () {
     // Detectar a página ativa pelo caminho
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
     const navLinks = [
-        { href: 'sobre.html',           label: 'Sobre' },
-        { href: 'objetivos.html',       label: 'Objetivos' },
-        { href: 'saude-feminina.html',  label: 'Saúde Feminina' },
-        { href: 'mitos-e-verdades.html',label: 'Mitos' },
-        { href: 'quiz.html',            label: 'Quiz' },
-        { href: 'estatisticas.html',    label: 'Dados' },
-        { href: 'biblioteca.html',      label: 'Biblioteca' },
-        { href: 'faq.html',             label: 'FAQ' },
-        { href: 'contato.html',         label: 'Contato' },
+        { href: 'sobre.html', label: 'Sobre' },
+        { href: 'objetivos.html', label: 'Objetivos' },
+        { href: 'saude-feminina.html', label: 'Saúde Feminina' },
+        { href: 'mitos-e-verdades.html', label: 'Mitos' },
+        { href: 'quiz.html', label: 'Quiz' },
+        { href: 'estatisticas.html', label: 'Dados' },
+        { href: './postos/index.html', label: 'UBRs' },
+        { href: 'biblioteca.html', label: 'Biblioteca' },
+        { href: 'faq.html', label: 'FAQ' },
+        { href: 'contato.html', label: 'Contato' },
     ];
 
     const allNavLinks = [
-        { href: 'sobre.html',           label: 'Sobre o Projeto' },
-        { href: 'objetivos.html',       label: 'Objetivos' },
-        { href: 'saude-feminina.html',  label: 'Saúde Feminina' },
-        { href: 'mitos-e-verdades.html',label: 'Mitos e Verdades' },
-        { href: 'quiz.html',            label: 'Quiz' },
-        { href: 'estatisticas.html',    label: 'Estatísticas' },
-        { href: 'biblioteca.html',      label: 'Biblioteca' },
-        { href: 'faq.html',             label: 'FAQ' },
-        { href: 'linha-do-tempo.html',  label: 'Linha do Tempo' },
-        { href: 'pesquisa.html',        label: 'Metodologia' },
-        { href: 'professor.html',       label: 'Área do Professor' },
-        { href: 'aluno.html',           label: 'Portal do Aluno' },
-        { href: 'contato.html',         label: 'Contato' },
+        { href: 'sobre.html', label: 'Sobre o Projeto' },
+        { href: 'objetivos.html', label: 'Objetivos' },
+        { href: 'saude-feminina.html', label: 'Saúde Feminina' },
+        { href: 'mitos-e-verdades.html', label: 'Mitos e Verdades' },
+        { href: 'quiz.html', label: 'Quiz' },
+        { href: 'estatisticas.html', label: 'Estatísticas' },
+        { href: 'biblioteca.html', label: 'Biblioteca' },
+        { href: 'faq.html', label: 'FAQ' },
+        { href: './postos/index.html', label: 'UBRs' },
+        { href: 'linha-do-tempo.html', label: 'Linha do Tempo' },
+        { href: 'pesquisa.html', label: 'Metodologia' },
+        { href: 'professor.html', label: 'Área do Professor' },
+        { href: 'aluno.html', label: 'Portal do Aluno' },
+        { href: 'contato.html', label: 'Contato' },
     ];
 
     // === HEADER ===
@@ -51,7 +53,7 @@
 <header id="masthead" class="site-header glassmorphism">
     <div class="container header-container">
         <div class="site-branding">
-            <a href="index.html" class="logo-text">Silêncios da Saúde</a>
+            <a href="index.html" class="logo-text">Viva Bem, Menina!</a>
         </div>
         <nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
             <ul class="nav-menu">${desktopLinks}</ul>
@@ -79,7 +81,7 @@
     <div class="container" style="display:flex;flex-direction:column;gap:32px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;">
             <div style="flex:1;min-width:250px;">
-                <h2 class="logo-text" style="font-size:1.5rem;margin-bottom:8px;">Silêncios da Saúde</h2>
+                <h2 class="logo-text" style="font-size:1.5rem;margin-bottom:8px;">Viva Bem, Menina!</h2>
                 <p style="font-size:0.95rem;max-width:320px;color:var(--text-muted);">Uma plataforma educativa focada em quebrar tabus e fornecer conhecimento científico real sobre saúde feminina para adolescentes.</p>
             </div>
             <div style="min-width:150px;">
@@ -115,7 +117,7 @@
         </div>
         <hr style="border:0;border-top:1px solid var(--border-color);margin:0;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:0.85rem;color:var(--text-muted);">
-            <p>&copy; 2026 Silêncios da Saúde. Todos os direitos reservados.</p>
+            <p>&copy; 2026 Viva Bem, Menina! Todos os direitos reservados.</p>
             <p>Desenvolvido de acordo com as normas científicas e éticas de saúde.</p>
         </div>
     </div>

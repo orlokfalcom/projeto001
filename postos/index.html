@@ -1,290 +1,593 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mapa CNES Brasil — Sem API</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UBRs e Postos de Saúde — Viva Bem, Menina!</title>
+  <meta name="description" content="Encontre Unidades Básicas de Saúde, UPAs, hospitais e postos de atendimento próximos a você. Mapa interativo do portal Viva Bem, Menina!">
+  <meta property="og:title" content="UBRs e Postos de Saúde — Viva Bem, Menina!">
+  <meta property="og:description" content="Mapa interativo de estabelecimentos de saúde (CNES) para adolescentes.">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#CDB4DB">
+
+  <!-- Design System do Portal -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
   <style>
-    :root {
-      --bg: #f3f7f7;
-      --panel: #ffffff;
-      --panel-alt: #edf7f4;
-      --primary: #146a52;
-      --primary-dark: #0f563f;
-      --text: #172334;
-      --muted: #5a6977;
-      --border: #d8e1e7;
-      --shadow: 0 10px 22px rgba(18, 76, 64, 0.12);
+    /* ── Ajustes específicos da página de mapa ─────────────────── */
+
+    /* Banner de página interna */
+    .map-page-banner {
+      padding: 3.5rem 0 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(205, 180, 219, 0.15) 0%, rgba(152, 216, 200, 0.12) 100%);
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 0;
     }
 
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      font: 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+    .map-page-banner h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+      color: var(--heading-color);
     }
 
-    body {
-      display: flex;
-      flex-direction: column;
+    .map-page-banner p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 12px;
-      padding: 16px 20px 14px;
-      background: linear-gradient(135deg, #0f4d42, #146a52);
-      color: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      font-weight: 700;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 12px;
-      letter-spacing: 0.03em;
-    }
-
-    .subheader {
-      margin: 6px 0 0;
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    .controls {
+    /* Controles do mapa */
+    .map-controls {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
-      padding: 12px 16px;
-      background: var(--panel);
-      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
     }
 
-    .controls > * {
-      min-height: 42px;
+    .map-controls > * {
+      min-height: 44px;
     }
 
     .search-wrap {
       flex: 2 1 260px;
     }
 
-    .filter {
+    .filter-wrap {
       flex: 1 1 180px;
     }
 
-    input, select, button {
+    .map-controls input[type="search"],
+    .map-controls select {
       width: 100%;
-      height: 42px;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      font: inherit;
-      background: #fff;
-      color: var(--text);
+      height: 44px;
+      padding: 10px 16px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 9999px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      background: var(--bg-card);
+      color: var(--text-color);
+      transition: border-color 0.2s;
     }
 
-    input:focus, select:focus, button:focus {
-      outline: 2px solid rgba(20, 106, 82, 0.18);
-      outline-offset: 1px;
+    .map-controls input[type="search"]:focus,
+    .map-controls select:focus {
+      outline: none;
+      border-color: var(--accent);
     }
 
-    input[type="search"] {
-      min-width: 220px;
+    .map-controls input[type="search"]::placeholder {
+      color: var(--text-muted);
     }
 
     .button-group {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      flex: 1 1 220px;
+      flex: 1 1 200px;
     }
 
-    button {
-      cursor: pointer;
-      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+    .button-group .btn {
+      flex: 1;
+      min-width: 100px;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.88rem;
     }
 
-    button:hover {
-      transform: translateY(-1px);
-    }
-
-    .primary-btn {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .secondary-btn {
-      background: #edf6f2;
-      color: var(--primary-dark);
-      border-color: #cfe3dc;
-      font-weight: 600;
-    }
-
-    .summary {
+    /* Cards de resumo */
+    .summary-strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      padding: 14px 16px 0;
-      background: var(--bg);
+      margin-bottom: 16px;
     }
 
     .summary-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
-      box-shadow: 0 5px 12px rgba(20, 30, 40, 0.04);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-3px);
     }
 
     .summary-card span {
       display: block;
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 0.72rem;
+      color: var(--text-muted);
       margin-bottom: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
+      font-weight: 600;
     }
 
     .summary-card strong {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      font-weight: 700;
-      color: var(--primary-dark);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--purple-light), #ff8fab);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .status {
-      padding: 10px 16px 0;
-      font-size: 13px;
-      color: var(--muted);
+    /* Legenda de categorias */
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Status */
+    .map-status {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    /* Mapa */
     #map {
-      flex: 1;
-      min-height: 420px;
-      height: calc(100vh - 240px);
-      margin: 12px 16px 16px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      width: 100%;
+      height: 520px;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-color);
       overflow: hidden;
+      box-shadow: var(--card-shadow);
       background: #dfeef5;
-      box-shadow: var(--shadow);
     }
 
+    /* Popup do Leaflet */
     .leaflet-popup-content {
+      font-family: var(--font-body);
       line-height: 1.6;
       max-height: 300px;
       overflow: auto;
       margin: 10px 12px;
-      color: var(--text);
+      color: var(--text-color);
     }
 
-    .leaflet-popup-content-wrapper,
-    .leaflet-popup-tip {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    .leaflet-popup-content-wrapper {
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
 
     .popup-title {
       display: block;
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 800;
       margin-bottom: 8px;
-      color: var(--primary-dark);
+      color: var(--heading-color);
+      font-family: var(--font-heading);
     }
 
     .popup-item {
       margin: 4px 0;
+      font-size: 0.88rem;
+      color: var(--text-color);
     }
 
     .popup-item strong {
-      color: var(--text);
+      color: var(--heading-color);
+      font-weight: 700;
     }
 
     .popup-note {
       display: block;
       margin-top: 8px;
-      color: var(--muted);
-      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-style: italic;
     }
 
-    @media (max-width: 768px) {
-      header {
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .summary {
+    /* Responsivo */
+    @media (max-width: 640px) {
+      .summary-strip {
         grid-template-columns: 1fr;
       }
 
       #map {
         height: 62vh;
       }
+
+      .button-group {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .summary-strip {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div>
-      <h1>Mapa de estabelecimentos de saúde — CNES Brasil</h1>
-      <p class="subheader">Leaflet + OpenStreetMap · Sem chave de API</p>
+
+  <a class="skip-link sr-only" href="#content">Pular para o conteúdo</a>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CABEÇALHO — idêntico ao portal principal
+  ═══════════════════════════════════════════════════════════ -->
+  <header id="masthead" class="site-header glassmorphism">
+    <div class="container header-container">
+      <div class="site-branding">
+        <a href="../index.html" class="logo-text"
+          style="display: flex; align-items: center; gap: 10px; font-weight: 900;">
+          <img src="../images/logo.png" alt="Logo Viva Bem, Menina!"
+            style="height: 36px; width: 36px; border-radius: 8px; box-shadow: 0 4px 12px rgba(205,180,219,0.3); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+          Viva Bem, Menina!
+        </a>
+      </div>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menu Principal">
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="../sobre.html">Sobre</a></li>
+          <li><a class="nav-link" href="../objetivos.html">Objetivos</a></li>
+          <li><a class="nav-link" href="../saude-feminina.html">Saúde Feminina</a></li>
+          <li><a class="nav-link" href="../mitos-e-verdades.html">Mitos</a></li>
+          <li><a class="nav-link" href="../quiz.html">Quiz</a></li>
+          <li><a class="nav-link" href="../estatisticas.html">Dados</a></li>
+          <li><a class="nav-link" href="../biblioteca.html">Biblioteca</a></li>
+          <li><a class="nav-link" href="../faq.html">FAQ</a></li>
+          <li><a class="nav-link active" href="index.html">UBRs</a></li>
+          <li><a class="nav-link" href="../contato.html">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Barra de Pesquisa Global -->
+        <div class="search-wrapper-header" role="search" aria-label="Pesquisa Global">
+          <button id="search-toggle-btn" class="icon-btn" aria-label="Abrir pesquisa" aria-expanded="false"
+            aria-controls="header-search-form">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <div id="header-search-form" class="search-form-expanded" hidden>
+            <input type="search" id="global-search-input" placeholder="Buscar no portal..."
+              aria-label="Pesquisar" autocomplete="off" role="combobox" aria-expanded="false"
+              aria-autocomplete="list" aria-controls="search-dropdown">
+            <div id="search-dropdown" class="search-dropdown" role="listbox"
+              aria-label="Resultados da pesquisa"></div>
+          </div>
+        </div>
+        <button id="theme-toggle" class="icon-btn" aria-label="Alternar Modo Escuro"
+          aria-live="polite"></button>
+        <button id="hamburger-toggle" class="icon-btn hamburger" aria-label="Abrir Menu Principal"
+          aria-expanded="false" aria-controls="mobile-navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
-    <span class="badge">Dados cadastrais</span>
   </header>
 
-  <div class="controls">
-    <div class="search-wrap">
-      <input id="busca" type="search" placeholder="Pesquisar nome, CNES, bairro, endereço..." aria-label="Pesquisar estabelecimento">
+  <!-- MENU MOBILE -->
+  <div id="mobile-navigation" class="mobile-nav glassmorphism">
+    <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../sobre.html">Sobre o Projeto</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../objetivos.html">Objetivos</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../saude-feminina.html">Saúde Feminina</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../mitos-e-verdades.html">Mitos e Verdades</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../quiz.html">Quiz</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../estatisticas.html">Estatísticas</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../biblioteca.html">Biblioteca</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../faq.html">FAQ</a></li>
+      <li><a class="nav-link active" style="font-size: 1.2rem;" href="index.html">UBRs / Postos de Saúde</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../linha-do-tempo.html">Linha do Tempo</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../professor.html">Área do Professor</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../aluno.html">Portal do Aluno</a></li>
+      <li><a class="nav-link" style="font-size: 1.2rem;" href="../contato.html">Contato</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTEÚDO PRINCIPAL
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="content" class="site-content">
+
+    <!-- Banner da Página -->
+    <div class="map-page-banner">
+      <div class="container">
+        <span class="section-tag reveal">🏥 Rede de Saúde Pública</span>
+        <h1 class="reveal">UBRs e Postos de Saúde</h1>
+        <p class="reveal">Encontre Unidades Básicas de Saúde, UPAs, hospitais e postos de atendimento próximos.
+          Dados do CNES — Cadastro Nacional de Estabelecimentos de Saúde.</p>
+      </div>
     </div>
-    <select id="uf" class="filter" aria-label="Filtrar por UF">
-      <option value="">Todas as UFs</option>
-    </select>
-    <select id="categoria" class="filter" aria-label="Filtrar por categoria">
-      <option value="">Todas as categorias</option>
-    </select>
-    <div class="button-group">
-      <button id="limpar" type="button" class="secondary-btn">Limpar filtros</button>
-      <button id="importar" type="button" class="primary-btn">Importar GeoJSON</button>
-      <input type="file" id="arquivo" accept=".geojson,.json,application/json" hidden>
+
+    <!-- Mapa e controles -->
+    <main class="container py-10" id="map-content">
+
+      <!-- Controles de busca e filtro -->
+      <div class="map-controls reveal">
+        <div class="search-wrap">
+          <input id="busca" type="search" placeholder="🔍  Pesquisar nome, CNES, bairro, endereço..."
+            aria-label="Pesquisar estabelecimento">
+        </div>
+        <div class="filter-wrap">
+          <select id="uf" aria-label="Filtrar por UF">
+            <option value="">Todas as UFs</option>
+          </select>
+        </div>
+        <div class="filter-wrap">
+          <select id="categoria" aria-label="Filtrar por categoria">
+            <option value="">Todas as categorias</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button id="limpar" type="button" class="btn btn-outline">Limpar filtros</button>
+          <button id="importar" type="button" class="btn btn-secondary">⬆ Importar GeoJSON</button>
+          <input type="file" id="arquivo" accept=".geojson,.json,application/json" hidden>
+        </div>
+      </div>
+
+      <!-- Cards de resumo -->
+      <div class="summary-strip reveal" aria-live="polite">
+        <div class="summary-card glassmorphism">
+          <span>Exibidos</span>
+          <strong id="card-exibidos">0</strong>
+        </div>
+        <div class="summary-card glassmorphism">
+          <span>Total</span>
+          <strong id="card-total">0</strong>
+        </div>
+        <div class="summary-card glassmorphism">
+          <span>UFs</span>
+          <strong id="card-ufs">0</strong>
+        </div>
+      </div>
+
+      <!-- Legenda -->
+      <div class="map-legend reveal">
+        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6"></span>Hospital</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>UPA</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span>UBS / Posto</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span>Centro de Saúde</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#ef4444"></span>Clínica</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f97316"></span>Pronto Atendimento</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#146a52"></span>Outros</div>
+      </div>
+
+      <!-- Status e Mapa -->
+      <div class="map-status reveal" id="status">Carregando dados...</div>
+      <div id="map" class="reveal" aria-label="Mapa com estabelecimentos de saúde"></div>
+
+      <!-- Nota informativa -->
+      <div class="card glassmorphism reveal" style="margin-top: 1.5rem; padding: 1.25rem 1.5rem; display: flex; gap: 16px; align-items: flex-start;">
+        <span style="font-size: 1.5rem; flex-shrink: 0;">ℹ️</span>
+        <div>
+          <h3 style="font-size: 0.97rem; font-weight: 700; margin-bottom: 4px;">Sobre os dados</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.6;">
+            Os dados são provenientes do <strong>CNES — Cadastro Nacional de Estabelecimentos de Saúde</strong>.
+            Confirme endereços e horários de funcionamento diretamente com o estabelecimento antes de se deslocar.
+            Para importar dados atualizados, use o botão "Importar GeoJSON".
+          </p>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- #content -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       RODAPÉ — idêntico ao portal principal
+  ═══════════════════════════════════════════════════════════ -->
+  <footer id="colophon" class="site-footer glassmorphism py-10"
+    style="margin-top: 5rem; border-top: 1px solid var(--border-color);">
+    <div class="container" style="display: flex; flex-direction: column; gap: 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px;">
+        <div style="flex: 1; min-width: 250px;">
+          <h2 class="logo-text" style="font-size: 1.5rem; margin-bottom: 8px;">Viva Bem, Menina!</h2>
+          <p class="text-muted" style="font-size: 0.95rem; max-width: 320px;">
+            Uma plataforma educativa focada em quebrar tabus e fornecer conhecimento científico real sobre
+            saúde feminina para adolescentes.
+          </p>
+        </div>
+
+        <div style="min-width: 150px;">
+          <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+            Links Rápidos</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+            <li><a href="../sobre.html">Sobre o Projeto</a></li>
+            <li><a href="../saude-feminina.html">Saúde Feminina</a></li>
+            <li><a href="../mitos-e-verdades.html">Mitos e Verdades</a></li>
+            <li><a href="../quiz.html">Quiz Educativo</a></li>
+            <li><a href="../biblioteca.html">Biblioteca</a></li>
+          </ul>
+        </div>
+
+        <div style="min-width: 150px;">
+          <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+            Área Especial</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+            <li><a href="../contato.html">Fale Conosco</a></li>
+            <li><a href="../professor.html">Área do Professor</a></li>
+            <li><a href="../aluno.html">Portal do Aluno</a></li>
+            <li><a href="../linha-do-tempo.html">Linha do Tempo</a></li>
+          </ul>
+        </div>
+
+        <div style="min-width: 200px;">
+          <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+            Siga-nos</h3>
+          <div style="display: flex; gap: 12px;">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
+              aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
+              aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+              </svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="icon-btn"
+              aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                </path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
+
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted);">
+        <p>&copy; 2026 Viva Bem, Menina! Todos os direitos reservados.</p>
+        <p>Dados CNES — Cadastro Nacional de Estabelecimentos de Saúde.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- COOKIE BANNER LGPD -->
+  <div id="cookie-banner" class="cookie-banner glassmorphism card">
+    <div style="flex: 1; min-width: 250px;">
+      <h4 style="font-size: 1rem; margin-bottom: 4px; font-weight: 700;">Valorizamos sua Privacidade 🍪</h4>
+      <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted);">
+        Utilizamos cookies essenciais para garantir o funcionamento do portal, de acordo com a LGPD.
+      </p>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <button id="cookie-accept" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.85rem;">Aceitar
+        Todos</button>
     </div>
   </div>
 
-  <div class="summary" aria-live="polite">
-    <div class="summary-card">
-      <span>Exibidos</span>
-      <strong id="card-exibidos">0</strong>
-    </div>
-    <div class="summary-card">
-      <span>Total</span>
-      <strong id="card-total">0</strong>
-    </div>
-    <div class="summary-card">
-      <span>UFs</span>
-      <strong id="card-ufs">0</strong>
+  <!-- WIDGET ASSISTENTE LUNA -->
+  <div class="luna-widget">
+    <button id="luna-toggle" class="luna-btn" aria-label="Abrir conversa com Luna" aria-expanded="false"
+      aria-controls="luna-chat-box">💬</button>
+
+    <div id="luna-chat-box" class="luna-chat-window glassmorphism">
+      <div class="luna-header">
+        <div class="luna-avatar">👩‍⚕️</div>
+        <div>
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark);">Luna</h4>
+          <span style="font-size: 0.75rem; color: var(--text-dark); opacity: 0.8;">Assistente Virtual de
+            Saúde</span>
+        </div>
+        <button id="luna-close"
+          style="margin-left: auto; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-dark);"
+          aria-label="Fechar chat">&times;</button>
+      </div>
+
+      <div id="luna-quick-chips" class="luna-quick-chips">
+        <button class="luna-chip" data-topic="menstruação">🩸 Menstruação</button>
+        <button class="luna-chip" data-topic="cólica">💊 Cólica</button>
+        <button class="luna-chip" data-topic="puberdade">🌱 Puberdade</button>
+        <button class="luna-chip" data-topic="TPM">😤 TPM</button>
+        <button class="luna-chip" data-topic="alimentação">🥗 Alimentação</button>
+        <button class="luna-chip" data-topic="sono">😴 Sono</button>
+      </div>
+
+      <div id="luna-chat-messages" class="luna-messages">
+        <div class="msg msg-bot">
+          Olá! Eu sou a Luna, sua assistente virtual de saúde 💜 Aqui podemos conversar de forma segura e
+          anônima sobre puberdade, menstruação, corpo e sentimentos. Use os botões acima ou digite sua
+          pergunta abaixo!
+        </div>
+      </div>
+
+      <div class="luna-input-area">
+        <input type="text" id="luna-input" placeholder="Digite sua pergunta aqui..."
+          aria-label="Mensagem para a Luna" autocomplete="off">
+        <button id="luna-send" aria-label="Enviar mensagem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="status" id="status">Carregando dados...</div>
-  <div id="map" aria-label="Mapa com estabelecimentos de saúde"></div>
+  <!-- ═══════════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════════ -->
 
+  <!-- Scripts do Portal (caminhos relativos à subpasta) -->
+  <script src="../js/theme.js"></script>
+  <script src="../js/luna.js"></script>
+
+  <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Lógica do Mapa CNES -->
   <script>
     (() => {
       const map = L.map('map', { zoomControl: true }).setView([-14.2, -51.9], 4);
@@ -351,7 +654,6 @@
         select.innerHTML = '';
         const placeholder = new Option(label, '');
         select.add(placeholder);
-
         [...new Set(values.filter(Boolean))]
           .sort((a, b) => a.localeCompare(b, 'pt-BR'))
           .forEach((value) => select.add(new Option(value, value)));
@@ -382,8 +684,8 @@
             <div class="popup-item"><strong>Endereço:</strong> ${escapeHTML(endereco)}</div>
             <div class="popup-item"><strong>Bairro:</strong> ${escapeHTML(bairro)}</div>
             <div class="popup-item"><strong>CEP:</strong> ${escapeHTML(cep)}</div>
-            <div class="popup-item"><strong>Telefone cadastrado:</strong> ${escapeHTML(telefone)}</div>
-            <span class="popup-note">Dados cadastrais: confirme atendimento e endereço antes de ir.</span>
+            <div class="popup-item"><strong>Telefone:</strong> ${escapeHTML(telefone)}</div>
+            <span class="popup-note">Confirme atendimento e endereço antes de se deslocar.</span>
           </div>
         `;
       }
@@ -500,7 +802,6 @@
       refs.arquivo.addEventListener('change', async () => {
         const file = refs.arquivo.files[0];
         if (!file) return;
-
         try {
           const text = await file.text();
           const parsed = JSON.parse(text);
@@ -515,9 +816,7 @@
 
       fetch('./dados.geojson')
         .then((response) => {
-          if (!response.ok) {
-            throw new Error('Não foi possível carregar dados.geojson.');
-          }
+          if (!response.ok) throw new Error('Não foi possível carregar dados.geojson.');
           return response.json();
         })
         .then(load)
@@ -529,6 +828,7 @@
         });
     })();
   </script>
-</body>
-</html>
 
+</body>
+
+</html>

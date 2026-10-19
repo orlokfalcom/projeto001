@@ -1,5 +1,5 @@
-/**
- * Lógica do Jogo Mitos e Verdades - Silêncios da Saúde
+﻿/**
+ * Lógica do Jogo Mitos e Verdades - Viva Bem, Menina!
  */
 
 document.addEventListener('DOMContentLoaded', () => {
